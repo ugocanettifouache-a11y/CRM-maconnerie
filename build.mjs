@@ -11,6 +11,9 @@ const M = Object.fromEntries(METIERS.map(m => [m.slug, m]));
 // Indexation Google : bloquée tant que la variable INDEXATION=on n'est pas définie dans Cloudflare
 // (à activer le jour où crm-maconnerie.fr est branché).
 const INDEX = process.env.INDEXATION === 'on';
+import { createHash } from 'node:crypto';
+const ver = f => createHash('sha1').update(readFileSync(join(ROOT, 'src', f))).digest('hex').slice(0, 8);
+const V = { css: ver('assets/css/style.css'), js: ver('assets/js/main.js') };
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 const pages = [];
 
@@ -83,7 +86,7 @@ ${(noindex || !INDEX) ? '<meta name="robots" content="noindex">' : ''}
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/fraunces-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=${V.css}">
 ${ld}
 </head>
 <body>
@@ -107,7 +110,7 @@ ${footer()}
   <a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} Appeler</a>
   <a class="btn btn-primary" href="/contact/">Devis gratuit</a>
 </div>
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v=${V.js}" defer></script>
 </body>
 </html>`;
 }
