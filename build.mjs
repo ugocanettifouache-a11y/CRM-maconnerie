@@ -45,9 +45,9 @@ const FB_PHOTOS = REAL_POSTS.flatMap(p => p.images.map(src => ({ src, metiers: p
 const PLACE = { 'murs-clotures': 'mur', 'enduits-facades': 'facade', 'toitures-genoises': 'toit', 'terrasses-exterieurs': 'terrasse', 'renovation': 'renovation', 'construction-extension': 'maison' };
 const placeholder = slug => `/assets/img/placeholder-${PLACE[slug] || 'mur'}.svg`;
 const used = new Set();
+const ALL_PHOTOS = [...REAL.filter(r => !r.exemple).map(r => ({ src: r.image, metiers: [r.metier] })), ...FB_PHOTOS];
 function photoFor(slug, i = 0) {
-  const pool = FB_PHOTOS.filter(p => !slug || p.metiers.includes(slug));
-  const list = pool.length ? pool : FB_PHOTOS;
+  const list = ALL_PHOTOS.filter(p => !slug || p.metiers.includes(slug));
   const pick = list[i % (list.length || 1)];
   return pick ? pick.src : placeholder(slug);
 }
@@ -348,6 +348,7 @@ for (const c of COMMUNES) {
   const items = [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/'], [`Maçon à ${c.nom}`, `/zone-intervention/${c.slug}/`]];
   const fm = c.focus.map(s => M[s]);
   const reals = REAL.filter(r => r.lieu === c.nom).concat(REAL.filter(r => r.lieu !== c.nom && c.focus.includes(r.metier))).slice(0, 3);
+  const realsAny = reals.length ? reals : REAL.slice(0, 3);
   add(`/zone-intervention/${c.slug}/`, {
     title: c.metaTitle, desc: c.metaDesc, schema: [crumbsLd(items)],
     body: pageHero({ kicker: `${c.nom} · ${c.cp}`, h1: `Votre maçon <em>à ${esc(c.nom)}.</em>`, lead: c.accroche, crumbItems: items }) + `
@@ -362,7 +363,7 @@ for (const c of COMMUNES) {
     <div class="line">${I.pin}<div><b>Depuis</b>${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)})</div></div>
     <a class="btn btn-primary" href="/contact/" style="width:100%;margin-top:18px">Demander un devis</a></div>
 </div></section>
-<section class="section paper"><div class="wrap"><div class="head"><div><div class="eyebrow">Réalisations</div><h2>Près de <em>${esc(c.nom)}.</em></h2></div></div>${worksGrid(reals)}</div></section>
+${realsAny.length ? `<section class="section paper"><div class="wrap"><div class="head"><div><div class="eyebrow">Réalisations</div><h2>Dans le <em>secteur.</em></h2></div></div>${worksGrid(realsAny)}</div></section>` : ''}
 <section class="section"><div class="wrap"><div class="eyebrow">Communes voisines</div>${`<ul class="towns">${COMMUNES.filter(x => x.slug !== c.slug).map(x => `<li><a href="/zone-intervention/${x.slug}/">${esc(x.nom)}</a></li>`).join('')}</ul>`}</div></section>
 ${cta(`Un projet <em>à ${esc(c.nom)}</em> ?`)}`
   });

@@ -1,10 +1,18 @@
 {
-  "_info": "Ce fichier est remplacé automatiquement par scripts/sync-facebook.mjs (GitHub Action quotidienne). Les entrées ci-dessous sont des exemples.",
+  "_info": "Remplacé automatiquement par scripts/sync-facebook.mjs dès que l'accès Facebook est configuré.",
   "derniereSynchro": null,
   "posts": [
-    { "id": "exemple-1", "date": "2026-11-12", "texte": "Fin du mur de clôture à Quissac : enduit gratté et couvertine posés. Merci à nos clients pour leur confiance !", "images": ["/assets/img/placeholder-mur.svg"], "lien": "", "metiers": ["murs-clotures"], "exemple": true },
-    { "id": "exemple-2", "date": "2026-11-05", "texte": "Chantier en cours : coulage de la dalle pour une future terrasse autour de la piscine.", "images": ["/assets/img/placeholder-terrasse.svg"], "lien": "", "metiers": ["terrasses-exterieurs"], "exemple": true },
-    { "id": "exemple-3", "date": "2026-10-28", "texte": "Reprise d'une génoise deux rangs sur une maison de village.", "images": ["/assets/img/placeholder-toit.svg"], "lien": "", "metiers": ["toitures-genoises"], "exemple": true },
-    { "id": "exemple-4", "date": "2026-10-20", "texte": "Façade terminée : enduit à la chaux sur une maison en pierre, avant / après.", "images": ["/assets/img/placeholder-facade.svg"], "lien": "", "metiers": ["enduits-facades"], "exemple": true }
+    {
+      "id": "fb-2026-11-12",
+      "date": "2026-11-12",
+      "texte": "AVANT / APRÈS : Métamorphose complète de ces toilettes !",
+      "images": [
+        "/assets/realisations/wc-apres.jpg"
+      ],
+      "lien": "https://www.facebook.com/people/CRM-ma%C3%A7onnerie-g%C3%A9n%C3%A9rale/100090567451861/",
+      "metiers": [
+        "renovation"
+      ]
+    }
   ]
 }

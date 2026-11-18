@@ -1,11 +1,62 @@
 [
-  { "id": "mur-cloture-quissac", "titre": "Mur de clôture enduit", "metier": "murs-clotures", "lieu": "Quissac", "date": "2026-09", "description": "Mur de clôture en parpaing sur semelle ferraillée, enduit gratté ton pierre et couvertine.", "image": "/assets/img/placeholder-mur.svg", "avant": "", "exemple": true },
-  { "id": "facade-sauve", "titre": "Rénovation de façade à la chaux", "metier": "enduits-facades", "lieu": "Sauve", "date": "2026-07", "description": "Piquage de l'ancien enduit ciment, reprise des joints et enduit chaux trois couches.", "image": "/assets/img/placeholder-facade.svg", "avant": "/assets/img/placeholder-avant.svg", "exemple": true },
-  { "id": "plage-piscine-sommieres", "titre": "Plage de piscine en travertin", "metier": "terrasses-exterieurs", "lieu": "Sommières", "date": "2026-06", "description": "Dalle béton drainée et pose de travertin, margelles assorties.", "image": "/assets/img/placeholder-terrasse.svg", "avant": "", "exemple": true },
-  { "id": "poolhouse-saint-mamert", "titre": "Pool-house maçonné", "metier": "terrasses-exterieurs", "lieu": "Saint-Mamert-du-Gard", "date": "2026-05", "description": "Construction d'un pool-house avec dalle, murs enduits et génoise.", "image": "/assets/img/placeholder-poolhouse.svg", "avant": "", "exemple": true },
-  { "id": "genoise-saint-hippolyte", "titre": "Génoise deux rangs", "metier": "toitures-genoises", "lieu": "Saint-Hippolyte-du-Fort", "date": "2026-04", "description": "Dépose de l'ancienne génoise abîmée et création d'une génoise deux rangs en tuiles canal.", "image": "/assets/img/placeholder-toit.svg", "avant": "/assets/img/placeholder-avant.svg", "exemple": true },
-  { "id": "extension-ledignan", "titre": "Extension de 25 m²", "metier": "construction-extension", "lieu": "Lédignan", "date": "2026-03", "description": "Fondations, dalle, élévation des murs et liaison avec la maison existante.", "image": "/assets/img/placeholder-maison.svg", "avant": "", "exemple": true },
-  { "id": "ouverture-quissac", "titre": "Ouverture de mur porteur", "metier": "renovation", "lieu": "Quissac", "date": "2026-02", "description": "Étaiement, pose d'un IPN et reprise des tableaux pour ouvrir la cuisine sur le séjour.", "image": "/assets/img/placeholder-renovation.svg", "avant": "/assets/img/placeholder-avant.svg", "exemple": true },
-  { "id": "soutenement-sauve", "titre": "Mur de soutènement", "metier": "murs-clotures", "lieu": "Sauve", "date": "2026-01", "description": "Mur de soutènement ferraillé avec drainage et barbacanes, parement pierre.", "image": "/assets/img/placeholder-mur.svg", "avant": "", "exemple": true },
-  { "id": "escalier-sommieres", "titre": "Escalier extérieur", "metier": "terrasses-exterieurs", "lieu": "Sommières", "date": "2025-11", "description": "Escalier béton coffré et habillage pierre reliant la terrasse au jardin.", "image": "/assets/img/placeholder-terrasse.svg", "avant": "", "exemple": true }
+  {
+    "id": "wc-renovation",
+    "titre": "Rénovation complète de WC",
+    "metier": "renovation",
+    "lieu": "Gard",
+    "date": "2026-11",
+    "description": "Ancien carrelage et frise déposés, murs habillés de panneaux 3D blancs, sol refait : une pièce méconnaissable.",
+    "image": "/assets/realisations/wc-apres.jpg",
+    "avant": "/assets/realisations/wc-avant.jpg"
+  },
+  {
+    "id": "toiture-sinistre",
+    "titre": "Toiture refaite après sinistre",
+    "metier": "toitures-genoises",
+    "lieu": "Gard",
+    "date": "2026-10",
+    "description": "Couverture endommagée par un incendie : dépose des éléments brûlés, reprise du support et nouvelle couverture en tuiles canal.",
+    "image": "/assets/realisations/toiture-apres-1.jpg",
+    "avant": "/assets/realisations/toiture-avant-2.jpg"
+  },
+  {
+    "id": "pool-house",
+    "titre": "Pool-house maçonné",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "date": "2026-09",
+    "description": "Pool-house en bord de piscine : murs maçonnés, couverture en tuiles et plan de travail pour la cuisine d'été.",
+    "image": "/assets/realisations/pool-house.jpg",
+    "avant": ""
+  },
+  {
+    "id": "salle-eau",
+    "titre": "Salle d'eau modernisée",
+    "metier": "renovation",
+    "lieu": "Gard",
+    "date": "2026-11",
+    "description": "Faïence ancienne remplacée par un habillage mural contemporain, radiateur sèche-serviettes posé.",
+    "image": "/assets/realisations/salle-eau-apres-radiateur.jpg",
+    "avant": "/assets/realisations/salle-eau-avant.jpg"
+  },
+  {
+    "id": "toiture-tuiles",
+    "titre": "Couverture en tuiles canal",
+    "metier": "toitures-genoises",
+    "lieu": "Gard",
+    "date": "2026-10",
+    "description": "Pan de toiture sinistré repris et recouvert en tuiles canal.",
+    "image": "/assets/realisations/toiture-apres-2.jpg",
+    "avant": "/assets/realisations/toiture-avant-1.jpg"
+  },
+  {
+    "id": "renovation-interieure",
+    "titre": "Rénovation intérieure",
+    "metier": "renovation",
+    "lieu": "Gard",
+    "date": "2026-10",
+    "description": "Pièce de vie reprise : murs, sol et plafond à poutres apparentes.",
+    "image": "/assets/realisations/renovation-interieure.jpg",
+    "avant": ""
+  }
 ]
