@@ -1,0 +1,20 @@
+name: Import photos
+on:
+  workflow_dispatch:
+  push:
+    paths: ['data/import-photos.json']
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/import-photos.mjs
+      - run: |
+          git config user.name "crm-bot"
+          git config user.email "bot@crm-maconnerie.fr"
+          git add src/assets/realisations
+          if ! git diff --cached --quiet; then git commit -m "Import des photos de chantier (Facebook)" && git push; fi
