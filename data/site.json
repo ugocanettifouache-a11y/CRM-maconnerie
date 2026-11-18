@@ -1,15 +1,15 @@
 {
-  "_a_completer": "Toutes les valeurs entre crochets [ ] sont à remplacer par les vraies infos de Cyril avant la mise en ligne.",
+  "_a_completer": "Valeurs entre crochets [ ] à compléter avec Cyril. Téléphone, e-mail et adresse repris de sa page Facebook pro.",
   "nom": "CRM Maçonnerie Générale",
   "nomCourt": "CRM Maçonnerie",
   "dirigeant": "Cyril Rives",
   "slogan": "Le travail bien fait, du sol au faîtage.",
   "url": "https://crm-maconnerie.fr",
-  "telephone": "[06 00 00 00 00]",
-  "telephoneLien": "+33600000000",
-  "email": "[contact@crm-maconnerie.fr]",
+  "telephone": "06 24 15 09 23",
+  "telephoneLien": "+33624150923",
+  "email": "cyrilrivesm@gmail.com",
   "adresse": {
-    "rue": "[Adresse]",
+    "rue": "Chemin de campagne",
     "codePostal": "30260",
     "ville": "Quissac",
     "departement": "Gard",
@@ -30,10 +30,23 @@
     "capital": "[capital social si société]"
   },
   "chiffres": [
-    { "valeur": "[X] ans", "label": "d'expérience" },
-    { "valeur": "48 h", "label": "pour vous rappeler" },
-    { "valeur": "Décennale", "label": "assurance garantie" }
+    {
+      "valeur": "[X] ans",
+      "label": "d'expérience"
+    },
+    {
+      "valeur": "48 h",
+      "label": "pour vous rappeler"
+    },
+    {
+      "valeur": "Décennale",
+      "label": "assurance garantie"
+    }
   ],
-  "webmaster": { "nom": "Hélion — Ugo Canetti", "url": "https://helion-business.com" },
-  "hebergeur": "Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com"
+  "webmaster": {
+    "nom": "Hélion — Ugo Canetti",
+    "url": "https://helion-business.com"
+  },
+  "hebergeur": "Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com",
+  "heroImage": ""
 }
