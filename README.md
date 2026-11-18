@@ -77,5 +77,5 @@ app.pagescms.org → se connecter avec GitHub → ouvrir le dépôt. Cyril (invi
 - [ ] Logo vectoriel définitif (`src/assets/img/logo.svg` est provisoire) + favicon
 - [ ] Photos : remplacer les `placeholder-*.svg` (format paysage 4:3, ~1600 px, nommées `mur-cloture-quissac.jpg`…)
 - [ ] Réalisations réelles (retirer `"exemple": true`), texte de la page À propos
-- [ ] Valider avec Cyril : liste des 6 communes, rayon d'intervention (30 km), horaires, « rappel sous 48 h »
+- [ ] Valider avec Cyril : liste des 6 communes, rayon d'intervention (50 km, validé), horaires, « rappel sous 48 h »
 - [ ] Coordonnées Hélion dans les mentions légales si souhaité

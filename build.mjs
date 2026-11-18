@@ -151,7 +151,7 @@ function localBusiness() {
     founder: { '@type': 'Person', name: S.dirigeant },
     address: { '@type': 'PostalAddress', postalCode: S.adresse.codePostal, addressLocality: S.adresse.ville, addressRegion: S.adresse.region, addressCountry: 'FR' },
     geo: { '@type': 'GeoCoordinates', latitude: S.adresse.lat, longitude: S.adresse.lng },
-    areaServed: COMMUNES.map(c => ({ '@type': 'City', name: c.nom })),
+    areaServed: [...COMMUNES.map(c => ({ '@type': 'City', name: c.nom })), { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', latitude: S.adresse.lat, longitude: S.adresse.lng }, geoRadius: S.rayonKm * 1000 }],
     sameAs: [S.facebook],
     openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '18:00' }],
     hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Travaux de maçonnerie', itemListElement: METIERS.map(m => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: m.nom, url: `${S.url}/metiers/${m.slug}/` } })) }
@@ -262,8 +262,8 @@ add('/', {
 
 <section class="section">
   <div class="wrap split">
-    <div class="reveal"><div class="eyebrow">Secteur</div><h2>Autour de ${esc(S.adresse.ville)}, <em>à ${S.rayonKm} km à la ronde.</em></h2><p class="lead" style="margin-bottom:30px">Vallée du Vidourle, garrigue nîmoise, piémont cévenol.</p>${towns()}</div>
-    <div class="reveal">${mapFrame('3.75%2C43.80%2C4.25%2C44.03', "Carte du secteur d'intervention autour de Quissac")}</div>
+    <div class="reveal"><div class="eyebrow">Secteur</div><h2>Autour de ${esc(S.adresse.ville)}, <em>à ${S.rayonKm} km à la ronde.</em></h2><p class="lead" style="margin-bottom:30px">Vallée du Vidourle, garrigue nîmoise, piémont cévenol : jusqu'à Nîmes, Alès, Lunel et le nord de Montpellier.</p>${towns()}</div>
+    <div class="reveal">${mapFrame('3.35%2C43.55%2C4.65%2C44.27', "Carte du secteur d'intervention autour de Quissac")}</div>
   </div>
 </section>
 ${cta()}`
@@ -339,8 +339,8 @@ add('/zone-intervention/', {
   body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basé à ${S.adresse.ville}, Cyril intervient dans un rayon d'environ ${S.rayonKm} km.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
     + `<section class="section"><div class="wrap split" style="align-items:start">
   <div><div class="grid g2">${COMMUNES.map(c => `<a class="tile reveal" href="/zone-intervention/${c.slug}/"><span class="ico">${I.pin}</span><h3>Maçon à ${esc(c.nom)}</h3><p>${esc(c.accroche)}</p><span class="link">Voir ${I.arrow}</span></a>`).join('')}</div>
-  <p class="muted" style="margin-top:28px">Votre commune n'est pas dans la liste ? Appelez : si elle est dans le secteur, Cyril se déplace.</p></div>
-  <div class="reveal" style="position:sticky;top:110px">${mapFrame('3.70%2C43.75%2C4.30%2C44.08', "Carte du secteur d'intervention")}</div>
+  <p class="muted" style="margin-top:28px">Votre commune n'est pas dans la liste ? Cyril intervient jusqu'à ${S.rayonKm} km autour de Quissac, de Nîmes à Alès et jusqu'au nord de Montpellier : appelez, il se déplace.</p></div>
+  <div class="reveal" style="position:sticky;top:110px">${mapFrame('3.30%2C43.50%2C4.70%2C44.32', "Carte du secteur d'intervention")}</div>
 </div></section>` + cta()
 });
 
