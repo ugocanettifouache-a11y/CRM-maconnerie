@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Photo à venir : Terrasse">
+<rect width="800" height="600" fill="#EFE9DF"/><rect x="0" y="430" width="800" height="170" fill="#E4DCCD"/>
+<g fill="none" stroke="#B8AE9F" stroke-width="3"><path d="M100 400 L250 300 H700 L560 400Z"/><line x1="340" y1="300" x2="192" y2="400"/><line x1="430" y1="300" x2="284" y2="400"/><line x1="520" y1="300" x2="376" y2="400"/><line x1="610" y1="300" x2="468" y2="400"/><line x1="700" y1="300" x2="560" y2="400"/><line x1="175" y1="350" x2="630" y2="350"/><rect x="380" y="315" width="170" height="28" rx="4" fill="#cfe0e6" stroke="#9fb8c2"/></g>
+<text x="400" y="510" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#6B655D">Terrasse</text>
+<text x="400" y="545" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" fill="#9A9184">Photo de chantier à venir</text>
+</svg>

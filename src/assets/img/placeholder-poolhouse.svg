@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Photo à venir : Pool-house">
+<rect width="800" height="600" fill="#EFE9DF"/><rect x="0" y="430" width="800" height="170" fill="#E4DCCD"/>
+<g fill="none" stroke="#B8AE9F" stroke-width="3"><rect x="220" y="260" width="360" height="170"/><path d="M200 262 H600 L580 230 H220Z" stroke="#7A1E3A"/><rect x="270" y="310" width="110" height="120"/><rect x="430" y="310" width="100" height="70"/></g>
+<text x="400" y="510" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#6B655D">Pool-house</text>
+<text x="400" y="545" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" fill="#9A9184">Photo de chantier à venir</text>
+</svg>

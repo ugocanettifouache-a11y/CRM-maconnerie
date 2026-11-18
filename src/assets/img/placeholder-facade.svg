@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Photo à venir : Façade">
+<rect width="800" height="600" fill="#EFE9DF"/><rect x="0" y="430" width="800" height="170" fill="#E4DCCD"/>
+<g fill="none" stroke="#B8AE9F" stroke-width="3"><path d="M200 430V240L400 140L600 240V430Z"/><rect x="250" y="280" width="70" height="90"/><rect x="480" y="280" width="70" height="90"/><rect x="365" y="320" width="70" height="110"/><path d="M190 245 L400 135 L610 245" stroke="#7A1E3A" stroke-width="4"/></g>
+<text x="400" y="510" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#6B655D">Façade</text>
+<text x="400" y="545" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" fill="#9A9184">Photo de chantier à venir</text>
+</svg>

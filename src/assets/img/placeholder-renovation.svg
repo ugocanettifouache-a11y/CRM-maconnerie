@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Photo à venir : Rénovation">
+<rect width="800" height="600" fill="#EFE9DF"/><rect x="0" y="430" width="800" height="170" fill="#E4DCCD"/>
+<g fill="none" stroke="#B8AE9F" stroke-width="3"><rect x="160" y="200" width="480" height="230"/><rect x="300" y="270" width="200" height="160" stroke="#7A1E3A"/><line x1="290" y1="268" x2="510" y2="268" stroke-width="10" stroke="#6B655D"/></g>
+<text x="400" y="510" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#6B655D">Rénovation</text>
+<text x="400" y="545" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" fill="#9A9184">Photo de chantier à venir</text>
+</svg>

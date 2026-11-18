@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Photo à venir : Avant travaux">
+<rect width="800" height="600" fill="#EFE9DF"/><rect x="0" y="430" width="800" height="170" fill="#E4DCCD"/>
+<g fill="none" stroke="#B8AE9F" stroke-width="3"><path d="M200 430V240L400 140L600 240V430Z"/><path d="M260 260 l30 50 l-20 30 l40 60" /><path d="M520 250 l-25 40 l30 35"/><path d="M380 300 l20 30 l-15 40"/></g>
+<text x="400" y="510" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="600" fill="#6B655D">Avant travaux</text>
+<text x="400" y="545" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" fill="#9A9184">Photo de chantier à venir</text>
+</svg>

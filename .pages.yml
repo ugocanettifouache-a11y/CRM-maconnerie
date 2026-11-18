@@ -1,0 +1,32 @@
+# Espace d'édition pour Cyril via Pages CMS (https://app.pagescms.org) :
+# il se connecte avec GitHub, ajoute une réalisation depuis son téléphone,
+# et le site se met à jour tout seul (Cloudflare redéploie à chaque modification).
+media:
+  input: src/assets/realisations
+  output: /assets/realisations
+content:
+  - name: realisations
+    label: Réalisations
+    type: file
+    path: data/realisations.json
+    format: json
+    list: true
+    fields:
+      - { name: titre, label: Titre, type: string, required: true }
+      - name: metier
+        label: Métier
+        type: select
+        options:
+          values:
+            - { value: enduits-facades, label: Enduits & façades }
+            - { value: murs-clotures, label: Murs & clôtures }
+            - { value: toitures-genoises, label: Toitures & génoises }
+            - { value: terrasses-exterieurs, label: Terrasses & extérieurs }
+            - { value: renovation, label: Rénovation }
+            - { value: construction-extension, label: Construction & extension }
+      - { name: lieu, label: Commune, type: string, required: true }
+      - { name: date, label: "Date (AAAA-MM)", type: string }
+      - { name: description, label: Description courte, type: text }
+      - { name: image, label: Photo (après), type: image, required: true }
+      - { name: avant, label: Photo avant (facultatif), type: image }
+      - { name: id, label: "Identifiant (ex. mur-quissac-2026)", type: string, required: true }

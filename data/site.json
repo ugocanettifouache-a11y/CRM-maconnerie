@@ -1,0 +1,39 @@
+{
+  "_a_completer": "Toutes les valeurs entre crochets [ ] sont à remplacer par les vraies infos de Cyril avant la mise en ligne.",
+  "nom": "CRM Maçonnerie Générale",
+  "nomCourt": "CRM Maçonnerie",
+  "dirigeant": "Cyril Rives",
+  "slogan": "Le travail bien fait, du sol au faîtage.",
+  "url": "https://crm-maconnerie.fr",
+  "telephone": "[06 00 00 00 00]",
+  "telephoneLien": "+33600000000",
+  "email": "[contact@crm-maconnerie.fr]",
+  "adresse": {
+    "rue": "[Adresse]",
+    "codePostal": "30260",
+    "ville": "Quissac",
+    "departement": "Gard",
+    "region": "Occitanie",
+    "lat": 43.9133,
+    "lng": 4.0011
+  },
+  "rayonKm": 30,
+  "horaires": "Du lundi au vendredi, 8 h – 18 h",
+  "facebook": "https://www.facebook.com/share/1DsBebzr75/",
+  "googleAvisUrl": "[lien Google « laisser un avis » — créé avec la fiche Google Business]",
+  "legal": {
+    "formeJuridique": "[forme juridique : EI / EURL / SARL…]",
+    "siret": "[SIRET]",
+    "rcsOuRm": "[RCS / Répertoire des métiers]",
+    "tva": "[n° TVA intracommunautaire ou « TVA non applicable, art. 293 B du CGI »]",
+    "assuranceDecennale": "[Assureur décennale + n° de contrat + zone couverte]",
+    "capital": "[capital social si société]"
+  },
+  "chiffres": [
+    { "valeur": "[X] ans", "label": "d'expérience" },
+    { "valeur": "48 h", "label": "pour vous rappeler" },
+    { "valeur": "Décennale", "label": "assurance garantie" }
+  ],
+  "webmaster": { "nom": "Hélion — Ugo Canetti", "url": "https://helion-business.com" },
+  "hebergeur": "Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com"
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "enduits-facades",
+    "nom": "Enduits & façades",
+    "court": "Enduits",
+    "icone": "facade",
+    "metaTitle": "Enduit de façade à Quissac et dans le Gard | CRM Maçonnerie",
+    "metaDesc": "Enduit monocouche, enduit à la chaux, ravalement et rénovation de façades autour de Quissac, Sauve et Sommières. Devis gratuit par un maçon local.",
+    "h1": "Enduits et façades dans le Gard",
+    "accroche": "Une façade propre protège la maison autant qu'elle la met en valeur. Neuve ou à reprendre, on choisit l'enduit qui convient au support et au climat gardois.",
+    "intro": "Sous le soleil et le mistral du Gard, une façade travaille : fissures, décollements, teinte qui passe. Cyril intervient sur le neuf comme sur la rénovation, en commençant toujours par un diagnostic du support. Parpaing, brique, pierre ou ancien enduit : chaque mur appelle sa solution, et c'est elle qui fait durer le résultat.",
+    "prestations": [
+      "Enduit monocouche (gratté, taloché, écrasé)",
+      "Enduit traditionnel à la chaux pour la pierre et le bâti ancien",
+      "Ravalement et rénovation de façade",
+      "Traitement des fissures et reprise des supports",
+      "Joints de pierre et pierres apparentes",
+      "Encadrements, soubassements et génoises enduites"
+    ],
+    "points": [
+      { "titre": "Diagnostic du support", "texte": "On identifie la nature du mur et l'origine des désordres avant de proposer quoi que ce soit." },
+      { "titre": "Le bon enduit", "texte": "Monocouche sur maçonnerie récente, chaux sur la pierre qui doit respirer : pas de solution unique." },
+      { "titre": "Finition soignée", "texte": "Protection des abords, angles nets, teinte choisie avec vous sur échantillon." }
+    ],
+    "faq": [
+      { "q": "Quel enduit choisir pour une maison en pierre ?", "r": "Pour la pierre et le bâti ancien, un enduit à la chaux est en général recommandé : il laisse le mur respirer et évite que l'humidité reste piégée. Le ciment et certains monocouches sont trop étanches pour ces supports." },
+      { "q": "Faut-il une autorisation pour refaire sa façade ?", "r": "Un changement d'aspect ou de couleur de façade demande souvent une déclaration préalable en mairie, surtout en secteur protégé. Renseignez-vous auprès de votre commune : Cyril peut vous indiquer les éléments à fournir." },
+      { "q": "Combien de temps dure un chantier de façade ?", "r": "Cela dépend de la surface, de l'état du support et de la météo. Le délai est précisé dans le devis, après visite." }
+    ],
+    "motsCles": ["enduit", "façade", "facade", "crépi", "ravalement", "monocouche", "chaux", "taloché", "gratté"]
+  },
+  {
+    "slug": "murs-clotures",
+    "nom": "Murs & clôtures",
+    "court": "Murs",
+    "icone": "mur",
+    "metaTitle": "Mur de clôture à Quissac et dans le Gard | CRM Maçonnerie",
+    "metaDesc": "Construction de murs de clôture, murets, murs de soutènement et piliers de portail autour de Quissac. Fondations solides, finitions enduites ou pierre.",
+    "h1": "Murs de clôture et de soutènement",
+    "accroche": "Un mur, c'est d'abord ce qu'on ne voit pas : la fondation. On la fait bien, pour que le reste tienne des décennies.",
+    "intro": "Délimiter un terrain, retenir une restanque, encadrer un portail : Cyril construit des murs pensés pour durer, avec des fondations dimensionnées selon le terrain et la hauteur. Finition enduite assortie à la maison, pierre apparente ou couvertine : le mur se fond dans le paysage au lieu de s'y imposer.",
+    "prestations": [
+      "Murs de clôture en parpaing enduit",
+      "Murets et murs en pierre",
+      "Murs de soutènement et restanques",
+      "Piliers de portail et de portillon",
+      "Couvertines et chaperons",
+      "Reprise de murs anciens fissurés ou affaissés"
+    ],
+    "points": [
+      { "titre": "Fondations adaptées", "texte": "Semelle et ferraillage dimensionnés selon le sol, la pente et la hauteur du mur." },
+      { "titre": "Règles respectées", "texte": "Hauteur et implantation vérifiées avec le PLU de votre commune avant de commencer." },
+      { "titre": "Finition au choix", "texte": "Enduit assorti à la maison, pierre, couvertine : on harmonise avec l'existant." }
+    ],
+    "faq": [
+      { "q": "Faut-il une déclaration pour construire un mur de clôture ?", "r": "Cela dépend de votre commune : certaines imposent une déclaration préalable pour les clôtures, et le PLU fixe souvent une hauteur maximale. Le plus sûr est de consulter la mairie avant le chantier." },
+      { "q": "Quelle différence entre mur de clôture et mur de soutènement ?", "r": "Un mur de clôture délimite ; un mur de soutènement retient de la terre et subit une poussée importante. Ce dernier demande une conception plus robuste (ferraillage, drainage, barbacanes)." },
+      { "q": "Peut-on réparer un vieux mur plutôt que le refaire ?", "r": "Souvent, oui. Après diagnostic, on peut reprendre les fondations, rejointoyer ou reconstruire seulement la partie abîmée." }
+    ],
+    "motsCles": ["mur", "clôture", "cloture", "muret", "soutènement", "soutenement", "pilier", "portail", "restanque", "couvertine"]
+  },
+  {
+    "slug": "toitures-genoises",
+    "nom": "Toitures & génoises",
+    "court": "Toitures",
+    "icone": "toit",
+    "metaTitle": "Rénovation de toiture et génoises dans le Gard | CRM Maçonnerie",
+    "metaDesc": "Rénovation de toitures en tuiles canal, génoises, faîtages et rives autour de Quissac et Sommières. Travail de maçon dans la tradition du Gard.",
+    "h1": "Toitures en tuiles et génoises",
+    "accroche": "La génoise, c'est la signature des maisons du Midi. On la refait dans les règles, comme la toiture qu'elle soutient.",
+    "intro": "Tuiles canal qui glissent, faîtage qui se fissure, génoise qui s'effrite : la toiture est l'endroit où les petits défauts deviennent vite de gros dégâts. Cyril intervient sur la maçonnerie de toiture, de la reprise ponctuelle à la rénovation complète, en respectant le style traditionnel des maisons gardoises.",
+    "prestations": [
+      "Rénovation de toitures en tuiles canal",
+      "Création et restauration de génoises (1, 2 ou 3 rangs)",
+      "Faîtages et arêtiers scellés",
+      "Rives, solins et souches de cheminée",
+      "Remplacement de tuiles et recherche de fuites",
+      "Dalles et chapes de toiture-terrasse"
+    ],
+    "points": [
+      { "titre": "Savoir-faire local", "texte": "Génoises et tuiles canal posées selon la tradition des maisons du Gard." },
+      { "titre": "Sécurité du chantier", "texte": "Échafaudage et protections adaptés, pour vous comme pour l'équipe." },
+      { "titre": "Étanchéité vérifiée", "texte": "Points singuliers (cheminée, rives, faîtage) contrôlés avant de quitter le toit." }
+    ],
+    "faq": [
+      { "q": "Qu'est-ce qu'une génoise ?", "r": "C'est une frise de tuiles superposées et scellées sous le bord du toit, typique du sud de la France. Elle éloigne l'eau de pluie de la façade tout en décorant la maison." },
+      { "q": "Ma toiture fuit, faut-il tout refaire ?", "r": "Pas forcément. Une fuite vient souvent d'un point précis (tuile cassée, faîtage, solin). Un diagnostic permet de réparer juste ce qu'il faut." },
+      { "q": "Intervenez-vous sur la charpente ?", "r": "Cyril est maçon : il traite la maçonnerie de toiture. Pour une charpente à remplacer, il peut vous orienter vers un charpentier de confiance." }
+    ],
+    "motsCles": ["toit", "toiture", "génoise", "genoise", "tuile", "faîtage", "faitage", "rive", "cheminée", "solin"]
+  },
+  {
+    "slug": "terrasses-exterieurs",
+    "nom": "Terrasses & extérieurs",
+    "court": "Terrasses",
+    "icone": "terrasse",
+    "metaTitle": "Terrasse, dallage et plage de piscine dans le Gard | CRM Maçonnerie",
+    "metaDesc": "Dalles béton, terrasses carrelées, plages de piscine en travertin, escaliers et pool-houses autour de Quissac, Sauve et Sommières.",
+    "h1": "Terrasses, dallages et aménagements extérieurs",
+    "accroche": "Dans le Gard, on vit dehors une bonne partie de l'année. Autant que la terrasse soit plane, saine et belle.",
+    "intro": "Terrasse au pied de la maison, plage de piscine, allée, escalier ou pool-house : Cyril réalise les aménagements extérieurs en partant d'une base solide. Une dalle bien drainée, avec la bonne pente, c'est ce qui évite les flaques, les fissures et les carreaux qui sonnent creux au bout de deux étés.",
+    "prestations": [
+      "Dalles béton et chapes",
+      "Terrasses carrelées ou en pierre naturelle",
+      "Plages de piscine (travertin, pierre reconstituée…)",
+      "Escaliers extérieurs et marches",
+      "Pool-houses, abris et cuisines d'été",
+      "Allées, bordures et réseaux d'évacuation"
+    ],
+    "points": [
+      { "titre": "Une base saine", "texte": "Terrassement, hérisson et dalle ferraillée : la durée de vie de la terrasse se joue là." },
+      { "titre": "Pentes et drainage", "texte": "L'eau doit partir dans la bonne direction, loin de la maison et de la piscine." },
+      { "titre": "Pose précise", "texte": "Joints réguliers, coupes propres, niveaux contrôlés." }
+    ],
+    "faq": [
+      { "q": "Quel revêtement pour une plage de piscine ?", "r": "Le travertin et la pierre reconstituée sont très appréciés : antidérapants et agréables pieds nus. Le choix dépend de votre budget et du style de la maison." },
+      { "q": "Faut-il un permis pour un pool-house ?", "r": "Selon la surface créée, une déclaration préalable ou un permis de construire peut être nécessaire. Cyril vous indique les démarches à prévoir lors de la visite." },
+      { "q": "Peut-on carreler sur une ancienne terrasse ?", "r": "Parfois, si le support est sain, plan et sans fissure active. Sinon, il vaut mieux reprendre la base pour éviter de reporter les défauts." }
+    ],
+    "motsCles": ["terrasse", "dalle", "dallage", "piscine", "travertin", "plage", "pool", "escalier", "allée", "carrelage"]
+  },
+  {
+    "slug": "renovation",
+    "nom": "Rénovation",
+    "court": "Rénovation",
+    "icone": "renovation",
+    "metaTitle": "Rénovation de maison et de bâti ancien dans le Gard | CRM Maçonnerie",
+    "metaDesc": "Ouverture de murs porteurs, reprise de maçonnerie, restauration de bâti ancien en pierre et rénovation intérieure autour de Quissac.",
+    "h1": "Rénovation et restauration du bâti",
+    "accroche": "Rénover, c'est composer avec ce qui existe. Il faut savoir lire un vieux mur avant d'y toucher.",
+    "intro": "Mas en pierre, maison de village ou pavillon des années 80 : chaque rénovation commence par comprendre le bâtiment. Cyril réalise les travaux de maçonnerie qui transforment une maison sans la fragiliser, de l'ouverture d'un mur porteur à la restauration d'une façade en pierre.",
+    "prestations": [
+      "Ouverture de murs porteurs (IPN, linteaux)",
+      "Création ou agrandissement de baies et portes",
+      "Restauration de bâti ancien en pierre",
+      "Reprise de fissures et de fondations",
+      "Cloisons, doublages et chapes intérieures",
+      "Démolition et évacuation des gravats"
+    ],
+    "points": [
+      { "titre": "Structure respectée", "texte": "Étaiement, linteaux et IPN dimensionnés : on ouvre sans mettre en danger la maison." },
+      { "titre": "Matériaux compatibles", "texte": "Sur l'ancien, chaux et pierre plutôt que ciment, pour éviter les désordres." },
+      { "titre": "Chantier propre", "texte": "Protection des pièces habitées, évacuation des gravats, nettoyage en fin de journée." }
+    ],
+    "faq": [
+      { "q": "Peut-on ouvrir un mur porteur ?", "r": "Oui, avec les précautions nécessaires : étaiement, pose d'un linteau ou d'une poutre dimensionnée. Pour les grandes ouvertures, une étude par un bureau d'études structure peut être demandée." },
+      { "q": "Travaillez-vous en site occupé ?", "r": "Oui. Les zones de travail sont isolées et protégées pour que vous puissiez continuer à vivre chez vous." },
+      { "q": "Faites-vous les finitions intérieures ?", "r": "Cyril réalise la maçonnerie (chapes, cloisons, enduits). Pour le reste (électricité, plomberie, peinture), il peut vous mettre en relation avec des artisans qu'il connaît." }
+    ],
+    "motsCles": ["rénovation", "renovation", "restauration", "porteur", "ipn", "ouverture", "linteau", "ancien", "pierre", "démolition"]
+  },
+  {
+    "slug": "construction-extension",
+    "nom": "Construction & extension",
+    "court": "Construction",
+    "icone": "maison",
+    "metaTitle": "Maçon pour extension et construction à Quissac | CRM Maçonnerie",
+    "metaDesc": "Gros œuvre pour extension de maison, garage, fondations, dalles et élévation de murs autour de Quissac, Sauve et Lédignan.",
+    "h1": "Construction, extension et gros œuvre",
+    "accroche": "Une pièce en plus, un garage, une maison : le gros œuvre, c'est la colonne vertébrale du projet.",
+    "intro": "Agrandir plutôt que déménager : l'extension est souvent la meilleure option pour gagner de la place. Cyril prend en charge le gros œuvre, des fondations jusqu'à l'élévation des murs, en coordination avec les autres corps de métier et, le cas échéant, avec votre architecte.",
+    "prestations": [
+      "Extensions de maison et surélévations",
+      "Garages et annexes",
+      "Fondations, longrines et vides sanitaires",
+      "Dalles et planchers",
+      "Élévation de murs (parpaing, brique, monomur)",
+      "Coordination avec les autres corps de métier"
+    ],
+    "points": [
+      { "titre": "Plans respectés", "texte": "Implantation et cotes conformes au permis et aux plans de l'architecte." },
+      { "titre": "Liaison avec l'existant", "texte": "Raccord propre entre l'extension et la maison, sans pont thermique ni fissure." },
+      { "titre": "Planning clair", "texte": "Étapes et délais annoncés dès le devis, points réguliers pendant le chantier." }
+    ],
+    "faq": [
+      { "q": "Faut-il un permis de construire pour une extension ?", "r": "Selon la surface créée et la zone (PLU), une déclaration préalable ou un permis de construire est nécessaire. Au-delà d'une certaine surface totale, le recours à un architecte devient obligatoire." },
+      { "q": "Gérez-vous tout le chantier ?", "r": "Cyril réalise le gros œuvre et peut coordonner les intervenants qu'il connaît. Pour un projet complet, il travaille volontiers avec votre architecte ou maître d'œuvre." },
+      { "q": "Êtes-vous assuré en décennale ?", "r": "Oui : l'attestation d'assurance décennale est fournie avec chaque devis." }
+    ],
+    "motsCles": ["extension", "construction", "garage", "fondation", "dalle", "gros œuvre", "gros oeuvre", "agrandissement", "élévation", "parpaing", "maison"]
+  }
+]
