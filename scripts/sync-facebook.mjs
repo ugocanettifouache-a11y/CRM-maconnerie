@@ -24,10 +24,16 @@ const classer = texte => {
 };
 
 const fields = 'id,message,created_time,permalink_url,full_picture,attachments{media,subattachments{media}}';
-const url = `https://graph.facebook.com/v21.0/${FB_PAGE_ID}/posts?fields=${encodeURIComponent(fields)}&limit=50&access_token=${FB_PAGE_TOKEN}`;
-const res = await fetch(url);
-if (!res.ok) { console.error('Erreur Graph API', res.status, await res.text()); process.exit(1); }
-const { data = [] } = await res.json();
+// Récupère TOUT l'historique de la page (pagination), pas seulement les derniers posts
+const data = [];
+let url = `https://graph.facebook.com/v21.0/${FB_PAGE_ID}/posts?fields=${encodeURIComponent(fields)}&limit=100&access_token=${FB_PAGE_TOKEN}`;
+while (url) {
+  const res = await fetch(url);
+  if (!res.ok) { console.error('Erreur Graph API', res.status, await res.text()); process.exit(1); }
+  const page = await res.json();
+  data.push(...(page.data || []));
+  url = page.paging?.next || null;
+}
 
 const imgDir = join(ROOT, 'src/assets/journal');
 mkdirSync(imgDir, { recursive: true });
@@ -41,7 +47,7 @@ for (const p of data) {
   if (!srcs.length && p.full_picture) srcs.push(p.full_picture);
 
   const images = [];
-  for (const [i, src] of srcs.slice(0, 4).entries()) {
+  for (const [i, src] of srcs.slice(0, 10).entries()) {
     const name = `${p.id.replace(/\W/g, '_')}_${i}.jpg`, file = join(imgDir, name);
     if (!existsSync(file)) {
       const r = await fetch(src);
