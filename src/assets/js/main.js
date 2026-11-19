@@ -46,7 +46,7 @@
       const r = await fetch('/api/devis', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       if (!r.ok) throw new Error();
       form.reset();
-      st.textContent = 'Merci ! Votre demande est bien partie. Cyril vous rappelle rapidement.';
+      st.textContent = 'Merci ! Votre demande est bien partie. Nous vous rappelons rapidement.';
       st.classList.add('ok');
     } catch {
       st.innerHTML = 'L’envoi n’a pas abouti. Vous pouvez appeler directement ou écrire à <a href="mailto:' + form.dataset.mail + '">' + form.dataset.mail + '</a>.';
@@ -54,4 +54,22 @@
     }
     btn.disabled = false; btn.textContent = 'Envoyer ma demande';
   });
+})();
+
+// Agrandissement des photos de chantier
+(() => {
+  const imgs = document.querySelectorAll('.w .ph:not(.ba) > img, .story-ph img, .fig img');
+  if (!imgs.length) return;
+  const box = document.createElement('div');
+  box.className = 'lb'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.hidden = true;
+  box.innerHTML = '<button class="lb-x" aria-label="Fermer">×</button><figure><img alt=""><figcaption></figcaption></figure>';
+  document.body.appendChild(box);
+  const im = box.querySelector('img'), cap = box.querySelector('figcaption');
+  const close = () => { box.hidden = true; document.body.style.overflow = ''; };
+  imgs.forEach(i => { i.style.cursor = 'zoom-in'; i.addEventListener('click', () => {
+    im.src = i.currentSrc || i.src; im.alt = i.alt; cap.textContent = i.alt || '';
+    box.hidden = false; document.body.style.overflow = 'hidden'; box.querySelector('.lb-x').focus();
+  }); });
+  box.addEventListener('click', e => { if (e.target !== im) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
 })();

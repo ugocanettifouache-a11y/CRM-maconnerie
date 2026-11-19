@@ -59,11 +59,11 @@ const HERO = S.heroImage || photoFor(null, 0) || placeholder('terrasses-exterieu
 function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false }) {
   const url = S.url + path;
   const nav = [
-    ['/metiers/', 'Métiers', METIERS.map(m => [`/metiers/${m.slug}/`, m.nom])],
+    ['/metiers/', 'Savoir-faire', METIERS.map(m => [`/metiers/${m.slug}/`, m.nom])],
     ['/realisations/', 'Réalisations'],
     ['/journal-de-chantier/', 'Journal'],
     ['/zone-intervention/', 'Secteur', COMMUNES.map(c => [`/zone-intervention/${c.slug}/`, `Maçon à ${c.nom}`])],
-    ['/a-propos/', "L'artisan"],
+    ['/a-propos/', 'Qui sommes-nous'],
   ];
   const cur = h => (path === h || (h !== '/' && path.startsWith(h))) ? ' aria-current="page"' : '';
   const navHtml = nav.map(([h, l, sub]) => sub
@@ -86,8 +86,8 @@ ${(noindex || !INDEX) ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:image" content="${S.url}${image}">
 <meta name="theme-color" content="#0B0B0C">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/fraunces-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/eb-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/style.css?v=${V.css}">
 ${ld}
 </head>
@@ -124,7 +124,7 @@ function footer() {
       <div class="foot-logo">
         <img src="/assets/img/logo-h-blanc.svg" alt="CRM — Cyril Rives Maçonnerie générale" width="210" height="51" loading="lazy">
         <p style="max-width:32ch">${esc(S.slogan)}<br>Maçonnerie générale à ${esc(S.adresse.ville)} et dans le Gard.</p>
-        <p><a href="${S.facebook}" rel="noopener" target="_blank" style="display:inline-flex;gap:10px;align-items:center"><span style="width:18px;display:inline-flex">${I.fb}</span>Les chantiers sur Facebook</a></p>
+        <p><a href="${S.facebook}" rel="noopener" target="_blank" style="display:inline-flex;gap:10px;align-items:center"><span style="width:18px;display:inline-flex">${I.fb}</span>Nos chantiers sur Facebook</a></p>
       </div>
       <div><h4>Métiers</h4><ul>${METIERS.map(m => `<li><a href="/metiers/${m.slug}/">${esc(m.nom)}</a></li>`).join('')}</ul></div>
       <div><h4>Secteur</h4><ul>${COMMUNES.map(c => `<li><a href="/zone-intervention/${c.slug}/">Maçon à ${esc(c.nom)}</a></li>`).join('')}</ul></div>
@@ -168,14 +168,15 @@ const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', ma
 
 // ---------- Blocs ----------
 const crumbs = items => `<nav class="crumbs" aria-label="Fil d'Ariane">${items.map(([n, p], i) => i < items.length - 1 ? `<a href="${p}">${esc(n)}</a> / ` : `<span aria-current="page">${esc(n)}</span>`).join('')}</nav>`;
-const pageHero = ({ kicker, h1, lead, crumbItems, btns = true }) => `<section class="page-hero on-dark"><div class="wrap">
-  ${crumbItems ? crumbs(crumbItems) : ''}<div class="eyebrow">${kicker}</div><h1>${h1}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}
+const pageHero = ({ kicker, h1, lead, crumbItems, btns = true, img, cap }) => `<section class="page-hero on-dark${img ? ' has-ph' : ''}"><div class="t">
+  ${crumbItems ? crumbs(crumbItems) : ''}<div><span class="eyebrow">${kicker}</span></div><h1>${h1}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}
   ${btns ? `<div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis gratuit</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>` : ''}
-</div></section>`;
-const cta = (titre = 'Parlons de votre <em>projet.</em>', texte = 'Visite et devis gratuits, sans engagement. Cyril vous rappelle sous 48 h.') => `<section class="cta on-dark"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Devis gratuit</div><h2>${titre}</h2><p class="lead">${texte}</p></div>
+</div>${img ? `<div class="ph"><img src="${img}" alt="" width="800" height="900" fetchpriority="high">${cap ? `<span class="ph-cap"><b>${esc(cap[0])}</b>${esc(cap[1] || '')}</span>` : ''}</div>` : ''}</section>`;
+const cta = (titre = 'Parlons de votre <em>projet.</em>', texte = 'La visite et le devis sont gratuits, sans engagement. Nous vous rappelons sous 48 h.') => `<section class="cta on-dark"><div class="wrap">
+  <div class="reveal"><h2>${titre}</h2><p class="lead">${texte}</p></div>
   <div class="side reveal"><a class="tel-big" href="tel:${S.telephoneLien}">${esc(S.telephone)}</a><div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis ${I.arrow}</a></div></div>
 </div></section>`;
+
 const indexList = list => `<div class="index">${list.map(m => `<a href="/metiers/${m.slug}/" class="reveal"><h3>${esc(m.nom)}</h3><p>${esc(m.accroche)}</p><span class="go">${I.arrow}</span></a>`).join('')}</div>`;
 const exBadge = o => o.exemple ? '<span class="badge ex">Exemple</span>' : '';
 const realCard = (r, size = '') => {
@@ -192,112 +193,93 @@ const postCard = p => `<article class="post reveal" data-m="${(p.metiers || []).
   <div class="tags">${(p.metiers || []).map(s => M[s] ? `<a href="/metiers/${s}/">${esc(M[s].nom)}</a>` : '').join('')}${p.lien ? `<a href="${esc(p.lien)}" rel="noopener" target="_blank" style="color:var(--mute)">Voir sur Facebook ↗</a>` : ''}</div></div></article>`;
 const filters = (id, slugs) => `<div class="filters" data-filters="${id}" role="group" aria-label="Filtrer par métier"><button data-f="all" aria-pressed="true">Tout voir</button>${slugs.map(s => `<button data-f="${s}" aria-pressed="false">${esc(M[s].nom)}</button>`).join('')}</div>`;
 const towns = () => `<ul class="towns">${COMMUNES.map(c => `<li><a href="/zone-intervention/${c.slug}/">${esc(c.nom)}</a></li>`).join('')}</ul>`;
-const house = (src, alt, cap) => `<figure class="house" style="margin:0"><div class="frame"><img src="${src}" alt="${esc(alt)}" width="1000" height="860" fetchpriority="high"></div>${cap ? `<figcaption class="cap"><b>${esc(cap[0])}</b>${esc(cap[1])}</figcaption>` : ''}</figure>`;
+const house = (src, alt, cap) => `<figure class="fig"><img src="${src}" alt="${esc(alt)}" width="800" height="920" loading="lazy">${cap ? `<figcaption class="ph-cap"><b>${esc(cap[0])}</b>${esc(cap[1])}</figcaption>` : ''}</figure>`;
+const realPhoto = (slug, i = 0) => { const p = photoFor(slug, i); return p.includes('placeholder') ? null : p; };
+
 const posts = () => [...JOURNAL.posts].sort((a, b) => b.date.localeCompare(a.date));
 const mapFrame = (bbox, title) => `<div class="map"><iframe title="${esc(title)}" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&amp;layer=mapnik&amp;marker=${S.adresse.lat}%2C${S.adresse.lng}"></iframe></div>`;
-const trust = `<div class="trust"><span>${I.shield}Assurance décennale</span><span>${I.doc}Devis détaillé gratuit</span><span>${I.pin}Basé à ${esc(S.adresse.ville)}</span></div>`;
+const trust = `<div class="trust"><span>${I.shield}Assurance décennale</span><span>${I.doc}Devis détaillé gratuit</span><span>${I.pin}Entreprise de ${esc(S.adresse.ville)}</span></div>`;
 function add(path, opts) { pages.push({ path, ...opts }); }
 
 // ---------- Accueil ----------
 const STORIES = ['poutre-7m', 'maison-village', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
 const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
-  <div class="story-ph"><img src="${r.image}" alt="${esc(r.titre)}" loading="lazy" width="540" height="960"></div>
+  <div class="story-ph"><img src="${r.image}" alt="${esc(r.titre)}" loading="lazy" width="540" height="620"><span class="n">${String(i + 1).padStart(2, '0')}</span></div>
   <div class="story-txt">
-    <div class="eyebrow">${esc(M[r.metier]?.nom || '')}${r.lieu && r.lieu !== 'Gard' ? ' · ' + esc(r.lieu) : ''}</div>
+    <span class="tag">${esc(M[r.metier]?.nom || '')}${r.lieu && r.lieu !== 'Gard' ? ' · ' + esc(r.lieu) : ''}</span>
     <h3>${esc(r.titre)}</h3>
     <p>${esc(r.description)}</p>
-    ${r.parole ? `<blockquote><p>« ${esc(r.parole)} »</p><cite>Extrait de sa publication Facebook</cite></blockquote>` : ''}
+    ${r.parole ? `<blockquote><p>« ${esc(r.parole)} »</p><cite>Extrait de notre page Facebook</cite></blockquote>` : ''}
     ${r.video ? `<a class="link" href="${r.video}" rel="noopener" target="_blank">Voir la vidéo du chantier ${I.arrow}</a>` : ''}
   </div>
 </article>`;
-const MATIERES = [
-  ['Pierre', 'poutre-7m', 'Murs anciens à reprendre, à rejointoyer, à sauver.'],
-  ['Béton armé', 'bassin-saint-nazaire', 'Planchers, dalles, bassins : le ferraillage avant tout.'],
-  ['Tuile canal', 'toiture-sinistre', 'Couvertures et génoises dans la tradition du Midi.'],
-  ['Faïence', 'faience-chevrons', 'Chevrons, grands formats : la pose au millimètre.'],
-  ['Carreau de ciment', 'maison-village', 'Le charme de l’ancien, posé comme il se doit.'],
-].map(([n, id, t]) => ({ n, t, img: id === 'carreaux' ? '/assets/realisations/carreaux-ciment.jpg' : REAL.find(r => r.id === id)?.image })).filter(x => x.img);
+const STRIP = [['renovation', 'plancher-beton'], ['salles-de-bain', 'faience-chevrons'], ['construction-extension', 'bassin-saint-nazaire'], ['terrasses-exterieurs', 'terrasse-renovation']]
+  .map(([slug, id]) => ({ m: M[slug], img: id === 'plancher-beton' ? '/assets/realisations/plancher-beton.jpg' : REAL.find(r => r.id === id)?.image })).filter(x => x.m && x.img);
 
 add('/', {
   title: 'Maçon à Quissac (Gard) — CRM Maçonnerie Générale, Cyril Rives',
   desc: 'Cyril Rives, artisan maçon à Quissac : rénovation de maisons de village, salles de bain, toitures, terrasses, béton armé. Devis gratuit dans un rayon de 50 km.',
   body: `
-<section class="hero grain">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="eyebrow">Artisan maçon · ${esc(S.adresse.ville)}, ${esc(S.adresse.departement)}</div>
-      <h1>De la fondation<br><em>à la faïence.</em></h1>
-      <p class="lead">Cyril Rives rénove, construit et répare avec les mains et avec le temps qu'il faut. Planchers, poutres, toitures, salles de bain, terrasses : un seul artisan pour tout le chantier, et le même soin du premier coup de pioche au dernier joint.</p>
-      <div class="btns"><a class="btn btn-primary" href="/contact/">Parler de votre projet</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>
-      ${trust}
-    </div>
-    <div class="reveal">${house(HERO, 'Pool-house maçonné par CRM en bord de piscine', ['Pool-house maçonné', 'Murs, couverture, cuisine d’été'])}</div>
+<section class="hero on-dark">
+  <div class="t reveal">
+    <span class="eyebrow">Maçon à ${esc(S.adresse.ville)} · ${esc(S.adresse.departement)}</span>
+    <h1>De la fondation<br><em>à la faïence.</em></h1>
+    <p class="lead">Plancher, poutre, toiture, salle de bain, terrasse : nous venons voir, nous chiffrons et nous réalisons le chantier, jusqu'au dernier joint. Une seule entreprise, et le même soin du gros œuvre aux finitions.</p>
+    <div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>
+    ${trust}
   </div>
+  <div class="ph"><img src="${HERO}" alt="Pool-house maçonné en bord de piscine" width="720" height="960" fetchpriority="high"><span class="ph-cap"><b>Pool-house maçonné</b>Murs, couverture, cuisine d'été</span></div>
 </section>
-
-<section class="section dark on-dark">
-  <div class="wrap">
-    <div class="head"><div><div class="eyebrow">Savoir-faire</div><h2>Un métier, <em>sept façons de l'exercer.</em></h2></div><a class="link" href="/metiers/">Tous les métiers ${I.arrow}</a></div>
-    ${indexList(METIERS)}
-  </div>
-</section>
-
-<section class="section grain paper">
-  <div class="wrap">
-    <div class="head"><div><div class="eyebrow">Carnet de chantier</div><h2>Trois chantiers <em>qui racontent le métier.</em></h2></div><p class="lead">Une poutre qui allait céder, une maison de village reprise de fond en comble, un bassin face aux Cévennes. Racontés avec les mots que Cyril a lui-même publiés.</p></div>
-    <div class="stories">${STORIES.map(story).join('')}</div>
-  </div>
-</section>
+<nav class="strip" aria-label="Nos principaux métiers">${STRIP.map((x, i) => `<a href="/metiers/${x.m.slug}/"><img src="${x.img}" alt="" loading="lazy" width="540" height="660"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="lbl"><b>${esc(x.m.nom)}</b><span>Découvrir ${I.arrow}</span></span></a>`).join('')}</nav>
 
 <section class="section">
+  <div class="wrap intro">
+    <div class="reveal"><span class="eyebrow">Qui sommes-nous</span><h2>Un seul interlocuteur, du gros œuvre aux finitions.</h2></div>
+    <div class="txt reveal">
+      <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre métier, nous le prenons au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
+      <p>Pas de commercial, pas de sous-traitance en cascade : celui qui vient voir votre projet et le chiffre est celui qui le réalise. Et nous montrons notre travail : la plupart de nos chantiers sont filmés et publiés, étape par étape.</p>
+      <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
+      <a class="link" href="/a-propos/">Qui sommes-nous ${I.arrow}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section paper">
   <div class="wrap">
-    <div class="head"><div><div class="eyebrow">Avant / après</div><h2>Le travail, <em>en images.</em></h2></div><a class="link" href="/realisations/">Toutes les réalisations ${I.arrow}</a></div>
+    <div class="head"><div><span class="eyebrow">Avant / après</span><h2>Le travail parle de lui-même.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>
     ${worksGrid(['wc-renovation', 'toiture-sinistre', 'salle-de-bain-pierre'].map(id => REAL.find(r => r.id === id)).filter(Boolean))}
   </div>
 </section>
 
-<section class="section dark on-dark">
+<section class="section">
   <div class="wrap">
-    <div class="head"><div><div class="eyebrow">Matières</div><h2>Ce qu'il a <em>entre les mains.</em></h2></div></div>
-    <div class="matieres">${MATIERES.map(x => `<figure class="mat reveal"><img src="${x.img}" alt="${esc(x.n)}" loading="lazy" width="540" height="960"><figcaption><b>${esc(x.n)}</b><span>${esc(x.t)}</span></figcaption></figure>`).join('')}</div>
-  </div>
-</section>
-
-<section class="section grain paper">
-  <div class="wrap split">
-    <div class="reveal">${house(REAL.find(r => r.id === 'coulage-dalle-pompe' || r.id === 'terrasse-renovation')?.image || photoFor(null, 1), 'Coulage d’une dalle à la pompe à béton', ['Dalle coulée à la pompe', 'Rénovation totale d’une terrasse'])}</div>
-    <div class="reveal">
-      <div class="eyebrow">L'artisan</div>
-      <h2>Le même homme <em>du devis à la réception.</em></h2>
-      <p class="lead">Chez CRM, pas de commercial ni de sous-traitance en cascade. Cyril vient voir, il chiffre, il fait, et il montre : la plupart de ses chantiers sont filmés et partagés étape par étape sur sa page.</p>
-      <ul class="ticks"><li>Visite et devis détaillé gratuits</li><li>Assurance décennale fournie avec chaque devis</li><li>Chantier tenu propre, délais annoncés</li><li>Le conseil honnête, même quand il faut faire moins</li></ul>
-      <a class="link" href="/a-propos/">Qui est Cyril ${I.arrow}</a>
-    </div>
+    <div class="head"><div><span class="eyebrow">Carnet de chantier</span><h2>Trois chantiers racontés.</h2></div><p class="lead">Une poutre qui allait céder, une maison de village reprise de fond en comble, un bassin face aux Cévennes. Avec les mots publiés sur notre page au fil du chantier.</p></div>
+    <div class="stories">${STORIES.map(story).join('')}</div>
   </div>
 </section>
 
 <section class="section dark on-dark">
   <div class="wrap">
-    <div class="head"><div><div class="eyebrow">Méthode</div><h2>Simple, du premier appel <em>à la réception.</em></h2></div></div>
+    <div class="head"><div><span class="eyebrow">Méthode</span><h2>Notre méthode.</h2></div></div>
     <div class="steps">
-      <div class="step reveal"><h3>On se parle</h3><p>Vous appelez ou remplissez le formulaire. Cyril vous rappelle sous 48 h.</p></div>
-      <div class="step reveal"><h3>Il vient voir</h3><p>Sur place, il regarde le terrain, le bâti, les contraintes. C'est gratuit.</p></div>
-      <div class="step reveal"><h3>Un devis clair</h3><p>Poste par poste, sans ligne floue, avec l'attestation décennale.</p></div>
-      <div class="step reveal"><h3>Le chantier</h3><p>Fait dans les règles, tenu propre, réceptionné ensemble.</p></div>
+      <div class="step reveal"><h3>On se parle</h3><p>Vous nous appelez ou remplissez le formulaire. Nous vous rappelons sous 48 h.</p></div>
+      <div class="step reveal"><h3>Nous venons voir</h3><p>Sur place, nous regardons le terrain, le bâti et vos contraintes. C'est gratuit.</p></div>
+      <div class="step reveal"><h3>Un devis clair</h3><p>Poste par poste, sans ligne floue, avec notre attestation décennale.</p></div>
+      <div class="step reveal"><h3>Le chantier</h3><p>Fait dans les règles, tenu propre, et réceptionné ensemble.</p></div>
     </div>
   </div>
 </section>
 
-<section class="section paper grain">
+${posts().length >= 3 ? `<section class="section paper">
   <div class="wrap">
-    <div class="head"><div><div class="eyebrow">En direct de Facebook</div><h2>Journal <em>de chantier.</em></h2></div><a class="link" href="/journal-de-chantier/">Tout le journal ${I.arrow}</a><p class="lead">Chaque publication de Cyril sur Facebook arrive ici automatiquement.</p></div>
-    <div class="journal">${posts().slice(0, 3).map(postCard).join('')}</div>
+    <div class="head"><div><span class="eyebrow">En direct de Facebook</span><h2>Notre journal de chantier.</h2></div><a class="link" href="/journal-de-chantier/">Tout le journal \${I.arrow}</a><p class="lead">Chaque chantier publié sur notre page Facebook arrive ici automatiquement.</p></div>
+    <div class="journal">\${posts().slice(0, 3).map(postCard).join('')}</div>
   </div>
-</section>
+</section>` : ''}
 
 <section class="section">
   <div class="wrap split">
-    <div class="reveal"><div class="eyebrow">Secteur</div><h2>Autour de ${esc(S.adresse.ville)}, <em>à ${S.rayonKm} km à la ronde.</em></h2><p class="lead" style="margin-bottom:30px">Vallée du Vidourle, garrigue nîmoise, piémont cévenol : jusqu'à Nîmes, Alès, Lunel et le nord de Montpellier.</p>${towns()}</div>
+    <div class="reveal"><span class="eyebrow">Secteur</span><h2>${esc(S.adresse.ville)} et ${S.rayonKm} km autour.</h2><p class="lead" style="margin-bottom:30px">Nous intervenons dans la vallée du Vidourle, la garrigue nîmoise et le piémont cévenol : jusqu'à Nîmes, Alès, Lunel et le nord de Montpellier.</p>${towns()}</div>
     <div class="reveal">${mapFrame('3.35%2C43.55%2C4.65%2C44.27', "Carte du secteur d'intervention autour de Quissac")}</div>
   </div>
 </section>
@@ -308,47 +290,47 @@ ${cta()}`
 // ---------- Métiers ----------
 add('/metiers/', {
   title: 'Nos métiers de maçon dans le Gard | CRM Maçonnerie Générale',
-  desc: 'Enduits de façade, murs de clôture, toitures et génoises, terrasses, rénovation, extensions : tous les travaux de maçonnerie de CRM à Quissac.',
-  schema: [crumbsLd([['Accueil', '/'], ['Métiers', '/metiers/']])],
-  body: pageHero({ kicker: 'Savoir-faire', h1: 'Six métiers, <em>une même exigence.</em>', lead: 'Chaque métier a ses règles. Voici ce que Cyril réalise pour les particuliers du Gard.', crumbItems: [['Accueil', '/'], ['Métiers', '/metiers/']] })
-    + `<section class="section light"><div class="wrap">${indexList(METIERS)}</div></section>` + cta()
+  desc: 'Rénovation intérieure, salles de bain, toitures, terrasses, béton armé, murs, façades : tous les travaux de maçonnerie de Cyril Rives à Quissac.',
+  schema: [crumbsLd([['Accueil', '/'], ['Savoir-faire', '/metiers/']])],
+  body: pageHero({ kicker: 'Savoir-faire', h1: `${METIERS.length} métiers, une même exigence.`, lead: 'Chaque métier a ses règles. Voici ce que nous réalisons pour les particuliers du Gard.', crumbItems: [['Accueil', '/'], ['Savoir-faire', '/metiers/']], img: '/assets/realisations/plancher-beton.jpg', cap: ['Plancher béton', 'Rénovation d’une maison de village'] })
+    + `<section class="section"><div class="wrap">${indexList(METIERS)}</div></section>` + cta()
 });
 
 for (const m of METIERS) {
   const reals = REAL.filter(r => r.metier === m.slug);
   const villes = COMMUNES.filter(c => c.focus.includes(m.slug));
   const art = ARTICLES.filter(a => a.metier === m.slug);
-  const items = [['Accueil', '/'], ['Métiers', '/metiers/'], [m.nom, `/metiers/${m.slug}/`]];
+  const items = [['Accueil', '/'], ['Savoir-faire', '/metiers/'], [m.nom, `/metiers/${m.slug}/`]];
+  const img = realPhoto(m.slug, 0);
   add(`/metiers/${m.slug}/`, {
     title: m.metaTitle, desc: m.metaDesc,
     schema: [crumbsLd(items), faqLd(m.faq), { '@context': 'https://schema.org', '@type': 'Service', name: m.nom, serviceType: m.nom, provider: { '@id': S.url + '/#entreprise' }, areaServed: COMMUNES.map(c => c.nom) }],
-    body: pageHero({ kicker: m.nom, h1: m.h1, lead: m.accroche, crumbItems: items }) + `
-<section class="section"><div class="wrap split">
-  <div class="reveal"><div class="eyebrow">Notre approche</div><h2>Bien fait, <em>fait pour durer.</em></h2><p class="lead">${esc(m.intro)}</p>
-    <ul class="ticks">${m.prestations.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
-    <a class="btn btn-primary" href="/contact/">Demander un devis</a></div>
-  <div class="reveal">${house(photoFor(m.slug, 0), `${m.nom} réalisé par CRM Maçonnerie`, null)}</div>
+    body: pageHero({ kicker: m.nom, h1: m.h1, lead: m.accroche, crumbItems: items, img, cap: img ? [reals[0]?.titre || m.nom, reals[0]?.lieu && reals[0].lieu !== 'Gard' ? reals[0].lieu : ''] : null }) + `
+<section class="section"><div class="wrap intro">
+  <div class="reveal"><span class="eyebrow">Notre approche</span><h2>Bien fait, et fait pour durer.</h2><p class="lead" style="margin-top:26px">${esc(m.intro)}</p></div>
+  <div class="reveal"><h3>Ce que nous réalisons</h3><ul class="ticks">${m.prestations.map(p => `<li>${esc(p)}</li>`).join('')}</ul><a class="btn btn-primary" href="/contact/">Demander un devis</a></div>
 </div></section>
-<section class="section paper"><div class="wrap"><div class="head"><div><div class="eyebrow">Engagements</div><h2>Ce qui fait <em>la différence.</em></h2></div></div>
+<section class="section paper"><div class="wrap"><div class="head"><div><span class="eyebrow">Nos engagements</span><h2>Ce qui fait la différence.</h2></div></div>
   <div class="points">${m.points.map(p => `<div class="point reveal"><h3>${esc(p.titre)}</h3><p>${esc(p.texte)}</p></div>`).join('')}</div></div></section>
-${reals.length ? `<section class="section"><div class="wrap"><div class="head"><div><div class="eyebrow">Réalisations</div><h2>Exemples <em>de chantiers.</em></h2></div><a class="link" href="/realisations/">Toutes les réalisations ${I.arrow}</a></div>${worksGrid(reals.slice(0, 3))}</div></section>` : ''}
+${reals.length ? `<section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Réalisations</span><h2>Quelques chantiers.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>${worksGrid(reals.slice(0, 3))}</div></section>` : ''}
 <section class="section${reals.length ? ' paper' : ''}"><div class="wrap split" style="align-items:start">
-  <div class="reveal"><div class="eyebrow">Questions fréquentes</div><h2>Vous vous <em>demandez…</em></h2>
-    ${villes.length ? `<p class="lead" style="margin-top:12px">Très demandé à ${villes.map(c => `<a href="/zone-intervention/${c.slug}/">${esc(c.nom)}</a>`).join(', ')}.</p>` : ''}
+  <div class="reveal"><span class="eyebrow">Questions fréquentes</span><h2>Vous vous demandez…</h2>
+    ${villes.length ? `<p class="lead" style="margin-top:16px">Nous le faisons souvent à ${villes.map(c => `<a href="/zone-intervention/${c.slug}/">${esc(c.nom)}</a>`).join(', ')}.</p>` : ''}
     ${art.map(a => `<p style="margin-top:24px"><a class="link" href="/conseils/${a.slug}/">À lire : ${esc(a.titre)} ${I.arrow}</a></p>`).join('')}</div>
   <div class="faq reveal">${m.faq.map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.r)}</p></details>`).join('')}</div>
 </div></section>
-<section class="section dark on-dark"><div class="wrap"><div class="head"><div><div class="eyebrow">Aussi</div><h2>Nos autres <em>métiers.</em></h2></div></div>${indexList(METIERS.filter(x => x.slug !== m.slug))}</div></section>
-${cta(`Votre projet de <em>${esc(m.court.toLowerCase())}</em> ?`)}`
+<section class="section dark on-dark"><div class="wrap"><div class="head"><div><span class="eyebrow">Aussi</span><h2>Nos autres métiers.</h2></div></div>${indexList(METIERS.filter(x => x.slug !== m.slug))}</div></section>
+${cta(`Votre projet : <em>${esc(m.court.toLowerCase())}</em> ?`)}`
   });
 }
+
 
 // ---------- Réalisations ----------
 add('/realisations/', {
   title: 'Nos réalisations de maçonnerie dans le Gard | CRM Maçonnerie',
   desc: 'Murs, façades, terrasses, toitures, rénovations et extensions réalisés par CRM Maçonnerie autour de Quissac. Photos avant / après.',
   schema: [crumbsLd([['Accueil', '/'], ['Réalisations', '/realisations/']])],
-  body: pageHero({ kicker: 'Réalisations', h1: 'Nos chantiers, <em>en images.</em>', lead: 'Une sélection de travaux réalisés dans le Gard. Faites glisser le curseur pour comparer avant et après.', crumbItems: [['Accueil', '/'], ['Réalisations', '/realisations/']], btns: false })
+  body: pageHero({ kicker: 'Réalisations', h1: 'Nos chantiers, <em>en images.</em>', lead: 'Une sélection de nos chantiers dans le Gard. Faites glisser le curseur pour comparer avant et après.', crumbItems: [['Accueil', '/'], ['Réalisations', '/realisations/']], btns: false })
     + `<section class="section"><div class="wrap">${filters('reals', [...new Set(REAL.map(r => r.metier))])}<div class="works" id="reals">${REAL.map(r => realCard(r)).join('')}</div></div></section>` + cta()
 });
 
@@ -358,7 +340,7 @@ add('/journal-de-chantier/', {
   title: 'Journal de chantier — les travaux en cours | CRM Maçonnerie',
   desc: 'Suivez les chantiers de CRM Maçonnerie Générale au fil des jours : murs, façades, terrasses et rénovations en cours dans le Gard.',
   schema: [crumbsLd([['Accueil', '/'], ['Journal de chantier', '/journal-de-chantier/']])],
-  body: pageHero({ kicker: 'Journal de chantier', h1: 'Les chantiers, <em>au jour le jour.</em>', lead: 'Les publications de la page Facebook de CRM, rassemblées ici automatiquement et classées par métier.', crumbItems: [['Accueil', '/'], ['Journal de chantier', '/journal-de-chantier/']], btns: false })
+  body: pageHero({ kicker: 'Journal de chantier', h1: 'Les chantiers, <em>au jour le jour.</em>', lead: 'Les publications de notre page Facebook, rassemblées ici automatiquement et classées par métier.', crumbItems: [['Accueil', '/'], ['Journal de chantier', '/journal-de-chantier/']], btns: false })
     + `<section class="section paper"><div class="wrap">
   <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">${filters('journal', METIERS.map(m => m.slug).filter(s => jp.some(p => (p.metiers || []).includes(s))))}
   <a class="btn btn-line" href="${S.facebook}" rel="noopener" target="_blank" style="margin-bottom:40px"><span style="width:18px;display:inline-flex;color:#1877F2">${I.fb}</span> Suivre sur Facebook</a></div>
@@ -372,10 +354,10 @@ add('/zone-intervention/', {
   title: "Zone d'intervention — maçon autour de Quissac | CRM Maçonnerie",
   desc: `CRM Maçonnerie intervient à Quissac, Sauve, Sommières, Lédignan, Saint-Hippolyte-du-Fort, Saint-Mamert-du-Gard et dans un rayon de ${S.rayonKm} km.`,
   schema: [crumbsLd([['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']])],
-  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basé à ${S.adresse.ville}, Cyril intervient dans un rayon d'environ ${S.rayonKm} km.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
+  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basés à ${S.adresse.ville}, nous intervenons dans un rayon d'environ ${S.rayonKm} km.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
     + `<section class="section"><div class="wrap split" style="align-items:start">
   <div><div class="grid g2">${COMMUNES.map(c => `<a class="tile reveal" href="/zone-intervention/${c.slug}/"><span class="ico">${I.pin}</span><h3>Maçon à ${esc(c.nom)}</h3><p>${esc(c.accroche)}</p><span class="link">Voir ${I.arrow}</span></a>`).join('')}</div>
-  <p class="muted" style="margin-top:28px">Votre commune n'est pas dans la liste ? Cyril intervient jusqu'à ${S.rayonKm} km autour de Quissac, de Nîmes à Alès et jusqu'au nord de Montpellier : appelez, il se déplace.</p></div>
+  <p class="muted" style="margin-top:28px">Votre commune n'est pas dans la liste ? Nous intervenons jusqu'à ${S.rayonKm} km autour de Quissac, de Nîmes à Alès et jusqu'au nord de Montpellier : appelez-nous, nous nous déplaçons.</p></div>
   <div class="reveal" style="position:sticky;top:110px">${mapFrame('3.30%2C43.50%2C4.70%2C44.32', "Carte du secteur d'intervention")}</div>
 </div></section>` + cta()
 });
@@ -393,7 +375,7 @@ for (const c of COMMUNES) {
     <h3 style="margin-top:32px">Les demandes les plus fréquentes</h3>
     <ul class="ticks">${fm.map(m => `<li><a href="/metiers/${m.slug}/">${esc(m.nom)}</a> — ${esc(m.prestations.slice(0, 2).join(', ').toLowerCase())}</li>`).join('')}</ul>
     <p class="muted">Et tous les autres travaux : ${METIERS.filter(m => !c.focus.includes(m.slug)).map(m => `<a href="/metiers/${m.slug}/">${esc(m.nom.toLowerCase())}</a>`).join(', ')}.</p></div>
-  <div class="contact-card reveal"><h3>Devis gratuit à ${esc(c.nom)}</h3><p style="color:var(--mute-d)">Cyril se déplace pour étudier votre projet sur place.</p>
+  <div class="contact-card reveal"><h3>Devis gratuit à ${esc(c.nom)}</h3><p style="color:var(--mute-d)">Nous nous déplaçons pour étudier votre projet sur place.</p>
     <div class="line">${I.phone}<div><b>Téléphone</b><a class="big" href="tel:${S.telephoneLien}">${esc(S.telephone)}</a></div></div>
     <div class="line">${I.clock}<div><b>Disponibilité</b>${esc(S.horaires)}</div></div>
     <div class="line">${I.pin}<div><b>Depuis</b>${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)})</div></div>
@@ -410,7 +392,7 @@ add('/conseils/', {
   title: 'Conseils travaux de maçonnerie | CRM Maçonnerie Générale',
   desc: 'Les conseils de Cyril Rives, maçon à Quissac : enduits de façade, murs de clôture, terrasses… pour préparer vos travaux dans le Gard.',
   schema: [crumbsLd([['Accueil', '/'], ['Conseils', '/conseils/']])],
-  body: pageHero({ kicker: 'Conseils', h1: 'Bien préparer <em>ses travaux.</em>', lead: "Les réponses d'un maçon aux questions qu'on lui pose le plus souvent.", crumbItems: [['Accueil', '/'], ['Conseils', '/conseils/']], btns: false })
+  body: pageHero({ kicker: 'Conseils', h1: 'Bien préparer <em>ses travaux.</em>', lead: "Nos réponses aux questions qu'on nous pose le plus souvent.", crumbItems: [['Accueil', '/'], ['Conseils', '/conseils/']], btns: false })
     + `<section class="section"><div class="wrap"><div class="grid g3">${ARTICLES.map(a => `<a class="card reveal" href="/conseils/${a.slug}/"><div class="ph"><img src="${photoFor(a.metier, 2) || a.image}" alt="" loading="lazy" width="800" height="600"></div><div class="body"><span class="tag">${esc(M[a.metier].nom)}</span><h3>${esc(a.titre)}</h3><p>${esc(a.resume)}</p><span class="link">Lire ${I.arrow}</span></div></a>`).join('')}</div></div></section>` + cta()
 });
 for (const a of ARTICLES) {
@@ -426,54 +408,52 @@ for (const a of ARTICLES) {
   });
 }
 
-// ---------- L'artisan ----------
+// ---------- Qui sommes-nous ----------
 add('/a-propos/', {
-  title: 'Cyril Rives, artisan maçon à Quissac | CRM Maçonnerie Générale',
-  desc: 'Cyril Rives, artisan maçon à Quissac (Gard) : sa façon de travailler, les chantiers qui le définissent, ses engagements. De la fondation à la faïence.',
-  schema: [crumbsLd([['Accueil', '/'], ["L'artisan", '/a-propos/']]), { '@context': 'https://schema.org', '@type': 'Person', name: S.dirigeant, jobTitle: 'Artisan maçon', worksFor: { '@id': S.url + '/#entreprise' }, workLocation: { '@type': 'Place', name: `${S.adresse.ville}, ${S.adresse.departement}` } }],
-  body: pageHero({ kicker: "L'artisan", h1: 'Cyril Rives, <em>maçon à Quissac.</em>', lead: 'Un artisan qui préfère montrer son travail plutôt que d’en parler. Alors on vous le montre.', crumbItems: [['Accueil', '/'], ["L'artisan", '/a-propos/']] }) + `
-<section class="section grain paper"><div class="wrap split">
-  <div class="reveal">${house(REAL.find(r => r.id === 'bassin-saint-nazaire')?.image || HERO, 'Bassin en béton armé réalisé par Cyril face aux Cévennes', ['Saint-Nazaire-des-Gardies', 'Bassin de rétention en béton armé'])}</div>
-  <div class="reveal">
-    <div class="eyebrow">Le métier</div>
-    <h2>Un maçon <em>complet.</em></h2>
-    <p class="lead" style="color:var(--ink)">Cyril Rives a créé CRM Maçonnerie Générale à Quissac. Son terrain de jeu, c'est la maçonnerie au sens large : il coule un plancher béton, remplace une poutre de sept mètres, refait une toiture après un incendie, puis pose une faïence en chevrons au millimètre.</p>
-    <p class="lead">Ce grand écart est rare. Il permet aux clients d'avoir un seul interlocuteur pour un chantier entier, et à Cyril de garder la main sur le résultat, du gros œuvre aux finitions.</p>
+  title: 'Qui sommes-nous — CRM Maçonnerie Générale, Quissac',
+  desc: 'CRM Maçonnerie Générale, entreprise de maçonnerie fondée à Quissac par Cyril Rives : notre façon de travailler, nos chantiers, nos engagements.',
+  schema: [crumbsLd([['Accueil', '/'], ['Qui sommes-nous', '/a-propos/']]), { '@context': 'https://schema.org', '@type': 'Person', name: S.dirigeant, jobTitle: 'Artisan maçon', worksFor: { '@id': S.url + '/#entreprise' }, workLocation: { '@type': 'Place', name: `${S.adresse.ville}, ${S.adresse.departement}` } }],
+  body: pageHero({ kicker: 'Qui sommes-nous', h1: 'Une entreprise d’artisan, <em>à Quissac.</em>', lead: 'Nous préférons montrer notre travail plutôt que d’en parler. Alors nous vous le montrons.', crumbItems: [['Accueil', '/'], ['Qui sommes-nous', '/a-propos/']], img: REAL.find(r => r.id === 'bassin-saint-nazaire')?.image, cap: ['Saint-Nazaire-des-Gardies', 'Bassin de rétention en béton armé'] }) + `
+<section class="section"><div class="wrap intro">
+  <div class="reveal"><span class="eyebrow">Notre métier</span><h2>Une maçonnerie complète.</h2></div>
+  <div class="txt reveal">
+    <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre terrain, c'est la maçonnerie au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
+    <p>Cette polyvalence est rare, et c'est ce qui fait la différence pour vous : un seul interlocuteur pour tout le chantier, et une entreprise qui garde la main sur le résultat, du gros œuvre aux finitions.</p>
     <p class="notice">À compléter avec Cyril : son parcours, ses débuts dans le métier, l'année de création de CRM, ce qu'il préfère dans son travail. Quelques phrases dans ses mots suffisent.</p>
+    <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
   </div>
 </div></section>
 
-<section class="section"><div class="wrap">
-  <div class="head"><div><div class="eyebrow">Sa manière</div><h2>Ce qui se voit <em>sur ses chantiers.</em></h2></div></div>
+<section class="section paper"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">Notre façon de travailler</span><h2>Ce qui se voit sur nos chantiers.</h2></div></div>
   <div class="points g4">
-    <div class="point reveal"><h3>Il montre tout</h3><p>Ses chantiers sont filmés et publiés étape par étape : ferraillage, coulage, pose, finitions. Rien n'est caché sous l'enduit.</p></div>
-    <div class="point reveal"><h3>Il traite la cause</h3><p>Une poutre qui menace de céder après des années d'infiltration : on ne masque pas, on remplace.</p></div>
-    <div class="point reveal"><h3>Il va jusqu'au bout</h3><p>Une maison de village reprise du plancher aux joints de faïence, en passant par l'isolation et le placo.</p></div>
-    <div class="point reveal"><h3>Il soigne le détail</h3><p>Chevrons, carreaux de ciment, génoises : les poses qui ne pardonnent rien sont celles qu'il met en avant.</p></div>
+    <div class="point reveal"><h3>Nous montrons tout</h3><p>Nos chantiers sont filmés et publiés étape par étape : ferraillage, coulage, pose, finitions. Rien n'est caché sous l'enduit.</p></div>
+    <div class="point reveal"><h3>Nous traitons la cause</h3><p>Une poutre qui menace de céder après des années d'infiltration : nous ne masquons pas, nous remplaçons.</p></div>
+    <div class="point reveal"><h3>Nous allons jusqu'au bout</h3><p>Une maison de village reprise du plancher aux joints de faïence, en passant par l'isolation et le placo.</p></div>
+    <div class="point reveal"><h3>Nous soignons le détail</h3><p>Chevrons, carreaux de ciment, génoises : les poses qui ne pardonnent rien sont celles que nous préférons.</p></div>
   </div>
 </div></section>
 
 <section class="section dark on-dark"><div class="wrap">
-  <div class="head"><div><div class="eyebrow">Carnet de chantier</div><h2>Dans <em>ses mots.</em></h2></div><a class="link" href="${S.facebook}" rel="noopener" target="_blank">Sa page Facebook ${I.arrow}</a></div>
+  <div class="head"><div><span class="eyebrow">Carnet de chantier</span><h2>Nos chantiers, racontés sur le moment.</h2></div><a class="link" href="${S.facebook}" rel="noopener" target="_blank">Notre page Facebook ${I.arrow}</a></div>
   <div class="quotes">${REAL.filter(r => r.parole).slice(0, 4).map(r => `<figure class="quote reveal"><blockquote>« ${esc(r.parole)} »</blockquote><figcaption>${esc(r.titre)}${r.video ? ` · <a href="${r.video}" rel="noopener" target="_blank">voir la vidéo</a>` : ''}</figcaption></figure>`).join('')}</div>
 </div></section>
 
-<section class="section paper grain"><div class="wrap"><div class="head"><div><div class="eyebrow">Engagements</div><h2>Ce que vous pouvez <em>attendre de CRM.</em></h2></div></div>
+<section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Nos engagements</span><h2>Ce que vous pouvez attendre de nous.</h2></div></div>
   <div class="points g4">
-    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Cyril fait le devis et le chantier. Pas d'intermédiaire.</p></div>
+    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Celui qui chiffre votre projet est celui qui le réalise. Pas d'intermédiaire.</p></div>
     <div class="point reveal"><h3>Des devis clairs</h3><p>Poste par poste, sans ligne floue ni supplément surprise.</p></div>
     <div class="point reveal"><h3>Assuré et déclaré</h3><p>Assurance décennale et responsabilité civile professionnelle.</p></div>
-    <div class="point reveal"><h3>Respect des lieux</h3><p>Abords protégés, chantier rangé, gravats évacués.</p></div>
-  </div></div></section>${cta('Un chantier à lui <em>confier ?</em>')}`
+    <div class="point reveal"><h3>Le respect des lieux</h3><p>Abords protégés, chantier rangé, gravats évacués.</p></div>
+  </div></div></section>${cta('Un chantier à nous <em>confier ?</em>')}`
 });
-
 
 // ---------- Contact ----------
 add('/contact/', {
   title: 'Contact et devis gratuit | CRM Maçonnerie Générale, Quissac',
   desc: 'Demandez un devis gratuit à CRM Maçonnerie Générale, maçon à Quissac : formulaire guidé, téléphone ou e-mail. Réponse sous 48 h.',
   schema: [crumbsLd([['Accueil', '/'], ['Contact', '/contact/']])],
-  body: pageHero({ kicker: 'Contact', h1: 'Parlons de <em>votre projet.</em>', lead: 'Décrivez vos travaux en deux minutes : Cyril vous rappelle sous 48 h pour convenir d’une visite.', crumbItems: [['Accueil', '/'], ['Contact', '/contact/']], btns: false }) + `
+  body: pageHero({ kicker: 'Contact', h1: 'Parlons de <em>votre projet.</em>', lead: 'Décrivez vos travaux en deux minutes : nous vous rappelons sous 48 h pour convenir d’une visite.', crumbItems: [['Accueil', '/'], ['Contact', '/contact/']], btns: false }) + `
 <section class="section"><div class="wrap split" style="align-items:start;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)">
   <form class="form" id="devis" data-mail="${esc(S.email)}" novalidate>
     <h2 style="font-size:2rem">Demande de devis</h2>
@@ -498,7 +478,7 @@ add('/contact/', {
   </form>
   <div>
     <div class="contact-card">
-      <h3>Joindre Cyril directement</h3>
+      <h3>Nous joindre directement</h3>
       <div class="line">${I.phone}<div><b>Téléphone</b><a class="big" href="tel:${S.telephoneLien}">${esc(S.telephone)}</a></div></div>
       <div class="line">${I.mail}<div><b>E-mail</b><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></div></div>
       <div class="line">${I.pin}<div><b>Basé à</b>${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)}), ${esc(S.adresse.departement)}</div></div>
