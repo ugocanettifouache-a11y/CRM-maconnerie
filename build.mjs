@@ -233,7 +233,6 @@ add('/', {
     <div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>
     ${trust}
   </div>
-  <div class="ph"><img src="${HERO}" alt="Terrasse et escalier réalisés au bord d'une piscine" width="1200" height="1600" fetchpriority="high"><span class="ph-cap"><b>Terrasse et escalier</b>Au bord de la piscine, dans le Gard</span></div>
 </section>
 <nav class="strip" aria-label="Nos principaux métiers">${STRIP.map((x, i) => `<a href="/metiers/${x.m.slug}/"><img src="${x.img}" alt="" loading="lazy" width="540" height="660"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="lbl"><b>${esc(x.m.nom)}</b><span>Découvrir ${I.arrow}</span></span></a>`).join('')}</nav>
 

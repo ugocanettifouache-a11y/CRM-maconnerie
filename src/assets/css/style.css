@@ -88,21 +88,20 @@ p{margin:0 0 1em}
 }
 @media (max-width:520px){.brand img{height:46px}}
 
-/* Hero accueil : aplat noir + photo pleine hauteur */
+/* Hero accueil : aplat noir, texte centré */
 .hero,.page-hero{container-type:inline-size}
-.hero{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);background:var(--ink);color:#fff;min-height:min(86vh,820px)}
-.hero .t{display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,8vw,110px) var(--gut) clamp(56px,7vw,96px) max(var(--gut),calc((100vw - var(--wrap))/2 + var(--gut)));padding-left:max(var(--gut),calc((100cqw - var(--wrap))/2 + var(--gut)))}
-.hero .eyebrow{align-self:flex-start}
-.hero h1{margin-bottom:28px;font-size:clamp(2.8rem,4.9vw,4.9rem)}
-.hero .lead{color:#CFC9BF;margin-bottom:38px;font-size:1.2rem}
-.hero .ph{position:relative;min-height:440px;background:#1b1b1b}
-.hero .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero{background:var(--ink);color:#fff;min-height:min(78vh,760px);display:flex;align-items:center;text-align:center}
+.hero .t{width:100%;max-width:var(--wrap);margin:0 auto;display:flex;flex-direction:column;align-items:center;padding:clamp(72px,9vw,120px) var(--gut)}
+.hero .eyebrow{align-self:center}
+.hero h1{margin-bottom:28px;font-size:clamp(3rem,6.2vw,6rem)}
+.hero .lead{color:#CFC9BF;margin:0 auto 40px;font-size:1.2rem}
+.hero .btns{justify-content:center}
+.hero .trust{justify-content:center;align-self:stretch}
 .ph-cap{position:absolute;left:0;bottom:0;background:#fff;color:var(--ink);padding:16px 22px;font-size:.9rem;line-height:1.4;max-width:80%}
 .ph-cap b{display:block;font:500 1.2rem/1.15 var(--serif)}
 .trust{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16);font-size:.92rem;color:var(--mute-d)}
 .trust span{display:inline-flex;align-items:center;gap:9px}
 .trust svg{width:18px;height:18px;color:var(--bdx-l)}
-@media (max-width:900px){.hero{grid-template-columns:1fr}.hero .t{padding-left:var(--gut)}.hero .ph{min-height:0;aspect-ratio:4/3.4}}
 
 /* Bande de photos (métiers) */
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--ink)}
