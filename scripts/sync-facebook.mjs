@@ -13,7 +13,7 @@ import { join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const { FB_PAGE_ID, FB_PAGE_TOKEN } = process.env;
-if (!FB_PAGE_ID || !FB_PAGE_TOKEN) { console.error('FB_PAGE_ID et FB_PAGE_TOKEN requis'); process.exit(1); }
+if (!FB_PAGE_ID || !FB_PAGE_TOKEN) { console.log('Accès Facebook pas encore configuré (secrets FB_PAGE_ID / FB_PAGE_TOKEN) : rien à faire.'); process.exit(0); }
 
 const metiers = JSON.parse(readFileSync(join(ROOT, 'data/metiers.json'), 'utf8'));
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
