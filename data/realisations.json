@@ -1,62 +1,152 @@
 [
   {
-    "id": "wc-renovation",
-    "titre": "Rénovation complète de WC",
+    "id": "maison-village",
+    "titre": "Rénovation complète d'une maison de village",
     "metier": "renovation",
     "lieu": "Gard",
-    "date": "2026-11",
-    "description": "Ancien carrelage et frise déposés, murs habillés de panneaux 3D blancs, sol refait : une pièce méconnaissable.",
+    "description": "Du plancher béton coulé l'été d'avant jusqu'aux finitions : cloisons BA13, isolation des combles par soufflage, ragréage, carrelage et faïence.",
+    "parole": "Suite de la rénovation complète d'une maison de village après la mise en place du plancher béton l'été dernier : pose d'armature et isolation, placage BA13, mise en place des portes, isolation des combles par soufflage, ragréage, pose de carrelage, plinthes et joints, faïence de douche et tour de vasques.",
+    "image": "/assets/realisations/plancher-beton.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/1211645023193043/",
+    "galerie": [
+      "/assets/realisations/carreaux-ciment.jpg"
+    ]
+  },
+  {
+    "id": "poutre-7m",
+    "titre": "Une poutre de 7 mètres sauvée de justesse",
+    "metier": "renovation",
+    "lieu": "Gard",
+    "description": "Poutre de 7 m (150 × 350 mm) rongée par des années d'infiltration : étaiement, dépose et remplacement avant qu'elle ne cède.",
+    "parole": "Remplacement d'une poutre de 7 mètres (150 × 350 mm) qui menaçait de s'effondrer suite à une infiltration permanente pendant plusieurs années.",
+    "image": "/assets/realisations/poutre-7m.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/609694252013598/"
+  },
+  {
+    "id": "wc-renovation",
+    "titre": "WC entièrement transformés",
+    "metier": "salles-de-bain",
+    "lieu": "Gard",
+    "description": "Faïence jaune et frise d'origine déposées, murs habillés de panneaux blancs en relief, sol refait.",
+    "parole": "Avant / après : métamorphose complète de ces toilettes !",
     "image": "/assets/realisations/wc-apres.jpg",
-    "avant": "/assets/realisations/wc-avant.jpg"
+    "avant": "/assets/realisations/wc-avant.jpg",
+    "video": ""
+  },
+  {
+    "id": "bassin-saint-nazaire",
+    "titre": "Bassin de rétention en béton armé",
+    "metier": "construction-extension",
+    "lieu": "Saint-Nazaire-des-Gardies",
+    "description": "Création d'un bassin pour stocker l'eau d'un forage, face aux Cévennes : ferraillage, coffrage et béton.",
+    "parole": "Création d'un bassin pour la rétention d'eau d'un forage. Secteur Saint-Nazaire-des-Gardies.",
+    "image": "/assets/realisations/bassin-retention.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/555620890768880/"
   },
   {
     "id": "toiture-sinistre",
-    "titre": "Toiture refaite après sinistre",
+    "titre": "Toiture refaite après un incendie",
     "metier": "toitures-genoises",
     "lieu": "Gard",
-    "date": "2026-10",
-    "description": "Couverture endommagée par un incendie : dépose des éléments brûlés, reprise du support et nouvelle couverture en tuiles canal.",
+    "description": "Couverture endommagée par le feu : dépose des éléments brûlés, reprise du support et nouvelle couverture en tuiles canal.",
     "image": "/assets/realisations/toiture-apres-1.jpg",
-    "avant": "/assets/realisations/toiture-avant-2.jpg"
+    "avant": "/assets/realisations/toiture-avant-2.jpg",
+    "video": ""
+  },
+  {
+    "id": "faience-chevrons",
+    "titre": "Douche en faïence posée en chevrons",
+    "metier": "salles-de-bain",
+    "lieu": "Gard",
+    "description": "Pose en chevrons sur toute la hauteur de la douche : une pose exigeante où chaque coupe se voit.",
+    "image": "/assets/realisations/faience-chevrons.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/930812802844527/"
+  },
+  {
+    "id": "terrasse-renovation",
+    "titre": "Rénovation totale d'une terrasse",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Démolition, ferraillage et nouvelle dalle coulée à la pompe à béton.",
+    "parole": "Rénovation totale d'une terrasse.",
+    "image": "/assets/realisations/coulage-dalle-pompe.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/1340299527646142/"
+  },
+  {
+    "id": "salle-de-bain-pierre",
+    "titre": "Salle de bain en pierre naturelle",
+    "metier": "salles-de-bain",
+    "lieu": "Gard",
+    "description": "Grands formats façon pierre au mur, plan de vasque habillé : une salle de bain sobre et chaleureuse.",
+    "parole": "Rénovation totale d'une salle de bain.",
+    "image": "/assets/realisations/salle-de-bain-pierre.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/732572512321086/"
   },
   {
     "id": "pool-house",
     "titre": "Pool-house maçonné",
     "metier": "terrasses-exterieurs",
     "lieu": "Gard",
-    "date": "2026-09",
     "description": "Pool-house en bord de piscine : murs maçonnés, couverture en tuiles et plan de travail pour la cuisine d'été.",
     "image": "/assets/realisations/pool-house.jpg",
-    "avant": ""
+    "avant": "",
+    "video": ""
   },
   {
     "id": "salle-eau",
     "titre": "Salle d'eau modernisée",
-    "metier": "renovation",
+    "metier": "salles-de-bain",
     "lieu": "Gard",
-    "date": "2026-11",
     "description": "Faïence ancienne remplacée par un habillage mural contemporain, radiateur sèche-serviettes posé.",
     "image": "/assets/realisations/salle-eau-apres-radiateur.jpg",
-    "avant": "/assets/realisations/salle-eau-avant.jpg"
+    "avant": "/assets/realisations/salle-eau-avant.jpg",
+    "video": ""
+  },
+  {
+    "id": "piscine-dalle",
+    "titre": "Abords de piscine",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Terrassement et ferraillage de la dalle autour d'une piscine bois.",
+    "parole": "Réalisation terrasse en bois.",
+    "image": "/assets/realisations/piscine-dalle.jpg",
+    "avant": "",
+    "video": "https://www.facebook.com/reel/2119339181801003/"
+  },
+  {
+    "id": "allee",
+    "titre": "Allée et bordures",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Allée d'accès au garage et bordures de jardin posées au cordeau.",
+    "image": "/assets/realisations/allee-paves.jpg",
+    "avant": "",
+    "video": ""
   },
   {
     "id": "toiture-tuiles",
     "titre": "Couverture en tuiles canal",
     "metier": "toitures-genoises",
     "lieu": "Gard",
-    "date": "2026-10",
     "description": "Pan de toiture sinistré repris et recouvert en tuiles canal.",
     "image": "/assets/realisations/toiture-apres-2.jpg",
-    "avant": "/assets/realisations/toiture-avant-1.jpg"
+    "avant": "/assets/realisations/toiture-avant-1.jpg",
+    "video": ""
   },
   {
     "id": "renovation-interieure",
-    "titre": "Rénovation intérieure",
+    "titre": "Pièce de vie rénovée",
     "metier": "renovation",
     "lieu": "Gard",
-    "date": "2026-10",
-    "description": "Pièce de vie reprise : murs, sol et plafond à poutres apparentes.",
+    "description": "Murs, sol et plafond à poutres apparentes repris.",
     "image": "/assets/realisations/renovation-interieure.jpg",
-    "avant": ""
+    "avant": "",
+    "video": ""
   }
 ]

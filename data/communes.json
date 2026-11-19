@@ -11,7 +11,11 @@
       "Quissac, c'est la base de CRM Maçonnerie. Le village et ses hameaux mêlent maisons anciennes en pierre le long du Vidourle, villas plus récentes et mas dans la garrigue : autant de bâtis qui demandent chacun un savoir-faire différent.",
       "Être sur place change tout : une visite de chantier se cale vite, un petit dépannage ne coûte pas une demi-journée de route, et Cyril passe facilement suivre l'avancement. Pour les habitants de Quissac, c'est un interlocuteur unique et joignable pour tous les travaux de maçonnerie."
     ],
-    "focus": ["murs-clotures", "enduits-facades", "renovation"]
+    "focus": [
+      "renovation",
+      "salles-de-bain",
+      "terrasses-exterieurs"
+    ]
   },
   {
     "slug": "macon-sauve",
@@ -24,7 +28,11 @@
       "Le village médiéval de Sauve, ses ruelles et ses maisons de pierre appellent une maçonnerie respectueuse de l'ancien : enduits à la chaux, rejointoiement, reprise de murs en pierre sèche ou maçonnée. Autour, les terrains en pente imposent souvent des murs de soutènement et des restanques solides.",
       "Basé à Quissac, juste à côté, Cyril intervient régulièrement sur Sauve et ses environs, aussi bien pour la restauration que pour les aménagements extérieurs des maisons plus récentes."
     ],
-    "focus": ["renovation", "enduits-facades", "murs-clotures"]
+    "focus": [
+      "renovation",
+      "enduits-facades",
+      "murs-clotures"
+    ]
   },
   {
     "slug": "macon-sommieres",
@@ -37,7 +45,11 @@
       "Sommières, sa cité médiévale et son pont romain sur le Vidourle, mêle façades anciennes à restaurer et villas récentes avec piscine. Les besoins vont du ravalement de façade en centre-ville aux terrasses et plages de piscine en périphérie.",
       "Le Vidourle rappelle aussi qu'ici l'eau se gère : pentes, drainage et soubassements sains sont des points auxquels Cyril accorde une attention particulière sur chaque chantier sommiérois."
     ],
-    "focus": ["enduits-facades", "terrasses-exterieurs", "murs-clotures"]
+    "focus": [
+      "enduits-facades",
+      "terrasses-exterieurs",
+      "murs-clotures"
+    ]
   },
   {
     "slug": "macon-ledignan",
@@ -50,7 +62,11 @@
       "Lédignan et les villages voisins attirent de nombreuses familles, avec des projets d'agrandissement : extension, garage, pool-house, clôture du terrain. Ce sont des chantiers de gros œuvre où la qualité des fondations et des dalles fait toute la différence dans le temps.",
       "Cyril se déplace depuis Quissac pour étudier votre projet sur place et vous remettre un devis détaillé, poste par poste."
     ],
-    "focus": ["construction-extension", "murs-clotures", "terrasses-exterieurs"]
+    "focus": [
+      "construction-extension",
+      "murs-clotures",
+      "terrasses-exterieurs"
+    ]
   },
   {
     "slug": "macon-saint-hippolyte-du-fort",
@@ -63,7 +79,11 @@
       "À Saint-Hippolyte-du-Fort, ancienne cité de la soie aux portes des Cévennes, le bâti ancien en pierre côtoie les constructions récentes sur les coteaux. Toitures en tuiles canal, génoises, murs de soutènement et restanques sont des demandes fréquentes.",
       "Cyril intervient sur la commune et ses hameaux pour restaurer ce patrimoine dans les règles de l'art, comme pour les projets neufs."
     ],
-    "focus": ["toitures-genoises", "murs-clotures", "renovation"]
+    "focus": [
+      "toitures-genoises",
+      "murs-clotures",
+      "renovation"
+    ]
   },
   {
     "slug": "macon-saint-mamert-du-gard",
@@ -76,6 +96,10 @@
       "Saint-Mamert-du-Gard et les villages de la garrigue concentrent beaucoup de maisons individuelles avec jardin et piscine. Terrasses, plages de piscine, murs de clôture et pool-houses y sont les projets les plus courants.",
       "Sur ces terrains souvent caillouteux, le terrassement et les fondations demandent de l'expérience : Cyril adapte chaque ouvrage au sol rencontré."
     ],
-    "focus": ["terrasses-exterieurs", "murs-clotures", "construction-extension"]
+    "focus": [
+      "terrasses-exterieurs",
+      "murs-clotures",
+      "construction-extension"
+    ]
   }
 ]
