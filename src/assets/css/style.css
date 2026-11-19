@@ -22,6 +22,8 @@
 *,*::before,*::after{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:90px}
 body{margin:0;font:400 17px/1.7 var(--sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:clip}
+/* Très grands écrans : tout le site tient dans un cadre centré, pour que chaque bloc reste dans l'axe */
+@media (min-width:1921px){html{background:#E4DCCF}body{max-width:1920px;margin:0 auto;box-shadow:0 0 0 1px var(--line),0 0 80px rgba(60,40,20,.10)}}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.04;letter-spacing:-.015em;margin:0 0 .4em;text-wrap:balance}
