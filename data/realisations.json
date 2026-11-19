@@ -172,7 +172,8 @@
     "description": "Poutre de 7 m (150 × 350 mm) rongée par des années d'infiltration, remplacée avant qu'elle ne cède.",
     "parole": "Remplacement d'une poutre de 7 mètres (150 × 350 mm) qui menaçait de s'effondrer suite à une infiltration permanente pendant plusieurs années.",
     "image": "/assets/realisations/poutre-7m.jpg",
-    "video": "https://www.facebook.com/reel/609694252013598/"
+    "video": "https://www.facebook.com/reel/609694252013598/",
+    "affiche": false
   },
   {
     "id": "maison-village",
@@ -182,7 +183,8 @@
     "description": "Du plancher béton jusqu'aux finitions : cloisons BA13, isolation des combles par soufflage, ragréage, carrelage et faïence.",
     "parole": "Suite de la rénovation complète d'une maison de village après la mise en place du plancher béton l'été dernier : pose d'armature et isolation, placage BA13, mise en place des portes, isolation des combles par soufflage, ragréage, pose de carrelage, plinthes et joints, faïence de douche et tour de vasques.",
     "image": "/assets/realisations/plancher-beton.jpg",
-    "video": "https://www.facebook.com/reel/1211645023193043/"
+    "video": "https://www.facebook.com/reel/1211645023193043/",
+    "affiche": false
   },
   {
     "id": "extension",

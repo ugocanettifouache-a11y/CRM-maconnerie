@@ -43,12 +43,13 @@ const I = {
   maison: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M3 24 17 12l14 12"/><path d="M7 21v19h20V21"/><path d="M27 28h17v12H27" stroke-dasharray="3 3"/><path d="M14 40v-8h6v8"/></svg>'
 };
 // ---------- Photos : les vraies photos Facebook remplacent les visuels provisoires dès la 1re synchro ----------
+const SHOWN = REAL.filter(r => r.affiche !== false);
 const REAL_POSTS = JOURNAL.posts.filter(p => !p.exemple && p.images?.length);
 const FB_PHOTOS = REAL_POSTS.flatMap(p => p.images.map(src => ({ src, metiers: p.metiers || [], date: p.date })));
 const PLACE = { 'murs-clotures': 'mur', 'enduits-facades': 'facade', 'toitures-genoises': 'toit', 'terrasses-exterieurs': 'terrasse', 'renovation': 'renovation', 'construction-extension': 'maison', 'salles-de-bain': 'renovation' };
 const placeholder = slug => `/assets/img/placeholder-${PLACE[slug] || 'mur'}.svg`;
 const used = new Set();
-const ALL_PHOTOS = [...REAL.filter(r => !r.exemple).map(r => ({ src: r.image, metiers: [r.metier] })), ...FB_PHOTOS];
+const ALL_PHOTOS = [...REAL.filter(r => !r.exemple && r.affiche !== false).map(r => ({ src: r.image, metiers: [r.metier] })), ...FB_PHOTOS];
 function photoFor(slug, i = 0) {
   const list = ALL_PHOTOS.filter(p => !slug || p.metiers.includes(slug));
   const pick = list[i % (list.length || 1)];
@@ -301,7 +302,7 @@ add('/metiers/', {
 });
 
 for (const m of METIERS) {
-  const reals = REAL.filter(r => r.metier === m.slug);
+  const reals = SHOWN.filter(r => r.metier === m.slug);
   const villes = COMMUNES.filter(c => c.focus.includes(m.slug));
   const art = ARTICLES.filter(a => a.metier === m.slug);
   const items = [['Accueil', '/'], ['Savoir-faire', '/metiers/'], [m.nom, `/metiers/${m.slug}/`]];
@@ -336,7 +337,7 @@ add('/realisations/', {
   desc: 'Murs, façades, terrasses, toitures, rénovations et extensions réalisés par CRM Maçonnerie autour de Quissac. Photos avant / après.',
   schema: [crumbsLd([['Accueil', '/'], ['Réalisations', '/realisations/']])],
   body: pageHero({ kicker: 'Réalisations', h1: 'Nos chantiers, <em>en images.</em>', lead: 'Une sélection de nos chantiers dans le Gard. Faites glisser le curseur pour comparer avant et après.', crumbItems: [['Accueil', '/'], ['Réalisations', '/realisations/']], btns: false })
-    + `<section class="section"><div class="wrap">${filters('reals', [...new Set(REAL.map(r => r.metier))])}<div class="works" id="reals">${REAL.map(r => realCard(r)).join('')}</div></div></section>` + cta()
+    + `<section class="section"><div class="wrap">${filters('reals', [...new Set(SHOWN.map(r => r.metier))])}<div class="works" id="reals">${SHOWN.map(r => realCard(r)).join('')}</div></div></section>` + cta()
 });
 
 // ---------- Journal ----------
@@ -370,8 +371,8 @@ add('/zone-intervention/', {
 for (const c of COMMUNES) {
   const items = [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/'], [`Maçon à ${c.nom}`, `/zone-intervention/${c.slug}/`]];
   const fm = c.focus.map(s => M[s]);
-  const reals = REAL.filter(r => r.lieu === c.nom).concat(REAL.filter(r => r.lieu !== c.nom && c.focus.includes(r.metier))).slice(0, 3);
-  const realsAny = reals.length ? reals : REAL.slice(0, 3);
+  const reals = SHOWN.filter(r => r.lieu === c.nom).concat(SHOWN.filter(r => r.lieu !== c.nom && c.focus.includes(r.metier))).slice(0, 3);
+  const realsAny = reals.length ? reals : SHOWN.slice(0, 3);
   add(`/zone-intervention/${c.slug}/`, {
     title: c.metaTitle, desc: c.metaDesc, schema: [crumbsLd(items)],
     body: pageHero({ kicker: `${c.nom} · ${c.cp}`, h1: `Votre maçon <em>à ${esc(c.nom)}.</em>`, lead: c.accroche, crumbItems: items }) + `
