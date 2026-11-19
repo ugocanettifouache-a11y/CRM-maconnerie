@@ -32,6 +32,7 @@ const I = {
   shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>',
   doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>',
   play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+  medal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>',
   menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
   facade: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M6 22 24 7l18 15"/><path d="M10 19v22h28V19"/><path d="M16 26h6v6h-6zM26 26h6v6h-6z"/><path d="M21 41v-5h6v5"/></svg>',
   mur: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h40v26H4z"/><path d="M4 22.7h40M4 31.3h40M14 14v8.7M26 14v8.7M38 14v8.7M8 22.7v8.6M20 22.7v8.6M32 22.7v8.6M14 31.3V40M26 31.3V40M38 31.3V40"/><path d="M2 10h44"/></svg>',
@@ -198,7 +199,7 @@ const realPhoto = (slug, i = 0) => { const p = photoFor(slug, i); return p.inclu
 
 const posts = () => [...JOURNAL.posts].sort((a, b) => b.date.localeCompare(a.date));
 const mapFrame = (bbox, title) => `<div class="map"><iframe title="${esc(title)}" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&amp;layer=mapnik&amp;marker=${S.adresse.lat}%2C${S.adresse.lng}"></iframe></div>`;
-const trust = `<div class="trust"><span>${I.shield}Assurance décennale</span><span>${I.doc}Devis détaillé gratuit</span><span>${I.pin}Entreprise de ${esc(S.adresse.ville)}</span></div>`;
+const trust = `<div class="trust"><span>${I.medal}Plus de 10 ans de métier</span><span>${I.doc}Artisan · Chambre de métiers</span><span>${I.shield}Assurance décennale</span><span>${I.pin}Devis gratuit, ${S.rayonKm} km autour de ${esc(S.adresse.ville)}</span></div>`;
 function add(path, opts) { pages.push({ path, ...opts }); }
 
 // ---------- Accueil ----------
@@ -237,7 +238,7 @@ add('/', {
     <div class="reveal"><span class="eyebrow">Qui sommes-nous</span><h2>Un seul interlocuteur, du gros œuvre aux finitions.</h2></div>
     <div class="txt reveal">
       <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre métier, nous le prenons au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
-      <p>Pas de commercial, pas de sous-traitance en cascade : celui qui vient voir votre projet et le chiffre est celui qui le réalise. Et nous montrons notre travail : la plupart de nos chantiers sont filmés et publiés, étape par étape.</p>
+      <p>CRM est une entreprise artisanale à taille humaine, forte de plus de dix ans de métier. Pas de commercial, pas de sous-traitance en cascade : celui qui vous répond au téléphone est celui qui vient voir, qui chiffre et qui réalise vos travaux. Et nous montrons notre travail : la plupart de nos chantiers sont filmés et publiés, étape par étape.</p>
       <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
       <a class="link" href="/a-propos/">Qui sommes-nous ${I.arrow}</a>
     </div>
@@ -418,7 +419,8 @@ add('/a-propos/', {
   <div class="reveal"><span class="eyebrow">Notre métier</span><h2>Une maçonnerie complète.</h2></div>
   <div class="txt reveal">
     <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre terrain, c'est la maçonnerie au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
-    <p>Cette polyvalence est rare, et c'est ce qui fait la différence pour vous : un seul interlocuteur pour tout le chantier, et une entreprise qui garde la main sur le résultat, du gros œuvre aux finitions.</p>
+    <p>Cette polyvalence, construite en plus de dix ans de métier, est rare. C'est ce qui fait la différence pour vous : un seul interlocuteur pour tout le chantier, et une entreprise qui garde la main sur le résultat, du gros œuvre aux finitions.</p>
+    <p>CRM est une entreprise artisanale à taille humaine, inscrite à la Chambre de métiers et de l'artisanat. Celui qui vous répond au téléphone est celui qui réalise vos travaux.</p>
     <p class="notice">À compléter avec Cyril : son parcours, ses débuts dans le métier, l'année de création de CRM, ce qu'il préfère dans son travail. Quelques phrases dans ses mots suffisent.</p>
     <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
   </div>
@@ -441,7 +443,7 @@ add('/a-propos/', {
 
 <section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Nos engagements</span><h2>Ce que vous pouvez attendre de nous.</h2></div></div>
   <div class="points g4">
-    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Celui qui chiffre votre projet est celui qui le réalise. Pas d'intermédiaire.</p></div>
+    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Celui qui chiffre votre projet est celui qui le réalise. Pas d'intermédiaire, pas de sous-traitance.</p></div>
     <div class="point reveal"><h3>Des devis clairs</h3><p>Poste par poste, sans ligne floue ni supplément surprise.</p></div>
     <div class="point reveal"><h3>Assuré et déclaré</h3><p>Assurance décennale et responsabilité civile professionnelle.</p></div>
     <div class="point reveal"><h3>Le respect des lieux</h3><p>Abords protégés, chantier rangé, gravats évacués.</p></div>
