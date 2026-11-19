@@ -56,20 +56,32 @@
   });
 })();
 
-// Agrandissement des photos de chantier
+// Agrandissement des photos de chantier, avec navigation dans la galerie du projet
 (() => {
-  const imgs = document.querySelectorAll('.w .ph:not(.ba) > img, .story-ph img, .fig img');
+  const imgs = document.querySelectorAll('.w .ph:not(.ba) > img, .w .ba .after-img img, .story-ph img, .fig img, .page-hero .ph img, .hero .ph img');
   if (!imgs.length) return;
   const box = document.createElement('div');
   box.className = 'lb'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.hidden = true;
-  box.innerHTML = '<button class="lb-x" aria-label="Fermer">×</button><figure><img alt=""><figcaption></figcaption></figure>';
+  box.innerHTML = '<button class="lb-x" aria-label="Fermer">×</button><button class="lb-p" aria-label="Photo précédente">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lb-n" aria-label="Photo suivante">›</button>';
   document.body.appendChild(box);
-  const im = box.querySelector('img'), cap = box.querySelector('figcaption');
+  const im = box.querySelector('img'), cap = box.querySelector('figcaption'), prev = box.querySelector('.lb-p'), next = box.querySelector('.lb-n');
+  let list = [], idx = 0, title = '';
+  const show = () => { im.src = list[idx]; cap.textContent = title + (list.length > 1 ? `  ·  ${idx + 1} / ${list.length}` : ''); prev.hidden = next.hidden = list.length < 2; };
+  const open = (srcs, start, t) => { list = srcs; idx = Math.max(0, start); title = t || ''; show(); box.hidden = false; document.body.style.overflow = 'hidden'; box.querySelector('.lb-x').focus(); };
   const close = () => { box.hidden = true; document.body.style.overflow = ''; };
-  imgs.forEach(i => { i.style.cursor = 'zoom-in'; i.addEventListener('click', () => {
-    im.src = i.currentSrc || i.src; im.alt = i.alt; cap.textContent = i.alt || '';
-    box.hidden = false; document.body.style.overflow = 'hidden'; box.querySelector('.lb-x').focus();
-  }); });
-  box.addEventListener('click', e => { if (e.target !== im) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) close(); });
+  const step = d => { idx = (idx + d + list.length) % list.length; show(); };
+  imgs.forEach(i => {
+    i.style.cursor = 'zoom-in';
+    i.addEventListener('click', e => {
+      const card = i.closest('[data-gal]'); const src = i.getAttribute('src');
+      if (card) { const g = JSON.parse(card.dataset.gal); open(g, g.indexOf(src), card.dataset.t); }
+      else open([src], 0, i.alt);
+    });
+  });
+  prev.addEventListener('click', e => { e.stopPropagation(); step(-1); });
+  next.addEventListener('click', e => { e.stopPropagation(); step(1); });
+  box.addEventListener('click', e => { if (e.target === box || e.target.classList.contains('lb-x')) close(); });
+  document.addEventListener('keydown', e => { if (box.hidden) return; if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+  let x0 = null; box.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+  box.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); x0 = null; });
 })();

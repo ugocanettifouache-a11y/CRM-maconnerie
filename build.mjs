@@ -57,7 +57,9 @@ function photoFor(slug, i = 0) {
 const HERO = S.heroImage || photoFor(null, 0) || placeholder('terrasses-exterieurs');
 
 // ---------- Gabarit ----------
+const withSrcset = html => html.replace(/<img src="\/assets\/photos\/([a-z0-9-]+)\.jpg"/g, (m, n) => `<img src="/assets/photos/${n}.jpg" srcset="/assets/photos/${n}-800.jpg 800w, /assets/photos/${n}.jpg 1600w" sizes="(max-width: 900px) 100vw, 50vw"`);
 function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false }) {
+  body = withSrcset(body);
   const url = S.url + path;
   const nav = [
     ['/metiers/', 'Savoir-faire', METIERS.map(m => [`/metiers/${m.slug}/`, m.nom])],
@@ -185,7 +187,8 @@ const realCard = (r, size = '') => {
   const ph = r.avant
     ? `<div class="ph ba">${exBadge(r)}${img(r.avant, `Avant : ${r.titre} à ${r.lieu}`)}<div class="after-img">${img(r.image, `Après : ${r.titre} à ${r.lieu}`)}</div><span class="lbl l">Avant</span><span class="lbl r">Après</span><div class="handle"></div><input type="range" min="0" max="100" value="50" aria-label="Comparer avant et après"></div>`
     : `<div class="ph">${exBadge(r)}${img(r.image, `${r.titre} à ${r.lieu}`)}</div>`;
-  return `<article class="w ${size} reveal" data-m="${r.metier}">${ph}<div class="meta"><h3>${esc(r.titre)}</h3><span class="where">${esc(r.lieu)}</span></div><p>${esc(r.description)}</p>${r.video ? `<a class="vid" href="${r.video}" rel="noopener" target="_blank">${I.play} Voir la vidéo du chantier</a>` : ''}</article>`;
+  const gal = [r.image, ...(r.galerie || []), ...(r.avant ? [r.avant] : [])];
+  return `<article class="w ${size} reveal" data-m="${r.metier}" data-gal='${esc(JSON.stringify(gal))}' data-t="${esc(r.titre)}">${ph}<div class="meta"><h3>${esc(r.titre)}</h3><span class="where">${esc(r.lieu)}</span></div><p>${esc(r.description)}</p>${r.video ? `<a class="vid" href="${r.video}" rel="noopener" target="_blank">${I.play} Voir la vidéo du chantier</a>` : ''}</article>`;
 };
 const worksGrid = list => `<div class="works">${list.map((r, i) => realCard(r, list.length >= 3 && i === 0 ? 'big' : list.length >= 3 && i < 3 ? 'mid' : '')).join('')}</div>`;
 const postCard = p => `<article class="post reveal" data-m="${(p.metiers || []).join(' ') || 'autre'}">
@@ -203,7 +206,7 @@ const trust = `<div class="trust"><span>${I.medal}Plus de 10 ans de métier</spa
 function add(path, opts) { pages.push({ path, ...opts }); }
 
 // ---------- Accueil ----------
-const STORIES = ['poutre-7m', 'maison-village', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
+const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
 const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
   <div class="story-ph"><img src="${r.image}" alt="${esc(r.titre)}" loading="lazy" width="540" height="620"><span class="n">${String(i + 1).padStart(2, '0')}</span></div>
   <div class="story-txt">
@@ -214,8 +217,8 @@ const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
     ${r.video ? `<a class="link" href="${r.video}" rel="noopener" target="_blank">Voir la vidéo du chantier ${I.arrow}</a>` : ''}
   </div>
 </article>`;
-const STRIP = [['renovation', 'plancher-beton'], ['salles-de-bain', 'faience-chevrons'], ['construction-extension', 'bassin-saint-nazaire'], ['terrasses-exterieurs', 'terrasse-renovation']]
-  .map(([slug, id]) => ({ m: M[slug], img: id === 'plancher-beton' ? '/assets/realisations/plancher-beton.jpg' : REAL.find(r => r.id === id)?.image })).filter(x => x.m && x.img);
+const STRIP = [['renovation', 'voute-pierre'], ['salles-de-bain', 'sdb-verte'], ['terrasses-exterieurs', 'opus-escaliers-maison'], ['enduits-facades', 'mas-pierre-2']]
+  .map(([slug, f]) => ({ m: M[slug], img: `/assets/photos/${f}.jpg` })).filter(x => x.m);
 
 add('/', {
   title: 'Maçon à Quissac (Gard) — CRM Maçonnerie Générale, Cyril Rives',
@@ -229,7 +232,7 @@ add('/', {
     <div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>
     ${trust}
   </div>
-  <div class="ph"><img src="${HERO}" alt="Pool-house maçonné en bord de piscine" width="720" height="960" fetchpriority="high"><span class="ph-cap"><b>Pool-house maçonné</b>Murs, couverture, cuisine d'été</span></div>
+  <div class="ph"><img src="${HERO}" alt="Terrasse et escalier réalisés au bord d'une piscine" width="1200" height="1600" fetchpriority="high"><span class="ph-cap"><b>Terrasse et escalier</b>Au bord de la piscine, dans le Gard</span></div>
 </section>
 <nav class="strip" aria-label="Nos principaux métiers">${STRIP.map((x, i) => `<a href="/metiers/${x.m.slug}/"><img src="${x.img}" alt="" loading="lazy" width="540" height="660"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="lbl"><b>${esc(x.m.nom)}</b><span>Découvrir ${I.arrow}</span></span></a>`).join('')}</nav>
 
@@ -248,13 +251,13 @@ add('/', {
 <section class="section paper">
   <div class="wrap">
     <div class="head"><div><span class="eyebrow">Avant / après</span><h2>Le travail parle de lui-même.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>
-    ${worksGrid(['wc-renovation', 'toiture-sinistre', 'salle-de-bain-pierre'].map(id => REAL.find(r => r.id === id)).filter(Boolean))}
+    ${worksGrid(['toiture-sinistre', 'wc-renovation', 'salle-eau'].map(id => REAL.find(r => r.id === id)).filter(Boolean))}
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Carnet de chantier</span><h2>Trois chantiers racontés.</h2></div><p class="lead">Une poutre qui allait céder, une maison de village reprise de fond en comble, un bassin face aux Cévennes. Avec les mots publiés sur notre page au fil du chantier.</p></div>
+    <div class="head"><div><span class="eyebrow">Carnet de chantier</span><h2>Trois chantiers racontés.</h2></div><p class="lead">Une voûte en pierre remise à nu, la façade d'un mas rejointoyée, un bassin en béton armé face aux Cévennes : le bâti ancien comme le neuf.</p></div>
     <div class="stories">${STORIES.map(story).join('')}</div>
   </div>
 </section>
@@ -302,11 +305,12 @@ for (const m of METIERS) {
   const villes = COMMUNES.filter(c => c.focus.includes(m.slug));
   const art = ARTICLES.filter(a => a.metier === m.slug);
   const items = [['Accueil', '/'], ['Savoir-faire', '/metiers/'], [m.nom, `/metiers/${m.slug}/`]];
-  const img = realPhoto(m.slug, 0);
+  const HEROS = { 'renovation': 'voute-pierre-2', 'salles-de-bain': 'sdb-verte', 'toitures-genoises': 'toiture-apres', 'terrasses-exterieurs': 'opus-escaliers-maison', 'construction-extension': 'bassin', 'murs-clotures': 'murs-rue', 'enduits-facades': 'mas-pierre-2' };
+  const img = HEROS[m.slug] ? `/assets/photos/${HEROS[m.slug]}.jpg` : realPhoto(m.slug, 0);
   add(`/metiers/${m.slug}/`, {
     title: m.metaTitle, desc: m.metaDesc,
     schema: [crumbsLd(items), faqLd(m.faq), { '@context': 'https://schema.org', '@type': 'Service', name: m.nom, serviceType: m.nom, provider: { '@id': S.url + '/#entreprise' }, areaServed: COMMUNES.map(c => c.nom) }],
-    body: pageHero({ kicker: m.nom, h1: m.h1, lead: m.accroche, crumbItems: items, img, cap: img ? [reals[0]?.titre || m.nom, reals[0]?.lieu && reals[0].lieu !== 'Gard' ? reals[0].lieu : ''] : null }) + `
+    body: pageHero({ kicker: m.nom, h1: m.h1, lead: m.accroche, crumbItems: items, img, cap: img ? [(REAL.find(r => r.image === img || (r.galerie || []).includes(img)) || reals[0] || { titre: m.nom }).titre, ''] : null }) + `
 <section class="section"><div class="wrap intro">
   <div class="reveal"><span class="eyebrow">Notre approche</span><h2>Bien fait, et fait pour durer.</h2><p class="lead" style="margin-top:26px">${esc(m.intro)}</p></div>
   <div class="reveal"><h3>Ce que nous réalisons</h3><ul class="ticks">${m.prestations.map(p => `<li>${esc(p)}</li>`).join('')}</ul><a class="btn btn-primary" href="/contact/">Demander un devis</a></div>
@@ -414,7 +418,7 @@ add('/a-propos/', {
   title: 'Qui sommes-nous — CRM Maçonnerie Générale, Quissac',
   desc: 'CRM Maçonnerie Générale, entreprise de maçonnerie fondée à Quissac par Cyril Rives : notre façon de travailler, nos chantiers, nos engagements.',
   schema: [crumbsLd([['Accueil', '/'], ['Qui sommes-nous', '/a-propos/']]), { '@context': 'https://schema.org', '@type': 'Person', name: S.dirigeant, jobTitle: 'Artisan maçon', worksFor: { '@id': S.url + '/#entreprise' }, workLocation: { '@type': 'Place', name: `${S.adresse.ville}, ${S.adresse.departement}` } }],
-  body: pageHero({ kicker: 'Qui sommes-nous', h1: 'Une entreprise d’artisan, <em>à Quissac.</em>', lead: 'Nous préférons montrer notre travail plutôt que d’en parler. Alors nous vous le montrons.', crumbItems: [['Accueil', '/'], ['Qui sommes-nous', '/a-propos/']], img: REAL.find(r => r.id === 'bassin-saint-nazaire')?.image, cap: ['Saint-Nazaire-des-Gardies', 'Bassin de rétention en béton armé'] }) + `
+  body: pageHero({ kicker: 'Qui sommes-nous', h1: 'Une entreprise d’artisan, <em>à Quissac.</em>', lead: 'Nous préférons montrer notre travail plutôt que d’en parler. Alors nous vous le montrons.', crumbItems: [['Accueil', '/'], ['Qui sommes-nous', '/a-propos/']], img: '/assets/photos/mas-pierre.jpg', cap: ['Façade de mas en pierre', 'Rejointoiement à l\u2019ancienne'] }) + `
 <section class="section"><div class="wrap intro">
   <div class="reveal"><span class="eyebrow">Notre métier</span><h2>Une maçonnerie complète.</h2></div>
   <div class="txt reveal">

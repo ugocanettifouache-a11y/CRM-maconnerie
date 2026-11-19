@@ -374,4 +374,8 @@ p{margin:0 0 1em}
 .lb img{max-width:92vw;max-height:84vh;object-fit:contain}
 .lb figcaption{color:#e6e0d7;font:500 1.2rem var(--serif)}
 .lb-x{position:absolute;top:18px;right:22px;width:48px;height:48px;border:1px solid rgba(255,255,255,.35);background:none;color:#fff;font-size:28px;line-height:1;cursor:pointer}
-.lb-x:hover{background:var(--bdx);border-color:var(--bdx)}
+.lb-x:hover,.lb-p:hover,.lb-n:hover{background:var(--bdx);border-color:var(--bdx)}
+.lb-p,.lb-n{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.3);color:#fff;font-size:34px;line-height:1;cursor:pointer}
+.lb-p{left:18px}.lb-n{right:18px}.lb-p[hidden],.lb-n[hidden]{display:none}
+.w .ph::after{content:"";position:absolute;right:12px;bottom:12px;width:34px;height:34px;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B0B0C' stroke-width='2'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center/16px no-repeat;opacity:0;transition:opacity .2s;pointer-events:none;z-index:2}
+.w:hover .ph:not(.ba)::after{opacity:1}

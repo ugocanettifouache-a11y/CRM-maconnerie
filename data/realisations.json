@@ -1,28 +1,39 @@
 [
   {
-    "id": "maison-village",
-    "titre": "Rénovation complète d'une maison de village",
-    "metier": "renovation",
+    "id": "terrasse-escalier-piscine",
+    "titre": "Terrasse et escalier au bord de la piscine",
+    "metier": "terrasses-exterieurs",
     "lieu": "Gard",
-    "description": "Du plancher béton coulé l'été d'avant jusqu'aux finitions : cloisons BA13, isolation des combles par soufflage, ragréage, carrelage et faïence.",
-    "parole": "Suite de la rénovation complète d'une maison de village après la mise en place du plancher béton l'été dernier : pose d'armature et isolation, placage BA13, mise en place des portes, isolation des combles par soufflage, ragréage, pose de carrelage, plinthes et joints, faïence de douche et tour de vasques.",
-    "image": "/assets/realisations/plancher-beton.jpg",
-    "avant": "",
-    "video": "https://www.facebook.com/reel/1211645023193043/",
+    "description": "Dallage grand format, escalier d'accès en pierre et habillage autour du pilier : une terrasse pensée pour vivre dehors.",
+    "image": "/assets/photos/terrasse-escalier-piscine.jpg",
     "galerie": [
-      "/assets/realisations/carreaux-ciment.jpg"
+      "/assets/photos/terrasse-pilier.jpg",
+      "/assets/photos/terrasse-pilier-2.jpg"
     ]
   },
   {
-    "id": "poutre-7m",
-    "titre": "Une poutre de 7 mètres sauvée de justesse",
+    "id": "voute-pierre",
+    "titre": "Voûte en pierre remise à nu",
     "metier": "renovation",
     "lieu": "Gard",
-    "description": "Poutre de 7 m (150 × 350 mm) rongée par des années d'infiltration : étaiement, dépose et remplacement avant qu'elle ne cède.",
-    "parole": "Remplacement d'une poutre de 7 mètres (150 × 350 mm) qui menaçait de s'effondrer suite à une infiltration permanente pendant plusieurs années.",
-    "image": "/assets/realisations/poutre-7m.jpg",
-    "avant": "",
-    "video": "https://www.facebook.com/reel/609694252013598/"
+    "description": "Voûte d'arêtes en pierre dégagée et rejointoyée : le caractère de l'ancien, révélé et consolidé.",
+    "image": "/assets/photos/voute-pierre.jpg",
+    "galerie": [
+      "/assets/photos/voute-pierre-2.jpg",
+      "/assets/photos/voute-pierre-3.jpg"
+    ]
+  },
+  {
+    "id": "mas-pierre",
+    "titre": "Façade de mas en pierre",
+    "metier": "enduits-facades",
+    "lieu": "Gard",
+    "description": "Murs en pierre d'un mas rejointoyés à l'ancienne, encadrements préservés.",
+    "image": "/assets/photos/mas-pierre.jpg",
+    "galerie": [
+      "/assets/photos/mas-pierre-2.jpg",
+      "/assets/photos/mas-pierre-3.jpg"
+    ]
   },
   {
     "id": "wc-renovation",
@@ -31,9 +42,92 @@
     "lieu": "Gard",
     "description": "Faïence jaune et frise d'origine déposées, murs habillés de panneaux blancs en relief, sol refait.",
     "parole": "Avant / après : métamorphose complète de ces toilettes !",
-    "image": "/assets/realisations/wc-apres.jpg",
-    "avant": "/assets/realisations/wc-avant.jpg",
-    "video": ""
+    "image": "/assets/photos/wc-apres.jpg",
+    "avant": "/assets/photos/wc-avant.jpg"
+  },
+  {
+    "id": "toiture-sinistre",
+    "titre": "Toiture refaite après un incendie",
+    "metier": "toitures-genoises",
+    "lieu": "Gard",
+    "description": "Couverture détruite par le feu : dépose des éléments brûlés, reprise du support et nouvelle couverture en tuiles canal.",
+    "image": "/assets/photos/toiture-apres.jpg",
+    "avant": "/assets/photos/toiture-avant.jpg",
+    "galerie": [
+      "/assets/photos/toiture-apres-2.jpg"
+    ]
+  },
+  {
+    "id": "sdb-verte",
+    "titre": "Salle de bain, faïence en chevrons",
+    "metier": "salles-de-bain",
+    "lieu": "Gard",
+    "description": "Faïence vert d'eau posée en chevrons, double vasque et douche : une pose exigeante, au millimètre.",
+    "image": "/assets/photos/sdb-verte.jpg",
+    "galerie": [
+      "/assets/photos/sdb-verte-douche.jpg",
+      "/assets/photos/sdb-verte-2.jpg"
+    ],
+    "video": "https://www.facebook.com/reel/930812802844527/"
+  },
+  {
+    "id": "mur-cloture",
+    "titre": "Mur de clôture enduit",
+    "metier": "murs-clotures",
+    "lieu": "Gard",
+    "description": "Mur en parpaing monté sur fondation, puis enduit ton pierre et couronné d'un chaperon.",
+    "image": "/assets/photos/mur-cloture.jpg",
+    "avant": "/assets/photos/mur-cloture-avant.jpg"
+  },
+  {
+    "id": "sdb-blanche",
+    "titre": "Salle de bain lumineuse",
+    "metier": "salles-de-bain",
+    "lieu": "Gard",
+    "description": "Douche vitrée, baignoire et meuble vasque bois : une salle de bain refaite de A à Z.",
+    "image": "/assets/photos/sdb-blanche-vasque.jpg",
+    "galerie": [
+      "/assets/photos/sdb-blanche-douche.jpg",
+      "/assets/photos/sdb-blanche-baignoire.jpg"
+    ]
+  },
+  {
+    "id": "opus-pierre",
+    "titre": "Escaliers et terrasse en pierre",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Dallage en pierre naturelle posé en opus incertum, marches et emmarchements assortis.",
+    "image": "/assets/photos/opus-escaliers-maison.jpg",
+    "galerie": [
+      "/assets/photos/opus-escalier.jpg",
+      "/assets/photos/opus-terrasse.jpg",
+      "/assets/photos/opus-escaliers-2.jpg"
+    ]
+  },
+  {
+    "id": "beton-desactive",
+    "titre": "Allée en béton désactivé",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Allée d'accès au garage en béton désactivé : antidérapant, durable et sans entretien.",
+    "image": "/assets/photos/beton-desactive-allee.jpg",
+    "galerie": [
+      "/assets/photos/beton-desactive-allee-2.jpg",
+      "/assets/photos/beton-desactive-joints.jpg",
+      "/assets/photos/beton-desactive-terrasse.jpg"
+    ]
+  },
+  {
+    "id": "travertin",
+    "titre": "Terrasse en travertin",
+    "metier": "terrasses-exterieurs",
+    "lieu": "Gard",
+    "description": "Dallage travertin posé sur une base saine, joints réguliers et pentes maîtrisées.",
+    "image": "/assets/photos/travertin-terrasse.jpg",
+    "galerie": [
+      "/assets/photos/travertin-pose.jpg",
+      "/assets/photos/travertin-terrasse-2.jpg"
+    ]
   },
   {
     "id": "bassin-saint-nazaire",
@@ -42,61 +136,72 @@
     "lieu": "Saint-Nazaire-des-Gardies",
     "description": "Création d'un bassin pour stocker l'eau d'un forage, face aux Cévennes : ferraillage, coffrage et béton.",
     "parole": "Création d'un bassin pour la rétention d'eau d'un forage. Secteur Saint-Nazaire-des-Gardies.",
-    "image": "/assets/realisations/bassin-retention.jpg",
-    "avant": "",
+    "image": "/assets/photos/bassin.jpg",
+    "galerie": [
+      "/assets/photos/bassin-2.jpg"
+    ],
     "video": "https://www.facebook.com/reel/555620890768880/"
   },
   {
-    "id": "toiture-sinistre",
-    "titre": "Toiture refaite après un incendie",
-    "metier": "toitures-genoises",
-    "lieu": "Gard",
-    "description": "Couverture endommagée par le feu : dépose des éléments brûlés, reprise du support et nouvelle couverture en tuiles canal.",
-    "image": "/assets/realisations/toiture-apres-1.jpg",
-    "avant": "/assets/realisations/toiture-avant-2.jpg",
-    "video": ""
-  },
-  {
-    "id": "faience-chevrons",
-    "titre": "Douche en faïence posée en chevrons",
-    "metier": "salles-de-bain",
-    "lieu": "Gard",
-    "description": "Pose en chevrons sur toute la hauteur de la douche : une pose exigeante où chaque coupe se voit.",
-    "image": "/assets/realisations/faience-chevrons.jpg",
-    "avant": "",
-    "video": "https://www.facebook.com/reel/930812802844527/"
-  },
-  {
-    "id": "terrasse-renovation",
-    "titre": "Rénovation totale d'une terrasse",
+    "id": "piscine-travertin",
+    "titre": "Plage de piscine en travertin",
     "metier": "terrasses-exterieurs",
     "lieu": "Gard",
-    "description": "Démolition, ferraillage et nouvelle dalle coulée à la pompe à béton.",
-    "parole": "Rénovation totale d'une terrasse.",
-    "image": "/assets/realisations/coulage-dalle-pompe.jpg",
-    "avant": "",
-    "video": "https://www.facebook.com/reel/1340299527646142/"
+    "description": "Plage de piscine en travertin, margelles assorties.",
+    "image": "/assets/photos/piscine-travertin.jpg",
+    "galerie": [
+      "/assets/photos/piscine-travertin-2.jpg"
+    ]
   },
   {
-    "id": "salle-de-bain-pierre",
-    "titre": "Salle de bain en pierre naturelle",
-    "metier": "salles-de-bain",
+    "id": "ouverture-pierre",
+    "titre": "Ouverture dans un mur en pierre",
+    "metier": "renovation",
     "lieu": "Gard",
-    "description": "Grands formats façon pierre au mur, plan de vasque habillé : une salle de bain sobre et chaleureuse.",
-    "parole": "Rénovation totale d'une salle de bain.",
-    "image": "/assets/realisations/salle-de-bain-pierre.jpg",
-    "avant": "",
-    "video": "https://www.facebook.com/reel/732572512321086/"
+    "description": "Création d'une ouverture dans un mur porteur en pierre, sous étaiement, avant pose du linteau.",
+    "image": "/assets/photos/ouverture-pierre.jpg",
+    "galerie": [
+      "/assets/photos/ouverture-pierre-2.jpg"
+    ]
   },
   {
-    "id": "pool-house",
-    "titre": "Pool-house maçonné",
-    "metier": "terrasses-exterieurs",
+    "id": "poutre-7m",
+    "titre": "Une poutre de 7 mètres remplacée",
+    "metier": "renovation",
     "lieu": "Gard",
-    "description": "Pool-house en bord de piscine : murs maçonnés, couverture en tuiles et plan de travail pour la cuisine d'été.",
-    "image": "/assets/realisations/pool-house.jpg",
-    "avant": "",
-    "video": ""
+    "description": "Poutre de 7 m (150 × 350 mm) rongée par des années d'infiltration, remplacée avant qu'elle ne cède.",
+    "parole": "Remplacement d'une poutre de 7 mètres (150 × 350 mm) qui menaçait de s'effondrer suite à une infiltration permanente pendant plusieurs années.",
+    "image": "/assets/realisations/poutre-7m.jpg",
+    "video": "https://www.facebook.com/reel/609694252013598/"
+  },
+  {
+    "id": "maison-village",
+    "titre": "Rénovation complète d'une maison de village",
+    "metier": "renovation",
+    "lieu": "Gard",
+    "description": "Du plancher béton jusqu'aux finitions : cloisons BA13, isolation des combles par soufflage, ragréage, carrelage et faïence.",
+    "parole": "Suite de la rénovation complète d'une maison de village après la mise en place du plancher béton l'été dernier : pose d'armature et isolation, placage BA13, mise en place des portes, isolation des combles par soufflage, ragréage, pose de carrelage, plinthes et joints, faïence de douche et tour de vasques.",
+    "image": "/assets/realisations/plancher-beton.jpg",
+    "video": "https://www.facebook.com/reel/1211645023193043/"
+  },
+  {
+    "id": "extension",
+    "titre": "Soubassement et dalle d'extension",
+    "metier": "construction-extension",
+    "lieu": "Gard",
+    "description": "Soubassement en parpaing, ferraillage et dalle béton pour une future extension.",
+    "image": "/assets/photos/extension-dalle.jpg",
+    "galerie": [
+      "/assets/photos/extension-ferraillage.jpg"
+    ]
+  },
+  {
+    "id": "maison-construction",
+    "titre": "Élévation des murs d'une maison",
+    "metier": "construction-extension",
+    "lieu": "Gard",
+    "description": "Gros œuvre d'une maison neuve : élévation des murs en blocs et ouvertures.",
+    "image": "/assets/photos/maison-construction.jpg"
   },
   {
     "id": "salle-eau",
@@ -104,49 +209,69 @@
     "metier": "salles-de-bain",
     "lieu": "Gard",
     "description": "Faïence ancienne remplacée par un habillage mural contemporain, radiateur sèche-serviettes posé.",
-    "image": "/assets/realisations/salle-eau-apres-radiateur.jpg",
-    "avant": "/assets/realisations/salle-eau-avant.jpg",
-    "video": ""
+    "image": "/assets/photos/salle-eau-apres.jpg",
+    "avant": "/assets/photos/salle-eau-avant.jpg"
   },
   {
-    "id": "piscine-dalle",
-    "titre": "Abords de piscine",
+    "id": "piscine-bois",
+    "titre": "Terrasse bois autour d'une piscine",
     "metier": "terrasses-exterieurs",
     "lieu": "Gard",
-    "description": "Terrassement et ferraillage de la dalle autour d'une piscine bois.",
+    "description": "Dalle, terrassement et terrasse bois autour d'une piscine hors-sol.",
     "parole": "Réalisation terrasse en bois.",
-    "image": "/assets/realisations/piscine-dalle.jpg",
-    "avant": "",
+    "image": "/assets/photos/piscine-bois.jpg",
+    "galerie": [
+      "/assets/photos/terrasse-bois.jpg"
+    ],
     "video": "https://www.facebook.com/reel/2119339181801003/"
   },
   {
-    "id": "allee",
-    "titre": "Allée et bordures",
+    "id": "murs-rue",
+    "titre": "Murs de clôture le long d'une rue",
+    "metier": "murs-clotures",
+    "lieu": "Gard",
+    "description": "Murs de clôture enduits et piliers de portail, alignés au cordeau.",
+    "image": "/assets/photos/murs-rue.jpg",
+    "galerie": [
+      "/assets/photos/mur-cloture-2.jpg"
+    ]
+  },
+  {
+    "id": "pool-house",
+    "titre": "Pool-house maçonné",
     "metier": "terrasses-exterieurs",
     "lieu": "Gard",
-    "description": "Allée d'accès au garage et bordures de jardin posées au cordeau.",
-    "image": "/assets/realisations/allee-paves.jpg",
-    "avant": "",
-    "video": ""
+    "description": "Pool-house en bord de piscine : murs maçonnés, couverture en tuiles et plan de travail pour la cuisine d'été.",
+    "image": "/assets/photos/pool-house.jpg",
+    "galerie": [
+      "/assets/photos/pool-house-2.jpg"
+    ]
   },
   {
-    "id": "toiture-tuiles",
-    "titre": "Couverture en tuiles canal",
-    "metier": "toitures-genoises",
-    "lieu": "Gard",
-    "description": "Pan de toiture sinistré repris et recouvert en tuiles canal.",
-    "image": "/assets/realisations/toiture-apres-2.jpg",
-    "avant": "/assets/realisations/toiture-avant-1.jpg",
-    "video": ""
-  },
-  {
-    "id": "renovation-interieure",
+    "id": "cuisine-renovee",
     "titre": "Pièce de vie rénovée",
     "metier": "renovation",
     "lieu": "Gard",
-    "description": "Murs, sol et plafond à poutres apparentes repris.",
-    "image": "/assets/realisations/renovation-interieure.jpg",
-    "avant": "",
-    "video": ""
+    "description": "Murs, sols et finitions repris pour accueillir une cuisine neuve.",
+    "image": "/assets/photos/cuisine-renovee.jpg",
+    "galerie": [
+      "/assets/photos/piece-renovee.jpg"
+    ]
+  },
+  {
+    "id": "abri-maconne",
+    "titre": "Abri maçonné",
+    "metier": "construction-extension",
+    "lieu": "Gard",
+    "description": "Petit bâtiment en blocs avec couverture tuiles.",
+    "image": "/assets/photos/abri-maconne.jpg"
+  },
+  {
+    "id": "piscine-beton",
+    "titre": "Piscine et plage béton",
+    "metier": "construction-extension",
+    "lieu": "Gard",
+    "description": "Plage béton autour d'une piscine neuve, avec volet de sécurité.",
+    "image": "/assets/photos/piscine-beton.jpg"
   }
 ]
