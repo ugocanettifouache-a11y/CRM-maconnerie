@@ -17,13 +17,11 @@
   --ink:#0B0B0C; --ink-2:#161616; --bdx:#841536; --bdx-d:#6A0F2A; --bdx-l:#D98BA4;
   --paper:#F7F4EF; --stone:#ECE6DC; --line:#E1D9CD; --mute:#6B665F; --mute-d:#B3ADA4; --white:#fff;
   --serif:Garamond,"EB Garamond","Times New Roman",serif; --sans:Manrope,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --wrap:1260px; --gut:clamp(20px,4.5vw,64px);
+  --wrap:clamp(1260px,66vw,2200px); --gut:clamp(20px,4.5vw,64px);
 }
 *,*::before,*::after{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:90px}
 body{margin:0;font:400 17px/1.7 var(--sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:clip}
-/* Très grands écrans : tout le site tient dans un cadre centré, pour que chaque bloc reste dans l'axe */
-@media (min-width:1921px){html{background:#E4DCCF}body{max-width:1920px;margin:0 auto;box-shadow:0 0 0 1px var(--line),0 0 80px rgba(60,40,20,.10)}}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.04;letter-spacing:-.015em;margin:0 0 .4em;text-wrap:balance}
@@ -108,7 +106,7 @@ p{margin:0 0 1em}
 
 /* Bande de photos (métiers) */
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--ink)}
-.strip a{position:relative;display:block;aspect-ratio:3/3.7;overflow:hidden;text-decoration:none;color:#fff}
+.strip a{position:relative;display:block;width:100%;aspect-ratio:3/3.7;max-height:640px;overflow:hidden;text-decoration:none;color:#fff}
 .strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .3s;opacity:.9}
 .strip a:hover img{transform:scale(1.05);opacity:1}
 .strip a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.8))}
