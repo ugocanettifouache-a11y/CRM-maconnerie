@@ -66,7 +66,7 @@ const HERO = S.heroImage || photoFor(null, 0) || placeholder('terrasses-exterieu
 
 // ---------- Gabarit ----------
 const withSrcset = html => html.replace(/<img src="\/assets\/photos\/([a-z0-9-]+)\.jpg"/g, (m, n) => `<img src="/assets/photos/${n}.jpg" srcset="/assets/photos/${n}-800.jpg 800w, /assets/photos/${n}.jpg 1600w" sizes="(max-width: 900px) 100vw, 50vw"`);
-function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false }) {
+function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false, overlay = false }) {
   body = withSrcset(body);
   const url = S.url + path;
   const nav = [
@@ -104,9 +104,9 @@ ${ld}
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
-<header class="site-header">
+<header class="site-header${overlay ? ' over' : ''}">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="${esc(S.nom)} — accueil"><img src="/assets/img/logo-h.svg" alt="CRM — Cyril Rives Maçonnerie générale" width="254" height="56"></a>
+    <a class="brand" href="/" aria-label="${esc(S.nom)} — accueil"><img class="k" src="/assets/img/logo-h.svg" alt="CRM — Cyril Rives Maçonnerie générale" width="254" height="56">${overlay ? '<img class="w" src="/assets/img/logo-h-blanc.svg" alt="" width="254" height="56">' : ''}</a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">${I.menu}</button>
     <nav class="nav" id="nav" aria-label="Navigation principale">
       ${navHtml}
@@ -223,6 +223,13 @@ const cercle = (cls = 'paper') => `<section class="section ${cls} cercle"><div c
   <ul class="trades reveal">${TRADES.map(([ic, n, d]) => `<li>${I[ic]}<b>${n}</b><span>${d}</span></li>`).join('')}</ul>
 </div></section>`;
 
+// ---------- Héros plein écran : photos en fondu ----------
+const HERO_SLIDES = [['voute', 'voute-pierre-2'], ['piscine', 'piscine-escalier'], ['mas', 'mas-pierre'], ['escaliers', 'opus-escaliers-2']].map(([f, photo]) => {
+  const p = `/assets/photos/${photo}.jpg`;
+  const r = REAL.find(x => x.image === p || (x.galerie || []).includes(p) || x.avant === p) || {};
+  return { f, titre: r.titre || 'Nos chantiers', lieu: r.lieu || 'Gard' };
+});
+
 // ---------- Accueil ----------
 const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
 const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
@@ -239,19 +246,28 @@ const STRIP = [['renovation', 'voute-pierre'], ['salles-de-bain', 'sdb-verte'], 
   .map(([slug, f]) => ({ m: M[slug], img: `/assets/photos/${f}.jpg` })).filter(x => x.m);
 
 add('/', {
+  overlay: true,
   title: 'Maçon à Quissac (Gard) — CRM Maçonnerie Générale, Cyril Rives',
   desc: 'Cyril Rives, artisan maçon à Quissac : rénovation de maisons de village, salles de bain, toitures, terrasses, béton armé. Devis gratuit dans un rayon de 50 km.',
   body: `
 <section class="hero on-dark">
-  <div class="t reveal">
+  <div class="hero-bg" aria-hidden="true">${HERO_SLIDES.map((s, i) => i === 0
+    ? `<img class="on" src="/assets/hero/${s.f}.jpg" srcset="/assets/hero/${s.f}-1200.jpg 1200w, /assets/hero/${s.f}.jpg 2048w" sizes="100vw" alt="" width="2048" height="1536" fetchpriority="high">`
+    : `<img data-src="/assets/hero/${s.f}.jpg" data-srcset="/assets/hero/${s.f}-1200.jpg 1200w, /assets/hero/${s.f}.jpg 2048w" sizes="100vw" alt="" width="2048" height="1536" data-cap="${esc(s.titre)}" data-lieu="${esc(s.lieu)}">`).join('')}</div>
+  <div class="t">
     <span class="eyebrow">Maçon à ${esc(S.adresse.ville)} · ${esc(S.adresse.departement)}</span>
-    <h1>De la fondation<br><em>à la faïence.</em></h1>
-    <p class="lead">Plancher, poutre, toiture, salle de bain, terrasse : nous venons voir, nous chiffrons et nous réalisons le chantier, jusqu'au dernier joint. Une seule entreprise, et le même soin du gros œuvre aux finitions.</p>
+    <h1><span class="l"><span>De la fondation</span></span><span class="l"><span><em>à la faïence.</em></span></span></h1>
+    <p class="lead">Plancher, poutre, toiture, salle de bain, terrasse, piscine : nous venons voir, nous chiffrons et nous réalisons le chantier, jusqu'au dernier joint. Le même soin du gros œuvre aux finitions.</p>
     <div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>
     ${trust}
   </div>
+  <div class="hero-foot"><div class="wrap">
+    <p class="hero-cap"><b>${esc(HERO_SLIDES[0].titre)}</b><span>${esc(HERO_SLIDES[0].lieu)}</span></p>
+    <a class="hero-scroll" href="#suite">Découvrir<i></i></a>
+    <div class="hero-prog"><span class="n">01</span><span class="bars">${HERO_SLIDES.map((s, i) => `<i${i === 0 ? ' class="on"' : ''}></i>`).join('')}</span><span>${String(HERO_SLIDES.length).padStart(2, '0')}</span></div>
+  </div></div>
 </section>
-<nav class="strip" aria-label="Nos principaux métiers">${STRIP.map((x, i) => `<a href="/metiers/${x.m.slug}/"><img src="${x.img}" alt="" loading="lazy" width="540" height="660"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="lbl"><b>${esc(x.m.nom)}</b><span>Découvrir ${I.arrow}</span></span></a>`).join('')}</nav>
+<nav class="strip" id="suite" aria-label="Nos principaux métiers">${STRIP.map((x, i) => `<a href="/metiers/${x.m.slug}/"><img src="${x.img}" alt="" loading="lazy" width="540" height="660"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="lbl"><b>${esc(x.m.nom)}</b><span>Découvrir ${I.arrow}</span></span></a>`).join('')}</nav>
 
 <section class="section">
   <div class="wrap intro">

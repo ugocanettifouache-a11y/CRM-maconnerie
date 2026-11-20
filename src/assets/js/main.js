@@ -1,11 +1,40 @@
 (() => {
   // Menu mobile
-  const t = document.querySelector('.menu-toggle'), nav = document.getElementById('nav');
+  const t = document.querySelector('.menu-toggle'), nav = document.getElementById('nav'), head = document.querySelector('.site-header');
   if (t && nav) t.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
     t.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
+    if (head) head.classList.toggle('menu', open); solid();
   });
+
+  // En-tête transparent sur le héros de l'accueil : devient blanc au défilement
+  function solid() { if (head && head.classList.contains('over')) head.classList.toggle('solid', scrollY > 40 || head.classList.contains('menu')); }
+  addEventListener('scroll', solid, { passive: true }); solid();
+
+  // Héros : photos de chantier en fondu enchaîné
+  const bg = document.querySelector('.hero-bg');
+  if (bg && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const imgs = [...bg.querySelectorAll('img')], bars = [...document.querySelectorAll('.hero-prog i')];
+    const num = document.querySelector('.hero-prog .n'), cap = document.querySelector('.hero-cap');
+    const first = { cap: cap ? cap.querySelector('b').textContent : '', lieu: cap ? cap.querySelector('span').textContent : '' };
+    let cur = 0;
+    const load = () => imgs.forEach(im => { if (im.dataset.src) { im.srcset = im.dataset.srcset; im.src = im.dataset.src; delete im.dataset.src; } });
+    if (document.readyState === 'complete') setTimeout(load, 400); else addEventListener('load', () => setTimeout(load, 400));
+    const go = () => {
+      if (document.hidden) return;
+      const nx = (cur + 1) % imgs.length, im = imgs[nx];
+      if (im.dataset.src || !im.complete || !im.naturalWidth) return;
+      const old = imgs[cur]; old.classList.add('out');
+      im.classList.remove('out'); im.classList.add('on');
+      setTimeout(() => old.classList.remove('on', 'out'), 1900);
+      bars.forEach((b, k) => { b.classList.toggle('on', k === nx); });
+      if (num) num.textContent = String(nx + 1).padStart(2, '0');
+      if (cap) { cap.classList.add('fade'); setTimeout(() => { cap.querySelector('b').textContent = nx ? im.dataset.cap : first.cap; cap.querySelector('span').textContent = nx ? im.dataset.lieu : first.lieu; cap.classList.remove('fade'); }, 600); }
+      cur = nx;
+    };
+    if (imgs.length > 1) setInterval(go, 6500);
+  }
 
   // Apparition au défilement
   const els = document.querySelectorAll('.reveal');
