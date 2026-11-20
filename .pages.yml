@@ -22,6 +22,7 @@ content:
             - { value: murs-clotures, label: Murs & clôtures }
             - { value: toitures-genoises, label: Toitures & génoises }
             - { value: terrasses-exterieurs, label: Terrasses & extérieurs }
+            - { value: piscines, label: Piscines sur mesure }
             - { value: renovation, label: Rénovation }
             - { value: construction-extension, label: Construction & extension }
       - { name: lieu, label: Commune, type: string, required: true }

@@ -145,7 +145,7 @@
   {
     "id": "piscine-travertin",
     "titre": "Plage de piscine en travertin",
-    "metier": "terrasses-exterieurs",
+    "metier": "piscines",
     "lieu": "Gard",
     "description": "Plage de piscine en travertin, margelles assorties.",
     "image": "/assets/photos/piscine-travertin.jpg",
@@ -241,7 +241,7 @@
   {
     "id": "pool-house",
     "titre": "Pool-house maçonné",
-    "metier": "terrasses-exterieurs",
+    "metier": "piscines",
     "lieu": "Gard",
     "description": "Pool-house en bord de piscine : murs maçonnés, couverture en tuiles et plan de travail pour la cuisine d'été.",
     "image": "/assets/photos/pool-house.jpg",
@@ -270,10 +270,19 @@
   },
   {
     "id": "piscine-beton",
-    "titre": "Piscine et plage béton",
-    "metier": "construction-extension",
+    "titre": "Piscine neuve et sa plage",
+    "metier": "piscines",
     "lieu": "Gard",
-    "description": "Plage béton autour d'une piscine neuve, avec volet de sécurité.",
-    "image": "/assets/photos/piscine-beton.jpg"
+    "description": "Bassin avec volet de sécurité : d'abord les margelles, puis la plage tout autour, tracée au cordeau dans le pré.",
+    "image": "/assets/photos/piscine-beton.jpg",
+    "avant": "/assets/photos/piscine-beton-avant.jpg"
+  },
+  {
+    "id": "piscine-escalier",
+    "titre": "Piscine avec escalier intégré",
+    "metier": "piscines",
+    "lieu": "Gard",
+    "description": "Bassin maçonné avec escalier intégré, photographié à la mise en eau, avant la finition de la plage.",
+    "image": "/assets/photos/piscine-escalier.jpg"
   }
 ]

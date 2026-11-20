@@ -43,6 +43,10 @@
       {
         "q": "Faites-vous les finitions intérieures ?",
         "r": "Nous réalisons la maçonnerie, les cloisons, l'isolation, les chapes et le carrelage. Pour l'électricité ou la plomberie, nous travaillons avec des artisans de confiance."
+      },
+      {
+        "q": "Vous occupez-vous aussi de la plomberie et de l'électricité ?",
+        "r": "Oui. Ces corps de métier sont confiés à des artisans qualifiés de notre cercle de partenaires, avec qui nous travaillons régulièrement. Vous gardez un seul interlocuteur : nous organisons le planning, coordonnons les interventions et suivons le chantier jusqu'à la réception."
       }
     ],
     "motsCles": [
@@ -104,6 +108,10 @@
       {
         "q": "Faites-vous la plomberie ?",
         "r": "Nous préparons les supports et travaillons avec un plombier de confiance pour les raccordements quand c'est nécessaire."
+      },
+      {
+        "q": "Vous occupez-vous aussi de la plomberie et de l'électricité ?",
+        "r": "Oui. Ces corps de métier sont confiés à des artisans qualifiés de notre cercle de partenaires, avec qui nous travaillons régulièrement. Vous gardez un seul interlocuteur : nous organisons le planning, coordonnons les interventions et suivons le chantier jusqu'à la réception."
       }
     ],
     "motsCles": [
@@ -194,7 +202,7 @@
       "Terrasses carrelées ou en pierre",
       "Plages et abords de piscine",
       "Allées, bordures et aménagements de jardin",
-      "Pool-houses et cuisines d'été",
+      "Cuisines d'été et abris maçonnés",
       "Escaliers extérieurs"
     ],
     "points": [
@@ -229,17 +237,76 @@
       "terrasse",
       "dalle",
       "dallage",
-      "piscine",
       "travertin",
       "plage",
-      "pool",
       "escalier",
       "allée",
       "carrelage",
       "bordure",
-      "jardin",
+      "jardin"
+    ]
+  },
+  {
+    "slug": "piscines",
+    "nom": "Piscines sur mesure",
+    "court": "Piscine",
+    "icone": "piscine",
+    "metaTitle": "Piscine maçonnée sur mesure dans le Gard | CRM Maçonnerie, Quissac",
+    "metaDesc": "Construction de piscines maçonnées sur mesure, margelles, plages et pool-houses autour de Quissac, Sauve et Sommières. Visite et devis gratuits.",
+    "h1": "Des piscines maçonnées, dessinées sur mesure",
+    "accroche": "La piscine, c'est le chantier que nous préférons : du gros œuvre de précision, qui se termine les pieds dans l'eau.",
+    "intro": "Chez CRM, la piscine est une passion. Nous la construisons comme une maison : implantation, terrassement, structure maçonnée et ferraillée en béton armé, puis les finitions qui font tout, margelles, plage, escalier, local technique. Chaque bassin est pensé pour votre terrain et votre façon de vivre dehors : forme, dimensions, profondeur, emplacement au soleil et à l'abri du vent. Pour la filtration, l'électricité et le revêtement, nous travaillons avec les artisans de notre cercle de partenaires, et nous restons votre seul interlocuteur du premier coup de pelle à la mise en eau.",
+    "prestations": [
+      "Piscines maçonnées en béton armé, sur mesure",
+      "Escaliers et banquettes intégrés au bassin",
+      "Margelles et plages : pierre, travertin, carrelage, béton",
+      "Pool-houses, cuisines d'été et locaux techniques",
+      "Rénovation de piscines et de leurs abords",
+      "Filtration, électricité et revêtement coordonnés avec nos artisans partenaires"
+    ],
+    "points": [
+      {
+        "titre": "Dessinée pour votre terrain",
+        "texte": "Forme, dimensions, profondeur et emplacement se décident avec vous, sur place, selon la pente, le soleil et l'accès au chantier."
+      },
+      {
+        "titre": "Une structure faite pour durer",
+        "texte": "Terrassement, ferraillage, béton : un bassin maçonné se construit sur des bases saines, comme une maison."
+      },
+      {
+        "titre": "Des abords soignés",
+        "texte": "Margelles alignées, plage avec les bonnes pentes pour évacuer l'eau, joints réguliers : c'est là que se joue le plaisir au quotidien."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Faut-il une autorisation pour construire une piscine ?",
+        "r": "En règle générale, une piscine enterrée de plus de 10 m² et jusqu'à 100 m² demande une déclaration préalable en mairie ; au-delà de 100 m², ou avec un abri de plus de 1,80 m de haut, un permis de construire. Le PLU de votre commune peut ajouter des règles : nous vous indiquons les démarches lors de la visite."
+      },
+      {
+        "q": "Une piscine doit-elle avoir un dispositif de sécurité ?",
+        "r": "Oui. Toute piscine enterrée ou semi-enterrée privée doit être équipée d'au moins un dispositif de sécurité normalisé : barrière, alarme, couverture ou abri. Nous le prévoyons dès la conception du projet."
+      },
+      {
+        "q": "Quand faut-il lancer le projet ?",
+        "r": "Idéalement à l'automne ou en hiver : le temps de dessiner le bassin, de faire les démarches et de construire, vous pouvez vous baigner dès l'été suivant."
+      },
+      {
+        "q": "Pouvez-vous rénover une piscine existante ?",
+        "r": "Oui : margelles, plage, escalier, abords ou pool-house. Nous venons voir l'état du bassin et vous proposons ce qui est utile, sans plus."
+      }
+    ],
+    "motsCles": [
+      "piscine",
+      "bassin",
+      "margelle",
+      "margelles",
+      "plage",
+      "pool",
       "pool-house",
-      "pool house"
+      "pool house",
+      "local technique",
+      "baignade"
     ]
   },
   {

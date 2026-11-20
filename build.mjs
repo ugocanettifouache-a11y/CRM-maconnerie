@@ -40,13 +40,20 @@ const I = {
   terrasse: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 38 14 24h30L34 38z"/><path d="M21 24l-8 14M28 24l-6 14M9 31h30"/><path d="M30 8c0 6-6 8-6 14M30 8c-3 2-8 2-10 0"/></svg>',
   renovation: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 42V10h38v32"/><path d="M16 42V22h16v20"/><path d="M13 20h22" stroke-width="4"/><path d="M5 42h38"/></svg>',
   bain: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 26h40v6a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8z"/><path d="M10 26V10a4 4 0 0 1 8 0"/><path d="M14 40l-2 4M34 40l2 4"/></svg>',
-  maison: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M3 24 17 12l14 12"/><path d="M7 21v19h20V21"/><path d="M27 28h17v12H27" stroke-dasharray="3 3"/><path d="M14 40v-8h6v8"/></svg>'
+  maison: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M3 24 17 12l14 12"/><path d="M7 21v19h20V21"/><path d="M27 28h17v12H27" stroke-dasharray="3 3"/><path d="M14 40v-8h6v8"/></svg>',
+  piscine: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30V10a4 4 0 0 1 8 0M26 30V10a4 4 0 0 1 8 0M14 16h20M14 23h20"/><path d="M4 36c3.3 0 3.3-2.5 6.7-2.5s3.3 2.5 6.6 2.5 3.4-2.5 6.7-2.5 3.3 2.5 6.7 2.5 3.3-2.5 6.6-2.5S40.7 36 44 36"/><path d="M4 42c3.3 0 3.3-2.5 6.7-2.5s3.3 2.5 6.6 2.5 3.4-2.5 6.7-2.5 3.3 2.5 6.7 2.5 3.3-2.5 6.6-2.5S40.7 42 44 42"/></svg>',
+  plomberie: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 15v10"/><path d="M8 20h13a8 8 0 0 1 8 8v3"/><path d="M17 20v-7M12 13h10"/><path d="M32 39c0 1.9-1.3 3.5-3 3.5s-3-1.6-3-3.5 3-5.5 3-5.5 3 3.6 3 5.5z"/></svg>',
+  elec: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M27 4 12 27h11l-2 17 15-23H25z"/></svg>',
+  menuiserie: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 42V8h28v34"/><path d="M6 42h36"/><path d="M15 13h18v24H15z"/><circle cx="29" cy="26" r="1.4" fill="currentColor"/></svg>',
+  platre: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 34h32l5-6H10z"/><path d="M21 28v-7"/><rect x="16" y="9" width="10" height="12" rx="3"/></svg>',
+  peinture: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="6" width="28" height="10" rx="2"/><path d="M36 11h4v9H24v6"/><path d="M21 26h6v16h-6z"/></svg>',
+  chauffage: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44c8 0 13-5 13-12 0-9-8-12-9-22-5 4-7 9-6 14-3-2-4-5-4-8-4 4-7 9-7 15 0 8 5 13 13 13z"/><path d="M24 44c-3 0-5-2-5-5 0-4 5-7 5-11 2 3 5 6 5 10 0 4-2 6-5 6z"/></svg>'
 };
 // ---------- Photos : les vraies photos Facebook remplacent les visuels provisoires dès la 1re synchro ----------
 const SHOWN = REAL.filter(r => r.affiche !== false);
 const REAL_POSTS = JOURNAL.posts.filter(p => !p.exemple && p.images?.length);
 const FB_PHOTOS = REAL_POSTS.flatMap(p => p.images.map(src => ({ src, metiers: p.metiers || [], date: p.date })));
-const PLACE = { 'murs-clotures': 'mur', 'enduits-facades': 'facade', 'toitures-genoises': 'toit', 'terrasses-exterieurs': 'terrasse', 'renovation': 'renovation', 'construction-extension': 'maison', 'salles-de-bain': 'renovation' };
+const PLACE = { 'murs-clotures': 'mur', 'enduits-facades': 'facade', 'toitures-genoises': 'toit', 'terrasses-exterieurs': 'terrasse', 'renovation': 'renovation', 'construction-extension': 'maison', 'salles-de-bain': 'renovation', 'piscines': 'terrasse' };
 const placeholder = slug => `/assets/img/placeholder-${PLACE[slug] || 'mur'}.svg`;
 const used = new Set();
 const ALL_PHOTOS = [...REAL.filter(r => !r.exemple && r.affiche !== false).map(r => ({ src: r.image, metiers: [r.metier] })), ...FB_PHOTOS];
@@ -206,6 +213,16 @@ const mapFrame = (bbox, title) => `<div class="map"><iframe title="${esc(title)}
 const trust = `<div class="trust"><span>${I.medal}Plus de 10 ans de métier</span><span>${I.doc}Artisan · Chambre de métiers</span><span>${I.shield}Assurance décennale</span><span>${I.pin}Devis gratuit, ${S.rayonKm} km autour de ${esc(S.adresse.ville)}</span></div>`;
 function add(path, opts) { pages.push({ path, ...opts }); }
 
+// ---------- Cercle d'artisans partenaires ----------
+const TRADES = [['plomberie', 'Plomberie & sanitaire', 'Réseaux, évacuations, sanitaires'], ['elec', 'Électricité', 'Mise aux normes, tableau, éclairage'], ['menuiserie', 'Menuiserie', 'Fenêtres, portes, escaliers'], ['platre', 'Plâtrerie & isolation', 'Cloisons, doublages, plafonds'], ['peinture', 'Peinture', 'Murs, plafonds, boiseries'], ['chauffage', 'Chauffage & climatisation', 'Pompe à chaleur, radiateurs, clim']];
+const cercle = (cls = 'paper') => `<section class="section ${cls} cercle"><div class="wrap split" style="align-items:start">
+  <div class="reveal"><span class="eyebrow">Notre cercle d'artisans</span><h2>Tous les corps de métier, <em>un seul interlocuteur.</em></h2>
+    <p class="lead" style="margin-top:26px">Une rénovation ne s'arrête pas à la maçonnerie. Pour la plomberie, l'électricité, la menuiserie ou la plâtrerie, nous faisons appel à des artisans qualifiés que nous connaissons bien, avec qui nous travaillons chantier après chantier.</p>
+    <p>Vous n'avez qu'un contact : nous. Nous organisons le planning, coordonnons les interventions et suivons le chantier jusqu'à la réception, sans que vous ayez à courir après chaque corps de métier.</p>
+    <a class="btn btn-primary" href="/contact/">Parler de votre projet</a></div>
+  <ul class="trades reveal">${TRADES.map(([ic, n, d]) => `<li>${I[ic]}<b>${n}</b><span>${d}</span></li>`).join('')}</ul>
+</div></section>`;
+
 // ---------- Accueil ----------
 const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
 const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
@@ -218,7 +235,7 @@ const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
     ${r.video ? `<a class="link" href="${r.video}" rel="noopener" target="_blank">Voir la vidéo du chantier ${I.arrow}</a>` : ''}
   </div>
 </article>`;
-const STRIP = [['renovation', 'voute-pierre'], ['salles-de-bain', 'sdb-verte'], ['terrasses-exterieurs', 'opus-escaliers-maison'], ['enduits-facades', 'mas-pierre-2']]
+const STRIP = [['renovation', 'voute-pierre'], ['salles-de-bain', 'sdb-verte'], ['piscines', 'piscine-travertin-2'], ['terrasses-exterieurs', 'opus-escaliers-maison']]
   .map(([slug, f]) => ({ m: M[slug], img: `/assets/photos/${f}.jpg` })).filter(x => x.m);
 
 add('/', {
@@ -241,9 +258,26 @@ add('/', {
     <div class="reveal"><span class="eyebrow">Qui sommes-nous</span><h2>Un seul interlocuteur, du gros œuvre aux finitions.</h2></div>
     <div class="txt reveal">
       <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre métier, nous le prenons au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
-      <p>CRM est une entreprise artisanale à taille humaine, forte de plus de dix ans de métier. Pas de commercial, pas de sous-traitance en cascade : celui qui vous répond au téléphone est celui qui vient voir, qui chiffre et qui réalise vos travaux. Et nous montrons notre travail : la plupart de nos chantiers sont filmés et publiés, étape par étape.</p>
+      <p>CRM est une entreprise artisanale à taille humaine, forte de plus de dix ans de métier. Pas de commercial ni d'intermédiaire : celui qui vous répond au téléphone est celui qui vient voir, qui chiffre et qui réalise vos travaux. Pour ce qui n'est pas de la maçonnerie, nous nous appuyons sur notre cercle d'artisans partenaires. Et nous montrons notre travail : la plupart de nos chantiers sont filmés et publiés, étape par étape.</p>
       <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
       <a class="link" href="/a-propos/">Qui sommes-nous ${I.arrow}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section dark on-dark pool">
+  <div class="wrap pool-grid">
+    <div class="pool-txt reveal">
+      <span class="eyebrow">Notre passion</span>
+      <h2>La piscine, <em>sur mesure.</em></h2>
+      <p class="lead">S'il y a un chantier que nous aimons plus que les autres, c'est celui-là. Une piscine maçonnée, c'est du gros œuvre de précision : implantation, terrassement, ferraillage, béton, puis les margelles et la plage qui feront le plaisir de tous vos étés.</p>
+      <ul class="ticks"><li>Forme, dimensions et escalier dessinés pour votre terrain</li><li>Structure maçonnée en béton armé</li><li>Margelles, plages, pool-house et local technique</li><li>Filtration, électricité, revêtement : coordonnés avec nos artisans partenaires</li></ul>
+      <div class="btns"><a class="btn btn-primary" href="/metiers/piscines/">Découvrir nos piscines</a><a class="btn btn-line" href="/contact/">Parler de votre piscine</a></div>
+    </div>
+    <div class="pool-ph reveal">
+      <a class="a" href="/metiers/piscines/"><img src="/assets/photos/piscine-beton.jpg" alt="Piscine neuve avec volet de sécurité et plage tout autour" loading="lazy" width="800" height="600"><span class="ph-cap"><b>Piscine neuve et sa plage</b>Dans le Gard</span></a>
+      <a class="b" href="/metiers/piscines/"><img src="/assets/photos/piscine-escalier.jpg" alt="Piscine avec escalier intégré à la mise en eau" loading="lazy" width="800" height="600"></a>
+      <a class="c" href="/metiers/piscines/"><img src="/assets/photos/pool-house.jpg" alt="Pool-house maçonné au bord d'une piscine" loading="lazy" width="600" height="800"></a>
     </div>
   </div>
 </section>
@@ -261,6 +295,7 @@ add('/', {
     <div class="stories">${STORIES.map(story).join('')}</div>
   </div>
 </section>
+${cercle()}
 
 <section class="section dark on-dark">
   <div class="wrap">
@@ -297,7 +332,7 @@ add('/metiers/', {
   desc: 'Rénovation intérieure, salles de bain, toitures, terrasses, béton armé, murs, façades : tous les travaux de maçonnerie de Cyril Rives à Quissac.',
   schema: [crumbsLd([['Accueil', '/'], ['Savoir-faire', '/metiers/']])],
   body: pageHero({ kicker: 'Savoir-faire', h1: `${METIERS.length} métiers, une même exigence.`, lead: 'Chaque métier a ses règles. Voici ce que nous réalisons pour les particuliers du Gard.', crumbItems: [['Accueil', '/'], ['Savoir-faire', '/metiers/']], img: '/assets/realisations/plancher-beton.jpg', cap: ['Plancher béton', 'Rénovation d’une maison de village'] })
-    + `<section class="section"><div class="wrap">${indexList(METIERS)}</div></section>` + cta()
+    + `<section class="section"><div class="wrap">${indexList(METIERS)}</div></section>` + cercle() + cta()
 });
 
 for (const m of METIERS) {
@@ -305,7 +340,7 @@ for (const m of METIERS) {
   const villes = COMMUNES.filter(c => c.focus.includes(m.slug));
   const art = ARTICLES.filter(a => a.metier === m.slug);
   const items = [['Accueil', '/'], ['Savoir-faire', '/metiers/'], [m.nom, `/metiers/${m.slug}/`]];
-  const HEROS = { 'renovation': 'voute-pierre-2', 'salles-de-bain': 'sdb-verte', 'toitures-genoises': 'toiture-apres', 'terrasses-exterieurs': 'opus-escaliers-maison', 'construction-extension': 'bassin', 'murs-clotures': 'murs-rue', 'enduits-facades': 'mas-pierre-2' };
+  const HEROS = { 'renovation': 'voute-pierre-2', 'salles-de-bain': 'sdb-verte', 'toitures-genoises': 'toiture-apres', 'terrasses-exterieurs': 'opus-escaliers-maison', 'piscines': 'piscine-travertin-2', 'construction-extension': 'bassin', 'murs-clotures': 'murs-rue', 'enduits-facades': 'mas-pierre-2' };
   const img = HEROS[m.slug] ? `/assets/photos/${HEROS[m.slug]}.jpg` : realPhoto(m.slug, 0);
   add(`/metiers/${m.slug}/`, {
     title: m.metaTitle, desc: m.metaDesc,
@@ -317,13 +352,21 @@ for (const m of METIERS) {
 </div></section>
 <section class="section paper"><div class="wrap"><div class="head"><div><span class="eyebrow">Nos engagements</span><h2>Ce qui fait la différence.</h2></div></div>
   <div class="points">${m.points.map(p => `<div class="point reveal"><h3>${esc(p.titre)}</h3><p>${esc(p.texte)}</p></div>`).join('')}</div></div></section>
-${reals.length ? `<section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Réalisations</span><h2>Quelques chantiers.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>${worksGrid(reals.slice(0, 3))}</div></section>` : ''}
+${m.slug === 'piscines' ? `<section class="section dark on-dark"><div class="wrap"><div class="head"><div><span class="eyebrow">Étape par étape</span><h2>De l'idée <em>à la mise en eau.</em></h2></div></div>
+  <div class="steps">
+    <div class="step reveal"><h3>Le projet</h3><p>Visite sur place, dessin du bassin avec vous, devis détaillé et démarches en mairie.</p></div>
+    <div class="step reveal"><h3>Le gros œuvre</h3><p>Implantation, terrassement, ferraillage et béton : la structure du bassin.</p></div>
+    <div class="step reveal"><h3>Les équipements</h3><p>Filtration, électricité, revêtement : posés par nos artisans partenaires, coordonnés par nous.</p></div>
+    <div class="step reveal"><h3>Les abords</h3><p>Margelles, plage, local technique ou pool-house, puis la mise en eau.</p></div>
+  </div></div></section>
+` : ''}${reals.length ? `<section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Réalisations</span><h2>Quelques chantiers.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>${worksGrid(reals.slice(0, 3))}</div></section>` : ''}
 <section class="section${reals.length ? ' paper' : ''}"><div class="wrap split" style="align-items:start">
   <div class="reveal"><span class="eyebrow">Questions fréquentes</span><h2>Vous vous demandez…</h2>
     ${villes.length ? `<p class="lead" style="margin-top:16px">Nous le faisons souvent à ${villes.map(c => `<a href="/zone-intervention/${c.slug}/">${esc(c.nom)}</a>`).join(', ')}.</p>` : ''}
     ${art.map(a => `<p style="margin-top:24px"><a class="link" href="/conseils/${a.slug}/">À lire : ${esc(a.titre)} ${I.arrow}</a></p>`).join('')}</div>
   <div class="faq reveal">${m.faq.map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.r)}</p></details>`).join('')}</div>
 </div></section>
+${['renovation', 'salles-de-bain', 'piscines', 'construction-extension'].includes(m.slug) ? cercle(reals.length ? '' : 'paper') : ''}
 <section class="section dark on-dark"><div class="wrap"><div class="head"><div><span class="eyebrow">Aussi</span><h2>Nos autres métiers.</h2></div></div>${indexList(METIERS.filter(x => x.slug !== m.slug))}</div></section>
 ${cta(`Votre projet : <em>${esc(m.court.toLowerCase())}</em> ?`)}`
   });
@@ -424,7 +467,8 @@ add('/a-propos/', {
   <div class="txt reveal">
     <p>CRM Maçonnerie Générale a été fondée à ${esc(S.adresse.ville)} par Cyril Rives. Notre terrain, c'est la maçonnerie au sens large : couler un plancher béton, remplacer une poutre de sept mètres, refaire une toiture après un incendie, puis poser une faïence en chevrons au millimètre.</p>
     <p>Cette polyvalence, construite en plus de dix ans de métier, est rare. C'est ce qui fait la différence pour vous : un seul interlocuteur pour tout le chantier, et une entreprise qui garde la main sur le résultat, du gros œuvre aux finitions.</p>
-    <p>CRM est une entreprise artisanale à taille humaine, inscrite à la Chambre de métiers et de l'artisanat. Celui qui vous répond au téléphone est celui qui réalise vos travaux.</p>
+    <p>CRM est une entreprise artisanale à taille humaine, inscrite à la Chambre de métiers et de l'artisanat. Celui qui vous répond au téléphone est celui qui réalise vos travaux. Pour la plomberie, l'électricité ou la menuiserie, nous travaillons avec un cercle d'artisans qualifiés que nous connaissons bien, et nous restons votre seul interlocuteur.</p>
+    <p>Et il y a la piscine : le chantier que nous préférons. Dessiner un bassin pour un terrain, le construire, puis le voir se remplir, c'est ce qui nous plaît le plus dans ce métier. <a href="/metiers/piscines/">Voir nos piscines</a>.</p>
     <p class="notice">À compléter avec Cyril : son parcours, ses débuts dans le métier, l'année de création de CRM, ce qu'il préfère dans son travail. Quelques phrases dans ses mots suffisent.</p>
     <div class="sig">Cyril Rives<small>Fondateur de CRM Maçonnerie Générale</small></div>
   </div>
@@ -447,7 +491,7 @@ add('/a-propos/', {
 
 <section class="section"><div class="wrap"><div class="head"><div><span class="eyebrow">Nos engagements</span><h2>Ce que vous pouvez attendre de nous.</h2></div></div>
   <div class="points g4">
-    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Celui qui chiffre votre projet est celui qui le réalise. Pas d'intermédiaire, pas de sous-traitance.</p></div>
+    <div class="point reveal"><h3>Un seul interlocuteur</h3><p>Celui qui chiffre votre projet est celui qui le réalise, et qui coordonne nos artisans partenaires pour les autres corps de métier.</p></div>
     <div class="point reveal"><h3>Des devis clairs</h3><p>Poste par poste, sans ligne floue ni supplément surprise.</p></div>
     <div class="point reveal"><h3>Assuré et déclaré</h3><p>Assurance décennale et responsabilité civile professionnelle.</p></div>
     <div class="point reveal"><h3>Le respect des lieux</h3><p>Abords protégés, chantier rangé, gravats évacués.</p></div>
