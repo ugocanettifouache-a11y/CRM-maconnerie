@@ -20,5 +20,5 @@ jobs:
         run: |
           git config user.name "crm-bot"
           git config user.email "bot@crm-maconnerie.fr"
-          git add data/journal.json src/assets/journal
+          git add data/journal.json; if [ -d src/assets/journal ]; then git add src/assets/journal; fi
           if ! git diff --cached --quiet; then git commit -m "Journal de chantier : synchro Facebook" && git push; fi
