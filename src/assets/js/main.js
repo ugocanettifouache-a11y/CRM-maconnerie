@@ -155,6 +155,25 @@
     inp.addEventListener('blur', () => setTimeout(close, 150));
   });
 
+  // Carte du secteur (OpenStreetMap via Leaflet) : cercle de 50 km + communes cliquables
+  const zm = document.getElementById('zone-map');
+  const initMap = () => {
+    if (!zm || !window.L || zm.dataset.ok) return; zm.dataset.ok = 1;
+    const base = JSON.parse(zm.dataset.base), R = +zm.dataset.r * 1000, pts = JSON.parse(zm.dataset.points);
+    const map = L.map(zm, { scrollWheelZoom: false, zoomSnap: .25 });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+    const dLa = R / 111320, dLo = R / (111320 * Math.cos(base[0] * Math.PI / 180));
+    map.fitBounds([[base[0] - dLa, base[1] - dLo], [base[0] + dLa, base[1] + dLo]], { padding: [10, 10] });
+    L.circle(base, { radius: R, color: '#841536', weight: 2, fillColor: '#841536', fillOpacity: .07 }).addTo(map);
+    pts.forEach(p => {
+      const m = L.circleMarker(p.p, { radius: p.b ? 10 : 7, color: '#fff', weight: 2.5, fillColor: p.b ? '#0B0B0C' : '#841536', fillOpacity: 1 }).addTo(map);
+      m.bindTooltip(p.b ? 'Quissac · notre base' : p.n, { direction: 'top', offset: [0, -8], className: 'ztip' + (p.b ? ' base' : ''), permanent: !!p.b });
+      m.bindPopup(`<b>${p.n}</b>${p.b ? 'Notre base' : `À environ ${p.k} km de Quissac`}<br><a href="${p.u}">Voir la page →</a>`);
+    });
+    zm.addEventListener('click', () => map.scrollWheelZoom.enable(), { once: true });
+  };
+  if (zm) { if (window.L) initMap(); else addEventListener('load', initMap); }
+
   // Formulaire de devis
   const form = document.getElementById('devis');
   if (form) form.addEventListener('submit', async e => {

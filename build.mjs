@@ -83,20 +83,10 @@ const zoneCheck = (id, label = 'Votre commune est-elle dans notre secteur ?') =>
   <ul class="zc-sugg" id="${id}-l" role="listbox" hidden></ul>
   <p class="zc-res" aria-live="polite"></p>
 </form>`;
-const zoneMap = () => {
-  const K = 6, C0 = 320, cosL = Math.cos(BASE.lat * Math.PI / 180);
-  const P = c => [C0 + (c.lng - BASE.lng) * cosL * 111.32 * K, C0 - (c.lat - BASE.lat) * 110.57 * K];
-  const lab = (c, x, y) => { const s = c.label || 'r';
-    const o = { r: [x + 11, y + 4, 'start'], l: [x - 11, y + 4, 'end'], t: [x, y - 11, 'middle'], b: [x, y + 20, 'middle'] }[s];
-    return `<text x="${o[0].toFixed(1)}" y="${o[1].toFixed(1)}" text-anchor="${o[2]}">${esc(c.nom)}</text>`; };
-  return `<figure class="zmap"><svg viewBox="0 0 640 640" role="img" aria-label="Carte de notre secteur : ${S.rayonKm} km autour de Quissac">
-  <circle class="ring r50" cx="${C0}" cy="${C0}" r="${S.rayonKm * K}"/><circle class="ring" cx="${C0}" cy="${C0}" r="${25 * K}"/><circle class="ring" cx="${C0}" cy="${C0}" r="${10 * K}"/>
-  <text class="rl" x="${C0}" y="${C0 - S.rayonKm * K - 10}" text-anchor="middle">${S.rayonKm} km</text><text class="rl" x="${C0}" y="${C0 - 25 * K - 8}" text-anchor="middle">25 km</text>
-  <g class="nord" transform="translate(600 48)"><path d="M0 -18 L7 6 L0 1 L-7 6 Z"/><text y="24" text-anchor="middle">N</text></g>
-  ${COMMUNES.map(c => { const [x, y] = P(c), base = c.slug === 'macon-quissac';
-    return `<a href="/zone-intervention/${c.slug}/" class="pin${base ? ' base' : ''}"><title>${esc(c.nom)} · ${base ? 'notre base' : `≈ ${c.km} km`}</title><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${base ? 9 : 6}"/>${lab(c, x, y)}</a>`; }).join('')}
-  </svg><figcaption>Distances à vol d'oiseau depuis Quissac. Votre commune n'apparaît pas ? Si elle est dans le cercle, nous venons.</figcaption></figure>`;
-};
+const zoneMap = () => `<link rel="stylesheet" href="/assets/vendor/leaflet/leaflet.css">
+<figure class="lmap-fig"><div class="lmap" id="zone-map" role="region" aria-label="Carte du secteur : ${S.rayonKm} km autour de Quissac" data-base='${JSON.stringify([BASE.lat, BASE.lng])}' data-r="${S.rayonKm}" data-points='${esc(JSON.stringify(COMMUNES.map(c => ({ n: c.nom, u: `/zone-intervention/${c.slug}/`, p: [c.lat, c.lng], k: c.km, b: c.slug === 'macon-quissac' }))))}'></div>
+<figcaption>Le cercle montre nos ${S.rayonKm} km autour de Quissac. Cliquez sur une commune pour voir sa page.</figcaption></figure>
+<script src="/assets/vendor/leaflet/leaflet.js" defer></script>`;
 
 function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false, overlay = false }) {
   body = withSrcset(body);
