@@ -208,7 +208,7 @@ const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', ma
 
 // ---------- Blocs ----------
 const crumbs = items => `<nav class="crumbs" aria-label="Fil d'Ariane">${items.map(([n, p], i) => i < items.length - 1 ? `<a href="${p}">${esc(n)}</a> / ` : `<span aria-current="page">${esc(n)}</span>`).join('')}</nav>`;
-const pageHero = ({ kicker, h1, lead, crumbItems, btns = true, img, cap, bg }) => `<section class="page-hero on-dark${img ? ' has-ph' : ''}${bg ? ' has-bg' : ''}">${bg ? `<div class="ph-bg" aria-hidden="true"><img src="${bg.src}" srcset="${bg.src.replace('.jpg', '-1000.jpg')} 1000w, ${bg.src} 1920w" sizes="100vw" alt="" width="1920" height="1280" fetchpriority="high"></div>` : ''}<div class="t">
+const pageHero = ({ kicker, h1, lead, crumbItems, btns = true, img, cap, bg, wall }) => `<section class="page-hero on-dark${img ? ' has-ph' : ''}${bg ? ' has-bg' : ''}${wall ? ' zone-hero' : ''}">${wall || ''}${bg ? `<div class="ph-bg" aria-hidden="true"><img src="${bg.src}" srcset="${bg.src.replace('.jpg', '-1000.jpg')} 1000w, ${bg.src} 1920w" sizes="100vw" alt="" width="1920" height="1280" fetchpriority="high"></div>` : ''}<div class="t">
   ${crumbItems ? crumbs(crumbItems) : ''}<div><span class="eyebrow">${kicker}</span></div><h1>${h1}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}
   ${btns ? `<div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis gratuit</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>` : ''}
 </div>${img ? `<div class="ph"><img src="${img}" alt="" width="800" height="900" fetchpriority="high">${cap ? `<span class="ph-cap"><b>${esc(cap[0])}</b>${esc(cap[1] || '')}</span>` : ''}</div>` : ''}${bg && bg.credit ? `<p class="ph-credit">${bg.credit}</p>` : ''}</section>`;
@@ -271,6 +271,14 @@ const avisBloc = () => !AVIS.avis.length ? '' : `<section class="section avis"><
 </div></section>`;
 
 const credit = p => p ? `${esc(p.sujet)} · Photo ${esc(p.auteur)}, ${p.licenceUrl ? `<a href="${p.licenceUrl}" rel="noopener license" target="_blank">${esc(p.licence)}</a>` : esc(p.licence)}, via <a href="${p.source}" rel="noopener" target="_blank">Wikimedia Commons</a>` : '';
+
+// ---------- Mur de villages (en-tête de la page Zone d'intervention) ----------
+const villageWall = () => {
+  const withPh = COMMUNES.filter(c => c.photo);
+  const cols = [[], [], []]; withPh.forEach((c, i) => cols[i % 3].push(c));
+  const tile = (c, dup) => `<a class="ztile" href="/zone-intervention/${c.slug}/"${dup ? ' tabindex="-1" aria-hidden="true"' : ''}><img src="${c.photo.src.replace('.jpg', '-600.jpg')}" alt="${dup ? '' : esc(c.nom)}" loading="${dup ? 'lazy' : 'eager'}" width="600" height="750"><span><b>${esc(c.nom)}</b>${c.slug === 'macon-quissac' ? 'Notre base' : `${c.km} km`}</span></a>`;
+  return `<div class="zwall"><div class="zwall-in">${cols.map((col, i) => `<div class="zcol${i === 1 ? ' up' : ''}" style="--dur:${[64, 76, 58][i]}s">${col.map(c => tile(c, false)).join('')}${col.map(c => tile(c, true)).join('')}</div>`).join('')}</div></div>`;
+};
 
 // ---------- Accueil ----------
 const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
@@ -475,7 +483,7 @@ add('/zone-intervention/', {
   title: "Zone d'intervention : maçon autour de Quissac, du Vidourle aux Cévennes | CRM Maçonnerie",
   desc: `CRM Maçonnerie intervient dans un rayon de ${S.rayonKm} km autour de Quissac : ${COMMUNES.slice(0, 10).map(c => c.nom).join(', ')}… Vérifiez si votre commune est dans le secteur.`,
   schema: [crumbsLd([['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']])],
-  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basés à ${S.adresse.ville}, nous intervenons dans un rayon de ${S.rayonKm} km : de Nîmes à Alès, de Sommières à Ganges.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
+  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basés à ${S.adresse.ville}, nous intervenons dans un rayon de ${S.rayonKm}&nbsp;km : de Nîmes à Alès, de Sommières à Ganges.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']], wall: villageWall() })
     + `<section class="section zone"><div class="wrap zone-grid">
   <div class="zone-l">
     <div class="zone-check reveal">${zoneCheck('zc-page')}</div>

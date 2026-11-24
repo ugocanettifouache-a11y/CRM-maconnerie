@@ -608,3 +608,29 @@ p{margin:0 0 1em}
 .ph-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 @media (max-width:760px){.page-hero.has-bg::before{background:linear-gradient(180deg,rgba(11,11,12,.72),rgba(11,11,12,.8))}.ph-credit{left:var(--gut);text-align:left}.page-hero.has-bg .t{padding-bottom:64px}}
 @media (prefers-reduced-motion:reduce){.page-hero.has-bg .ph-bg img{animation:none}}
+
+/* Zone d'intervention : mur de villages qui défile */
+.page-hero.zone-hero{position:relative;isolation:isolate;overflow:hidden;min-height:min(86vh,820px);align-content:center}
+.zone-hero .t{position:relative;z-index:2;padding-right:max(var(--gut),52%)}
+.zone-hero .lead{max-width:30rem}
+.zwall{position:absolute;top:0;bottom:0;right:0;width:62%;z-index:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 22%,#000 44%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.6) 22%,#000 44%)}
+.zwall-in{position:absolute;top:-30%;bottom:-30%;left:4%;right:-12%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;transform:rotate(-7deg)}
+.zcol{display:flex;flex-direction:column;animation:zscroll var(--dur,60s) linear infinite;will-change:transform}
+.zcol.up{animation-direction:reverse}
+@keyframes zscroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.zwall:hover .zcol{animation-play-state:paused}
+.ztile{position:relative;display:block;margin-bottom:16px;aspect-ratio:4/5;overflow:hidden;background:#1b1b1b;text-decoration:none}
+.ztile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78) saturate(.9);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .4s}
+.ztile span{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 14px;background:linear-gradient(0deg,rgba(11,11,12,.85),transparent);color:#CFC8BD;font-size:.78rem;font-weight:600;letter-spacing:.04em}
+.ztile span b{display:block;font:500 1.35rem/1.15 var(--serif);letter-spacing:0;color:#fff}
+.ztile:hover img{transform:scale(1.06);filter:brightness(1) saturate(1)}
+.ztile:hover span b{color:#fff}
+.ztile::after{content:"";position:absolute;inset:0;border:2px solid var(--bdx);opacity:0;transition:opacity .3s}
+.ztile:hover::after{opacity:1}
+@media (max-width:900px){
+  .zone-hero .t{padding-right:var(--gut)}
+  .zwall{width:100%;opacity:.3;-webkit-mask-image:none;mask-image:none;pointer-events:none}
+  .ztile span{display:none}
+  .zwall-in{left:-10%;right:-10%}
+}
+@media (prefers-reduced-motion:reduce){.zcol{animation:none}}
