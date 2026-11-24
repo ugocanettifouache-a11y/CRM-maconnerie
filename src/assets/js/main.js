@@ -118,7 +118,8 @@
     const km = (la, lo) => { const r = Math.PI / 180, a = Math.sin((la - B.lat) * r / 2) ** 2 + Math.cos(B.lat * r) * Math.cos(la * r) * Math.sin((lo - B.lng) * r / 2) ** 2; return Math.round(12742 * Math.asin(Math.sqrt(a))); };
     let list = [], sel = -1, timer, ctrl;
     const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-']/g, ' ').trim();
-    const rank = (c, q) => norm(c.nom) === norm(q) ? 0 : norm(c.nom).startsWith(norm(q)) && km(c.lat, c.lng) <= R + 15 ? 1 : 2;
+    const rank = (c, q) => { const n = norm(c.nom), m = norm(q), near = km(c.lat, c.lng) <= R + 15;
+      return n === m && near ? 0 : n.startsWith(m) && near ? 1 : n === m ? 2 : 3; };
     const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
     const close = () => { ul.hidden = true; sel = -1; inp.setAttribute('aria-expanded', 'false'); };
     const show = c => {
