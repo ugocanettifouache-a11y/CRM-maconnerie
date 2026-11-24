@@ -19,7 +19,15 @@
     "lat": 43.9213,
     "lng": 3.9985,
     "label": "b",
-    "groupe": "Autour de Quissac"
+    "groupe": "Autour de Quissac",
+    "photo": {
+      "src": "/assets/villes/macon-quissac.jpg",
+      "sujet": "Le pont sur le Vidourle",
+      "auteur": "Daniel Villafruela",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Quissac-Pont_sur_le_Vidourle-20190321.jpg"
+    }
   },
   {
     "slug": "macon-sauve",
@@ -40,7 +48,15 @@
     "lat": 43.9354,
     "lng": 3.9626,
     "label": "l",
-    "groupe": "Autour de Quissac"
+    "groupe": "Autour de Quissac",
+    "photo": {
+      "src": "/assets/villes/macon-sauve.jpg",
+      "sujet": "Le village au bord du Vidourle",
+      "auteur": "Thérèse Gaigé",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Le_Vidourle_%C3%A0_Sauve_(Gard)_-_01.jpg"
+    }
   },
   {
     "slug": "macon-sommieres",
@@ -61,7 +77,15 @@
     "lat": 43.7706,
     "lng": 4.0812,
     "label": "l",
-    "groupe": "Vers Nîmes"
+    "groupe": "Vers Nîmes",
+    "photo": {
+      "src": "/assets/villes/macon-sommieres.jpg",
+      "sujet": "Le pont romain",
+      "auteur": "EmDee",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Pont_romain_de_Sommi%C3%A8res_(Pont_Tib%C3%A8re)_-_01.JPG"
+    }
   },
   {
     "slug": "macon-ledignan",
@@ -82,7 +106,15 @@
     "lat": 43.9884,
     "lng": 4.1112,
     "label": "r",
-    "groupe": "Autour de Quissac"
+    "groupe": "Autour de Quissac",
+    "photo": {
+      "src": "/assets/villes/macon-ledignan.jpg",
+      "sujet": "La Grand-Rue",
+      "auteur": "Sapin88",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:L%C3%A9dignan_Grand_Rue.jpg"
+    }
   },
   {
     "slug": "macon-saint-hippolyte-du-fort",
@@ -103,7 +135,15 @@
     "lat": 43.9514,
     "lng": 3.8544,
     "label": "t",
-    "groupe": "Autour de Quissac"
+    "groupe": "Autour de Quissac",
+    "photo": {
+      "src": "/assets/villes/macon-saint-hippolyte-du-fort.jpg",
+      "sujet": "Vue depuis le Cengle",
+      "auteur": "Anthony Morel",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Saint-Hippolyte-du-Fort_(vue_du_Cengle).jpg"
+    }
   },
   {
     "slug": "macon-saint-mamert-du-gard",
@@ -124,7 +164,15 @@
     "lat": 43.8835,
     "lng": 4.1763,
     "label": "r",
-    "groupe": "Vers Nîmes"
+    "groupe": "Vers Nîmes",
+    "photo": {
+      "src": "/assets/villes/macon-saint-mamert-du-gard.jpg",
+      "sujet": "La mairie",
+      "auteur": "Chabe01",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Mairie_St_Mamert_3.jpg"
+    }
   },
   {
     "slug": "macon-anduze",
@@ -145,7 +193,15 @@
     "lat": 44.054,
     "lng": 3.9766,
     "label": "r",
-    "groupe": "Vers les Cévennes"
+    "groupe": "Vers les Cévennes",
+    "photo": {
+      "src": "/assets/villes/macon-anduze.jpg",
+      "sujet": "Le bourg au pied des Cévennes",
+      "auteur": "Szeder László",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:FR-30-Anduze1.JPG"
+    }
   },
   {
     "slug": "macon-ales",
@@ -166,7 +222,15 @@
     "lat": 44.125,
     "lng": 4.0905,
     "label": "r",
-    "groupe": "Vers Alès"
+    "groupe": "Vers Alès",
+    "photo": {
+      "src": "/assets/villes/macon-ales.jpg",
+      "sujet": "Le centre et le Gardon",
+      "auteur": "Vpe",
+      "licence": "Domaine public",
+      "licenceUrl": "",
+      "source": "https://commons.wikimedia.org/wiki/File:Centre_al%C3%A8s.JPG"
+    }
   },
   {
     "slug": "macon-nimes",
@@ -187,7 +251,15 @@
     "lat": 43.8322,
     "lng": 4.3429,
     "label": "r",
-    "groupe": "Vers Nîmes"
+    "groupe": "Vers Nîmes",
+    "photo": {
+      "src": "/assets/villes/macon-nimes.jpg",
+      "sujet": "Les arènes",
+      "auteur": "Krzysztof Golik",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Arenes_de_Nimes_(15).jpg"
+    }
   },
   {
     "slug": "macon-ganges",
@@ -208,7 +280,15 @@
     "lat": 43.9448,
     "lng": 3.7039,
     "label": "b",
-    "groupe": "Vers les Cévennes"
+    "groupe": "Vers les Cévennes",
+    "photo": {
+      "src": "/assets/villes/macon-ganges.jpg",
+      "sujet": "L'Hérault au crépuscule",
+      "auteur": "Giorgio Galeotti",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:H%C3%A9rault_river_at_twilight_-_Ganges,_France_-_July_13,_2024_03.jpg"
+    }
   },
   {
     "slug": "macon-calvisson",
@@ -229,7 +309,15 @@
     "lat": 43.7853,
     "lng": 4.189,
     "label": "r",
-    "groupe": "Vers Nîmes"
+    "groupe": "Vers Nîmes",
+    "photo": {
+      "src": "/assets/villes/macon-calvisson.jpg",
+      "sujet": "Un moulin du Roc de Gachone",
+      "auteur": "EmDee",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Calvisson_-_Roc_de_Gachone_-_Moulin_pointu_01.JPG"
+    }
   },
   {
     "slug": "macon-vezenobres",
@@ -250,7 +338,15 @@
     "lat": 44.052,
     "lng": 4.1368,
     "label": "r",
-    "groupe": "Vers Alès"
+    "groupe": "Vers Alès",
+    "photo": {
+      "src": "/assets/villes/macon-vezenobres.jpg",
+      "sujet": "Le village perché",
+      "auteur": "Poppy",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:V%C3%A9z%C3%A9nobres_5.jpg"
+    }
   },
   {
     "slug": "macon-claret",
@@ -271,7 +367,15 @@
     "lat": 43.8554,
     "lng": 3.8764,
     "label": "l",
-    "groupe": "Autour de Quissac"
+    "groupe": "Autour de Quissac",
+    "photo": {
+      "src": "/assets/villes/macon-claret.jpg",
+      "sujet": "La fontaine du village",
+      "auteur": "Daniel Villafruela",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Claret-Fontaine-20160615.jpg"
+    }
   },
   {
     "slug": "macon-saint-jean-du-gard",
@@ -292,6 +396,14 @@
     "lat": 44.1098,
     "lng": 3.8796,
     "label": "l",
-    "groupe": "Vers les Cévennes"
+    "groupe": "Vers les Cévennes",
+    "photo": {
+      "src": "/assets/villes/macon-saint-jean-du-gard.jpg",
+      "sujet": "La vallée vue de Saint-Roman",
+      "auteur": "Binnette",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Saint-Jean-du-Gard_-_Vue_de_Saint-Roman.jpg"
+    }
   }
 ]

@@ -208,10 +208,10 @@ const faqLd = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', ma
 
 // ---------- Blocs ----------
 const crumbs = items => `<nav class="crumbs" aria-label="Fil d'Ariane">${items.map(([n, p], i) => i < items.length - 1 ? `<a href="${p}">${esc(n)}</a> / ` : `<span aria-current="page">${esc(n)}</span>`).join('')}</nav>`;
-const pageHero = ({ kicker, h1, lead, crumbItems, btns = true, img, cap }) => `<section class="page-hero on-dark${img ? ' has-ph' : ''}"><div class="t">
+const pageHero = ({ kicker, h1, lead, crumbItems, btns = true, img, cap, bg }) => `<section class="page-hero on-dark${img ? ' has-ph' : ''}${bg ? ' has-bg' : ''}">${bg ? `<div class="ph-bg" aria-hidden="true"><img src="${bg.src}" srcset="${bg.src.replace('.jpg', '-1000.jpg')} 1000w, ${bg.src} 1920w" sizes="100vw" alt="" width="1920" height="1280" fetchpriority="high"></div>` : ''}<div class="t">
   ${crumbItems ? crumbs(crumbItems) : ''}<div><span class="eyebrow">${kicker}</span></div><h1>${h1}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}
   ${btns ? `<div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis gratuit</a><a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a></div>` : ''}
-</div>${img ? `<div class="ph"><img src="${img}" alt="" width="800" height="900" fetchpriority="high">${cap ? `<span class="ph-cap"><b>${esc(cap[0])}</b>${esc(cap[1] || '')}</span>` : ''}</div>` : ''}</section>`;
+</div>${img ? `<div class="ph"><img src="${img}" alt="" width="800" height="900" fetchpriority="high">${cap ? `<span class="ph-cap"><b>${esc(cap[0])}</b>${esc(cap[1] || '')}</span>` : ''}</div>` : ''}${bg && bg.credit ? `<p class="ph-credit">${bg.credit}</p>` : ''}</section>`;
 const cta = (titre = 'Parlons de votre <em>projet.</em>', texte = 'La visite et le devis sont gratuits, sans engagement. Nous vous rappelons sous 48 h.') => `<section class="cta on-dark"><div class="wrap">
   <div class="reveal"><h2>${titre}</h2><p class="lead">${texte}</p></div>
   <div class="side reveal"><a class="tel-big" href="tel:${S.telephoneLien}">${esc(S.telephone)}</a><div class="btns"><a class="btn btn-primary" href="/contact/">Demander un devis ${I.arrow}</a></div></div>
@@ -269,6 +269,8 @@ const avisBloc = () => !AVIS.avis.length ? '' : `<section class="section avis"><
   <div class="quotes">${AVIS.avis.slice(0, 6).map(a => `<figure class="quote reveal">${stars(a.note || 5)}<blockquote>« ${esc(a.texte)} »</blockquote><figcaption>${esc(a.auteur)}${a.date ? ` · ${esc(a.date)}` : ''}</figcaption></figure>`).join('')}</div>
   ${AVIS_URL ? `<div class="btns" style="margin-top:36px"><a class="btn btn-primary" href="${AVIS_URL}" rel="noopener" target="_blank">Laisser un avis</a></div>` : ''}
 </div></section>`;
+
+const credit = p => p ? `${esc(p.sujet)} · Photo ${esc(p.auteur)}, ${p.licenceUrl ? `<a href="${p.licenceUrl}" rel="noopener license" target="_blank">${esc(p.licence)}</a>` : esc(p.licence)}, via <a href="${p.source}" rel="noopener" target="_blank">Wikimedia Commons</a>` : '';
 
 // ---------- Accueil ----------
 const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
@@ -490,7 +492,7 @@ for (const c of COMMUNES) {
   const realsAny = reals.length ? reals : SHOWN.slice(0, 3);
   add(`/zone-intervention/${c.slug}/`, {
     title: c.metaTitle, desc: c.metaDesc, schema: [crumbsLd(items)],
-    body: pageHero({ kicker: `${c.nom} · ${c.cp}`, h1: `Votre maçon <em>à ${esc(c.nom)}.</em>`, lead: c.accroche, crumbItems: items }) + `
+    body: pageHero({ kicker: `${c.nom} · ${c.cp}`, h1: `Votre maçon <em>à ${esc(c.nom)}.</em>`, lead: c.accroche, crumbItems: items, bg: c.photo ? { src: c.photo.src, credit: credit(c.photo) } : null }) + `
 <section class="section"><div class="wrap split" style="align-items:start">
   <div class="reveal"><div class="eyebrow">Travaux à ${esc(c.nom)}</div>${c.texte.map(t => `<p class="lead" style="color:var(--ink)">${esc(t)}</p>`).join('')}
     <h3 style="margin-top:32px">Les demandes les plus fréquentes</h3>
@@ -635,7 +637,8 @@ add('/mentions-legales/', {
   <h2>Assurance professionnelle</h2><p>${esc(L.assuranceDecennale)}</p>
   <h2>Hébergement</h2><p>${esc(S.hebergeur)}</p>
   <h2>Conception et réalisation</h2><p>${esc(S.webmaster.nom)} — <a href="${S.webmaster.url}">${S.webmaster.url.replace('https://', '')}</a></p>
-  <h2>Propriété intellectuelle</h2><p>Les textes, photographies et le logo de ce site sont la propriété de ${esc(S.nom)}. Toute reproduction sans autorisation est interdite.</p>
+  <h2>Propriété intellectuelle</h2><p>Les textes, les photographies de chantier et le logo de ce site sont la propriété de ${esc(S.nom)}. Toute reproduction sans autorisation est interdite.</p>
+  <h2>Crédits photos des communes</h2><p>Les photos des pages consacrées aux communes proviennent de Wikimedia Commons, sous licence libre. Elles ont été recadrées et assombries pour la mise en page ; les versions modifiées restent sous la même licence.</p><ul>${COMMUNES.filter(c => c.photo).map(c => `<li>${esc(c.nom)} — ${credit(c.photo)}</li>`).join('')}</ul>
   <h2>Médiation de la consommation</h2><p>Conformément au Code de la consommation, le client peut recourir gratuitement à un médiateur de la consommation : ${esc(L.mediateur)}.</p>
 </div></section>`
 });

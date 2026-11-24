@@ -594,3 +594,17 @@ p{margin:0 0 1em}
   .mega .mega-cols a span{display:none}
   .mega .mega-all{position:static;margin-top:6px}
 }
+
+/* Héros des pages communes : photo du village en fond */
+.page-hero.has-bg{position:relative;isolation:isolate;overflow:hidden;min-height:min(76vh,720px);align-content:center}
+.page-hero.has-bg .ph-bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.page-hero.has-bg .ph-bg img{width:100%;height:100%;object-fit:cover;animation:kbz 16s cubic-bezier(.2,.6,.2,1) both}
+@keyframes kbz{from{transform:scale(1.14)}to{transform:scale(1.02)}}
+.page-hero.has-bg::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,12,.88) 0%,rgba(11,11,12,.72) 45%,rgba(11,11,12,.3) 100%),linear-gradient(0deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,0) 45%)}
+.page-hero.has-bg h1,.page-hero.has-bg .lead{text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.page-hero.has-bg h1 em{text-shadow:0 0 28px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.6)}
+.page-hero.has-bg .lead{color:#ECE6DC}
+.ph-credit{position:absolute;right:var(--gut);bottom:12px;margin:0;max-width:60ch;text-align:right;font-size:.7rem;line-height:1.4;color:rgba(255,255,255,.62)}
+.ph-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+@media (max-width:760px){.page-hero.has-bg::before{background:linear-gradient(180deg,rgba(11,11,12,.72),rgba(11,11,12,.8))}.ph-credit{left:var(--gut);text-align:left}.page-hero.has-bg .t{padding-bottom:64px}}
+@media (prefers-reduced-motion:reduce){.page-hero.has-bg .ph-bg img{animation:none}}
