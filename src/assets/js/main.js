@@ -117,6 +117,8 @@
     const B = { lat: +f.dataset.lat, lng: +f.dataset.lng }, R = +f.dataset.r, pages = JSON.parse(f.dataset.pages || '{}');
     const km = (la, lo) => { const r = Math.PI / 180, a = Math.sin((la - B.lat) * r / 2) ** 2 + Math.cos(B.lat * r) * Math.cos(la * r) * Math.sin((lo - B.lng) * r / 2) ** 2; return Math.round(12742 * Math.asin(Math.sqrt(a))); };
     let list = [], sel = -1, timer, ctrl;
+    const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-']/g, ' ').trim();
+    const rank = (c, q) => norm(c.nom) === norm(q) ? 0 : norm(c.nom).startsWith(norm(q)) && km(c.lat, c.lng) <= R + 15 ? 1 : 2;
     const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
     const close = () => { ul.hidden = true; sel = -1; inp.setAttribute('aria-expanded', 'false'); };
     const show = c => {
@@ -136,7 +138,7 @@
         const r = await fetch(`https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(q)}&codeRegion=76&fields=nom,centre,codesPostaux&boost=population&limit=8`, { signal: ctrl.signal });
         const data = await r.json();
         list = data.filter(c => c.centre).map(c => ({ nom: c.nom, cp: (c.codesPostaux || [''])[0], lat: c.centre.coordinates[1], lng: c.centre.coordinates[0] }))
-          .sort((a, b) => km(a.lat, a.lng) - km(b.lat, b.lng)).slice(0, 6);
+          .sort((a, b) => rank(a, q) - rank(b, q) || km(a.lat, a.lng) - km(b.lat, b.lng)).slice(0, 6);
         sel = -1; render();
         if (!list.length) { res.className = 'zc-res out'; res.textContent = 'Aucune commune trouvée. Vérifiez l’orthographe, ou appelez-nous.'; }
       } catch (e) { if (e.name !== 'AbortError') { res.className = 'zc-res out'; res.innerHTML = `Recherche indisponible pour le moment : appelez-nous au <a href="tel:${f.dataset.tel}">${f.dataset.telAff}</a>.`; } }
