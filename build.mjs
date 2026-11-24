@@ -69,6 +69,35 @@ const HERO = S.heroImage || photoFor(null, 0) || placeholder('terrasses-exterieu
 
 // ---------- Gabarit ----------
 const withSrcset = html => html.replace(/<img src="\/assets\/photos\/([a-z0-9-]+)\.jpg"/g, (m, n) => `<img src="/assets/photos/${n}.jpg" srcset="/assets/photos/${n}-800.jpg 800w, /assets/photos/${n}.jpg 1600w" sizes="(max-width: 900px) 100vw, 50vw"`);
+// ---------- Secteur : groupes, distances, vérificateur de commune, carte ----------
+const BASE = { lat: S.adresse.lat, lng: S.adresse.lng };
+const kmFrom = (lat, lng) => { const R = 6371, r = Math.PI / 180, dLa = (lat - BASE.lat) * r, dLo = (lng - BASE.lng) * r;
+  const a = Math.sin(dLa / 2) ** 2 + Math.cos(BASE.lat * r) * Math.cos(lat * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(a)); };
+COMMUNES.forEach(c => { c.km = Math.max(1, Math.round(kmFrom(c.lat, c.lng))); });
+const GROUPES = ['Autour de Quissac', 'Vers les Cévennes', 'Vers Alès', 'Vers Nîmes']
+  .map(g => ({ g, list: COMMUNES.filter(c => c.groupe === g).sort((a, b) => a.km - b.km) })).filter(x => x.list.length);
+const ZPAGES = JSON.stringify(Object.fromEntries(COMMUNES.map(c => [c.nom, `/zone-intervention/${c.slug}/`])));
+const zoneCheck = (id, label = 'Votre commune est-elle dans notre secteur ?') => `<form class="zcheck" role="search" autocomplete="off" data-lat="${BASE.lat}" data-lng="${BASE.lng}" data-r="${S.rayonKm}" data-tel="${S.telephoneLien}" data-tel-aff="${esc(S.telephone)}" data-pages='${esc(ZPAGES)}'>
+  <label for="${id}">${label}</label>
+  <div class="zc-field"><input id="${id}" type="text" inputmode="search" placeholder="Tapez votre commune…" aria-autocomplete="list" aria-controls="${id}-l"><button type="submit" aria-label="Vérifier">${I.arrow}</button></div>
+  <ul class="zc-sugg" id="${id}-l" role="listbox" hidden></ul>
+  <p class="zc-res" aria-live="polite"></p>
+</form>`;
+const zoneMap = () => {
+  const K = 6, C0 = 320, cosL = Math.cos(BASE.lat * Math.PI / 180);
+  const P = c => [C0 + (c.lng - BASE.lng) * cosL * 111.32 * K, C0 - (c.lat - BASE.lat) * 110.57 * K];
+  const lab = (c, x, y) => { const s = c.label || 'r';
+    const o = { r: [x + 11, y + 4, 'start'], l: [x - 11, y + 4, 'end'], t: [x, y - 11, 'middle'], b: [x, y + 20, 'middle'] }[s];
+    return `<text x="${o[0].toFixed(1)}" y="${o[1].toFixed(1)}" text-anchor="${o[2]}">${esc(c.nom)}</text>`; };
+  return `<figure class="zmap"><svg viewBox="0 0 640 640" role="img" aria-label="Carte de notre secteur : ${S.rayonKm} km autour de Quissac">
+  <circle class="ring r50" cx="${C0}" cy="${C0}" r="${S.rayonKm * K}"/><circle class="ring" cx="${C0}" cy="${C0}" r="${25 * K}"/><circle class="ring" cx="${C0}" cy="${C0}" r="${10 * K}"/>
+  <text class="rl" x="${C0}" y="${C0 - S.rayonKm * K - 10}" text-anchor="middle">${S.rayonKm} km</text><text class="rl" x="${C0}" y="${C0 - 25 * K - 8}" text-anchor="middle">25 km</text>
+  <g class="nord" transform="translate(600 48)"><path d="M0 -18 L7 6 L0 1 L-7 6 Z"/><text y="24" text-anchor="middle">N</text></g>
+  ${COMMUNES.map(c => { const [x, y] = P(c), base = c.slug === 'macon-quissac';
+    return `<a href="/zone-intervention/${c.slug}/" class="pin${base ? ' base' : ''}"><title>${esc(c.nom)} · ${base ? 'notre base' : `≈ ${c.km} km`}</title><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${base ? 9 : 6}"/>${lab(c, x, y)}</a>`; }).join('')}
+  </svg><figcaption>Distances à vol d'oiseau depuis Quissac. Votre commune n'apparaît pas ? Si elle est dans le cercle, nous venons.</figcaption></figure>`;
+};
+
 function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false, overlay = false }) {
   body = withSrcset(body);
   const url = S.url + path;
@@ -76,11 +105,16 @@ function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.
     ['/metiers/', 'Savoir-faire', METIERS.map(m => [`/metiers/${m.slug}/`, m.nom])],
     ['/realisations/', 'Réalisations'],
     ['/journal-de-chantier/', 'Journal'],
-    ['/zone-intervention/', 'Secteur', COMMUNES.map(c => [`/zone-intervention/${c.slug}/`, `Maçon à ${c.nom}`])],
+    ['/zone-intervention/', 'Secteur', 'MEGA'],
     ['/a-propos/', 'Qui sommes-nous'],
   ];
   const cur = h => (path === h || (h !== '/' && path.startsWith(h))) ? ' aria-current="page"' : '';
-  const navHtml = nav.map(([h, l, sub]) => sub
+  const mega = `<div class="has-sub has-mega"><a href="/zone-intervention/"${cur('/zone-intervention/')}>Secteur</a><div class="sub mega">
+    <div class="mega-intro"><span class="eyebrow">Notre secteur</span><p class="mega-big">${S.rayonKm} km <em>autour de Quissac.</em></p>${zoneCheck('zc-menu', 'Vous êtes dans le secteur ?')}</div>
+    <div class="mega-cols">${GROUPES.map(({ g, list }) => `<div><h5>${g}</h5>${list.map(c => `<a href="/zone-intervention/${c.slug}/">${esc(c.nom)}<span>${c.slug === 'macon-quissac' ? 'notre base' : `${c.km} km`}</span></a>`).join('')}</div>`).join('')}</div>
+    <a class="mega-all" href="/zone-intervention/">Voir la carte du secteur ${I.arrow}</a>
+  </div></div>`;
+  const navHtml = nav.map(([h, l, sub]) => sub === 'MEGA' ? mega : sub
     ? `<div class="has-sub"><a href="${h}"${cur(h)}>${l}</a><div class="sub">${sub.map(([sh, sl]) => `<a href="${sh}">${esc(sl)}</a>`).join('')}</div></div>`
     : `<a href="${h}"${cur(h)}>${l}</a>`).join('');
   const ld = [localBusiness(), ...schema].map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
@@ -143,7 +177,7 @@ function footer() {
         <p><a href="${S.facebook}" rel="noopener" target="_blank" style="display:inline-flex;gap:10px;align-items:center"><span style="width:18px;display:inline-flex">${I.fb}</span>Nos chantiers sur Facebook</a></p>
       </div>
       <div><h4>Métiers</h4><ul>${METIERS.map(m => `<li><a href="/metiers/${m.slug}/">${esc(m.nom)}</a></li>`).join('')}</ul></div>
-      <div><h4>Secteur</h4><ul>${COMMUNES.slice(0, 8).map(c => `<li><a href="/zone-intervention/${c.slug}/">Maçon à ${esc(c.nom)}</a></li>`).join('')}<li><a href="/zone-intervention/">Toute notre zone →</a></li></ul></div>
+      <div><h4>Secteur</h4><ul>${COMMUNES.slice(0, 8).map(c => `<li><a href="/zone-intervention/${c.slug}/">${esc(c.nom)}</a></li>`).join('')}<li><a href="/zone-intervention/">Toute notre zone →</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a href="tel:${S.telephoneLien}" style="font:500 1.3rem var(--serif);color:#fff">${esc(S.telephone)}</a></li>
         <li><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></li>
@@ -446,19 +480,21 @@ add('/journal-de-chantier/', {
 
 // ---------- Secteur ----------
 add('/zone-intervention/', {
-  title: "Zone d'intervention — maçon autour de Quissac | CRM Maçonnerie",
-  desc: `CRM Maçonnerie intervient à Quissac, Sauve, Sommières, Lédignan, Saint-Hippolyte-du-Fort, Saint-Mamert-du-Gard et dans un rayon de ${S.rayonKm} km.`,
+  title: "Zone d'intervention : maçon autour de Quissac, du Vidourle aux Cévennes | CRM Maçonnerie",
+  desc: `CRM Maçonnerie intervient dans un rayon de ${S.rayonKm} km autour de Quissac : ${COMMUNES.slice(0, 10).map(c => c.nom).join(', ')}… Vérifiez si votre commune est dans le secteur.`,
   schema: [crumbsLd([['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']])],
-  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basés à ${S.adresse.ville}, nous intervenons dans un rayon d'environ ${S.rayonKm} km.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
-    + `<section class="section"><div class="wrap split" style="align-items:start">
-  <div><div class="grid g2">${COMMUNES.map(c => `<a class="tile reveal" href="/zone-intervention/${c.slug}/"><span class="ico">${I.pin}</span><h3>Maçon à ${esc(c.nom)}</h3><p>${esc(c.accroche)}</p><span class="link">Voir ${I.arrow}</span></a>`).join('')}</div>
-  <p class="muted" style="margin-top:28px">Votre commune n'est pas dans la liste ? Nous intervenons jusqu'à ${S.rayonKm} km autour de Quissac, de Nîmes à Alès et jusqu'au nord de Montpellier : appelez-nous, nous nous déplaçons.</p></div>
-  <div class="reveal" style="position:sticky;top:110px">${mapFrame('3.30%2C43.50%2C4.70%2C44.32', "Carte du secteur d'intervention")}</div>
+  body: pageHero({ kicker: "Zone d'intervention", h1: 'Du Vidourle <em>aux Cévennes.</em>', lead: `Basés à ${S.adresse.ville}, nous intervenons dans un rayon de ${S.rayonKm} km : de Nîmes à Alès, de Sommières à Ganges.`, crumbItems: [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/']] })
+    + `<section class="section zone"><div class="wrap zone-grid">
+  <div class="zone-l">
+    <div class="zone-check reveal">${zoneCheck('zc-page')}</div>
+    ${GROUPES.map(({ g, list }) => `<div class="zgroup reveal"><h2 class="zg-t">${g}</h2><ul>${list.map(c => `<li><a href="/zone-intervention/${c.slug}/"><b>${esc(c.nom)}</b><span class="zg-a">${esc(c.accroche)}</span><span class="zg-k">${c.slug === 'macon-quissac' ? 'Notre base' : `${c.km} km`}</span>${I.arrow}</a></li>`).join('')}</ul></div>`).join('')}
+  </div>
+  <div class="zone-r reveal">${zoneMap()}</div>
 </div></section>` + cta()
 });
 
 for (const c of COMMUNES) {
-  const items = [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/'], [`Maçon à ${c.nom}`, `/zone-intervention/${c.slug}/`]];
+  const items = [['Accueil', '/'], ["Zone d'intervention", '/zone-intervention/'], [c.nom, `/zone-intervention/${c.slug}/`]];
   const fm = c.focus.map(s => M[s]);
   const reals = SHOWN.filter(r => r.lieu === c.nom).concat(SHOWN.filter(r => r.lieu !== c.nom && c.focus.includes(r.metier))).slice(0, 3);
   const realsAny = reals.length ? reals : SHOWN.slice(0, 3);

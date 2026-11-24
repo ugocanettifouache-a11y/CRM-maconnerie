@@ -15,7 +15,11 @@
       "renovation",
       "salles-de-bain",
       "terrasses-exterieurs"
-    ]
+    ],
+    "lat": 43.9213,
+    "lng": 3.9985,
+    "label": "b",
+    "groupe": "Autour de Quissac"
   },
   {
     "slug": "macon-sauve",
@@ -32,7 +36,11 @@
       "renovation",
       "enduits-facades",
       "murs-clotures"
-    ]
+    ],
+    "lat": 43.9354,
+    "lng": 3.9626,
+    "label": "l",
+    "groupe": "Autour de Quissac"
   },
   {
     "slug": "macon-sommieres",
@@ -49,7 +57,11 @@
       "enduits-facades",
       "terrasses-exterieurs",
       "murs-clotures"
-    ]
+    ],
+    "lat": 43.7706,
+    "lng": 4.0812,
+    "label": "l",
+    "groupe": "Vers Nîmes"
   },
   {
     "slug": "macon-ledignan",
@@ -66,7 +78,11 @@
       "construction-extension",
       "murs-clotures",
       "terrasses-exterieurs"
-    ]
+    ],
+    "lat": 43.9884,
+    "lng": 4.1112,
+    "label": "r",
+    "groupe": "Autour de Quissac"
   },
   {
     "slug": "macon-saint-hippolyte-du-fort",
@@ -83,7 +99,11 @@
       "toitures-genoises",
       "murs-clotures",
       "renovation"
-    ]
+    ],
+    "lat": 43.9514,
+    "lng": 3.8544,
+    "label": "t",
+    "groupe": "Autour de Quissac"
   },
   {
     "slug": "macon-saint-mamert-du-gard",
@@ -100,7 +120,11 @@
       "terrasses-exterieurs",
       "murs-clotures",
       "construction-extension"
-    ]
+    ],
+    "lat": 43.8835,
+    "lng": 4.1763,
+    "label": "r",
+    "groupe": "Vers Nîmes"
   },
   {
     "slug": "macon-anduze",
@@ -117,7 +141,11 @@
       "renovation",
       "murs-clotures",
       "enduits-facades"
-    ]
+    ],
+    "lat": 44.054,
+    "lng": 3.9766,
+    "label": "r",
+    "groupe": "Vers les Cévennes"
   },
   {
     "slug": "macon-ales",
@@ -134,7 +162,11 @@
       "renovation",
       "salles-de-bain",
       "construction-extension"
-    ]
+    ],
+    "lat": 44.125,
+    "lng": 4.0905,
+    "label": "r",
+    "groupe": "Vers Alès"
   },
   {
     "slug": "macon-nimes",
@@ -151,7 +183,11 @@
       "piscines",
       "terrasses-exterieurs",
       "murs-clotures"
-    ]
+    ],
+    "lat": 43.8322,
+    "lng": 4.3429,
+    "label": "r",
+    "groupe": "Vers Nîmes"
   },
   {
     "slug": "macon-ganges",
@@ -168,7 +204,11 @@
       "renovation",
       "enduits-facades",
       "murs-clotures"
-    ]
+    ],
+    "lat": 43.9448,
+    "lng": 3.7039,
+    "label": "b",
+    "groupe": "Vers les Cévennes"
   },
   {
     "slug": "macon-calvisson",
@@ -185,7 +225,11 @@
       "renovation",
       "piscines",
       "terrasses-exterieurs"
-    ]
+    ],
+    "lat": 43.7853,
+    "lng": 4.189,
+    "label": "r",
+    "groupe": "Vers Nîmes"
   },
   {
     "slug": "macon-vezenobres",
@@ -202,7 +246,11 @@
       "renovation",
       "enduits-facades",
       "terrasses-exterieurs"
-    ]
+    ],
+    "lat": 44.052,
+    "lng": 4.1368,
+    "label": "r",
+    "groupe": "Vers Alès"
   },
   {
     "slug": "macon-claret",
@@ -219,7 +267,11 @@
       "renovation",
       "salles-de-bain",
       "piscines"
-    ]
+    ],
+    "lat": 43.8554,
+    "lng": 3.8764,
+    "label": "l",
+    "groupe": "Autour de Quissac"
   },
   {
     "slug": "macon-saint-jean-du-gard",
@@ -236,6 +288,10 @@
       "renovation",
       "murs-clotures",
       "enduits-facades"
-    ]
+    ],
+    "lat": 44.1098,
+    "lng": 3.8796,
+    "label": "l",
+    "groupe": "Vers les Cévennes"
   }
 ]

@@ -111,6 +111,47 @@
     }));
   }
 
+  // Vérificateur : « votre commune est-elle dans notre secteur ? » (base adresse nationale, geo.api.gouv.fr)
+  document.querySelectorAll('.zcheck').forEach(f => {
+    const inp = f.querySelector('input'), ul = f.querySelector('.zc-sugg'), res = f.querySelector('.zc-res');
+    const B = { lat: +f.dataset.lat, lng: +f.dataset.lng }, R = +f.dataset.r, pages = JSON.parse(f.dataset.pages || '{}');
+    const km = (la, lo) => { const r = Math.PI / 180, a = Math.sin((la - B.lat) * r / 2) ** 2 + Math.cos(B.lat * r) * Math.cos(la * r) * Math.sin((lo - B.lng) * r / 2) ** 2; return Math.round(12742 * Math.asin(Math.sqrt(a))); };
+    let list = [], sel = -1, timer, ctrl;
+    const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+    const close = () => { ul.hidden = true; sel = -1; inp.setAttribute('aria-expanded', 'false'); };
+    const show = c => {
+      close(); inp.value = c.nom; const d = km(c.lat, c.lng), page = pages[c.nom];
+      const tel = `<a href="tel:${f.dataset.tel}">${f.dataset.telAff}</a>`;
+      if (d <= R) { res.className = 'zc-res ok'; res.innerHTML = `<b>Oui !</b> ${esc(c.nom)} est à environ ${d} km de Quissac : nous intervenons chez vous. ${page ? `<a href="${page}">Nos travaux à ${esc(c.nom)}</a> · ` : ''}<a href="/contact/">Demander un devis</a>`; }
+      else if (d <= R + 15) { res.className = 'zc-res lim'; res.innerHTML = `${esc(c.nom)} est à environ ${d} km, en limite de notre secteur. Appelez-nous au ${tel} : selon le projet, nous pouvons venir.`; }
+      else { res.className = 'zc-res out'; res.innerHTML = `${esc(c.nom)} est à environ ${d} km de Quissac, en dehors de notre secteur de ${R} km. Pour un projet important, appelez-nous quand même au ${tel}.`; }
+    };
+    const render = () => {
+      ul.innerHTML = list.map((c, i) => `<li role="option" aria-selected="${i === sel}" data-i="${i}">${esc(c.nom)}<span>${c.cp} · ${km(c.lat, c.lng)} km</span></li>`).join('');
+      ul.hidden = !list.length; inp.setAttribute('aria-expanded', String(!!list.length));
+    };
+    const search = async q => {
+      if (ctrl) ctrl.abort(); ctrl = new AbortController();
+      try {
+        const r = await fetch(`https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(q)}&codeRegion=76&fields=nom,centre,codesPostaux&boost=population&limit=8`, { signal: ctrl.signal });
+        const data = await r.json();
+        list = data.filter(c => c.centre).map(c => ({ nom: c.nom, cp: (c.codesPostaux || [''])[0], lat: c.centre.coordinates[1], lng: c.centre.coordinates[0] }))
+          .sort((a, b) => km(a.lat, a.lng) - km(b.lat, b.lng)).slice(0, 6);
+        sel = -1; render();
+        if (!list.length) { res.className = 'zc-res out'; res.textContent = 'Aucune commune trouvée. Vérifiez l’orthographe, ou appelez-nous.'; }
+      } catch (e) { if (e.name !== 'AbortError') { res.className = 'zc-res out'; res.innerHTML = `Recherche indisponible pour le moment : appelez-nous au <a href="tel:${f.dataset.tel}">${f.dataset.telAff}</a>.`; } }
+    };
+    inp.addEventListener('input', () => { clearTimeout(timer); res.className = 'zc-res'; res.textContent = ''; const q = inp.value.trim(); if (q.length < 2) { list = []; render(); return; } timer = setTimeout(() => search(q), 220); });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown' && list.length) { e.preventDefault(); sel = (sel + 1) % list.length; render(); }
+      else if (e.key === 'ArrowUp' && list.length) { e.preventDefault(); sel = (sel - 1 + list.length) % list.length; render(); }
+      else if (e.key === 'Escape') close();
+    });
+    ul.addEventListener('mousedown', e => { const li = e.target.closest('li'); if (li) { e.preventDefault(); show(list[+li.dataset.i]); } });
+    f.addEventListener('submit', async e => { e.preventDefault(); if (sel >= 0) return show(list[sel]); if (!list.length && inp.value.trim().length > 1) await search(inp.value.trim()); if (list.length) show(list[0]); });
+    inp.addEventListener('blur', () => setTimeout(close, 150));
+  });
+
   // Formulaire de devis
   const form = document.getElementById('devis');
   if (form) form.addEventListener('submit', async e => {
