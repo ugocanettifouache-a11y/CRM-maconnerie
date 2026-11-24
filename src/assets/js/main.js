@@ -37,11 +37,19 @@
   }
 
   // Apparition au défilement
-  const els = document.querySelectorAll('.reveal');
+  // Apparitions au défilement : titres qui se dévoilent, photos en rideau, grilles en cascade
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('main h2').forEach(h => { if (!h.closest('.hero, .page-hero, .cta')) h.classList.add('rv-h'); });
+    document.querySelectorAll('.w .ph, .story-ph, .pool-ph a, .strip a, .fig').forEach(p => p.classList.add('rv-img'));
+    document.querySelectorAll('.index, .works, .steps, .points, .trades, .strip, .towns, .journal, .quotes, .bax-list, .ticks, .stories').forEach(g =>
+      [...g.children].forEach((c, i) => { c.style.setProperty('--d', Math.min(i, 8) * 90 + 'ms'); if (!c.classList.contains('reveal') && !c.classList.contains('rv-img')) c.classList.add('rv-c'); }));
+  }
+  const els = document.querySelectorAll('.reveal, .rv-h, .rv-img, .rv-c');
+  const show = el => { el.classList.add('in'); if (el.classList.contains('rv-img')) setTimeout(() => el.classList.remove('rv-img', 'in'), 2200 + (parseInt(el.style.getPropertyValue('--d')) || 0)); };
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));
-  } else els.forEach(el => el.classList.add('in'));
+  } else els.forEach(show);
 
   // Filtres (réalisations, journal)
   document.querySelectorAll('[data-filters]').forEach(group => {
@@ -62,6 +70,46 @@
     const set = () => { a.style.clipPath = `inset(0 0 0 ${r.value}%)`; h.style.left = r.value + '%'; };
     r.addEventListener('input', set); set();
   });
+
+  // Avant / après géant : choix du chantier + balayage de démonstration à la première apparition
+  const bax = document.querySelector('.bax-ba');
+  if (bax) {
+    const range = bax.querySelector('input'), before = bax.querySelector('.bimg'), after = bax.querySelector('.after-img img');
+    const srcset = p => p.startsWith('/assets/photos/') ? `${p.replace('.jpg', '-800.jpg')} 800w, ${p} 1600w` : '';
+    const setV = v => { range.value = v; range.dispatchEvent(new Event('input')); };
+    let sweeping = false;
+    const sweep = () => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      sweeping = true; const t0 = performance.now(), D = 2400;
+      const keys = [50, 18, 82, 50];
+      const step = now => {
+        if (!sweeping) return;
+        const p = Math.min(1, (now - t0) / D), seg = Math.min(2, Math.floor(p * 3)), lp = p * 3 - seg;
+        const e = lp < .5 ? 2 * lp * lp : 1 - Math.pow(-2 * lp + 2, 2) / 2;
+        setV(keys[seg] + (keys[seg + 1] - keys[seg]) * e);
+        if (p < 1) requestAnimationFrame(step); else sweeping = false;
+      };
+      requestAnimationFrame(step);
+    };
+    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => range.addEventListener(ev, () => { sweeping = false; }, { passive: true }));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(sweep, 500); } }, { threshold: .55 });
+      io.observe(bax);
+    }
+    document.querySelectorAll('.bax-list button').forEach(btn => btn.addEventListener('click', () => {
+      if (btn.classList.contains('on')) return;
+      document.querySelectorAll('.bax-list button').forEach(x => { x.classList.toggle('on', x === btn); x.setAttribute('aria-pressed', x === btn); });
+      bax.classList.add('swap');
+      const pre = [new Image(), new Image()]; let n = 0;
+      const done = () => { if (++n < 2) return;
+        before.src = btn.dataset.avant; before.srcset = srcset(btn.dataset.avant); before.alt = 'Avant : ' + btn.dataset.titre;
+        after.src = btn.dataset.apres; after.srcset = srcset(btn.dataset.apres); after.alt = 'Après : ' + btn.dataset.titre;
+        setV(50); setTimeout(() => { bax.classList.remove('swap'); setTimeout(sweep, 350); }, 60);
+      };
+      pre[0].onload = pre[0].onerror = done; pre[1].onload = pre[1].onerror = done;
+      pre[0].src = btn.dataset.avant; pre[1].src = btn.dataset.apres;
+    }));
+  }
 
   // Formulaire de devis
   const form = document.getElementById('devis');

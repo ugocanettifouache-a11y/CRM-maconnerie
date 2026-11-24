@@ -101,5 +101,141 @@
       "murs-clotures",
       "construction-extension"
     ]
+  },
+  {
+    "slug": "macon-anduze",
+    "nom": "Anduze",
+    "cp": "30140",
+    "metaTitle": "Maçon à Anduze (30140) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Anduze : restauration de maisons en pierre, murs de soutènement, enduits à la chaux, salles de bain et terrasses. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Porte des Cévennes, Anduze mêle maisons de pierre, terrains en pente et jardins en terrasses.",
+    "texte": [
+      "Entre le vieux bourg, ses ruelles et les mas des alentours, les chantiers d'Anduze demandent de savoir travailler la pierre : reprise de murs, enduits à la chaux, rejointoiement, ouverture ou renfort de murs porteurs. Sur les terrains en pente, les murs de soutènement et les faïsses sont souvent à reprendre ou à créer.",
+      "Basés à Quissac, nous intervenons à Anduze et dans les villages voisins pour la rénovation de maisons anciennes comme pour les aménagements extérieurs : terrasses, escaliers, murs et piscines."
+    ],
+    "focus": [
+      "renovation",
+      "murs-clotures",
+      "enduits-facades"
+    ]
+  },
+  {
+    "slug": "macon-ales",
+    "nom": "Alès",
+    "cp": "30100",
+    "metaTitle": "Maçon à Alès (30100) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Alès : rénovation intérieure, salles de bain, extensions, terrasses et murs de clôture. Artisan basé à Quissac, visite et devis gratuits.",
+    "accroche": "Maisons de ville, villas des quartiers résidentiels : à Alès, les projets ne manquent pas.",
+    "texte": [
+      "À Alès, beaucoup de nos demandes concernent la rénovation de maisons de ville et de villas : ouverture de murs porteurs, création de salles de bain, reprise de planchers, agrandissements. À l'extérieur, terrasses, murs de clôture et plages de piscine viennent souvent compléter le projet.",
+      "Basés à Quissac, nous intervenons à Alès et dans son agglomération. Un seul interlocuteur du début à la fin, et nos artisans partenaires pour la plomberie ou l'électricité quand le chantier le demande."
+    ],
+    "focus": [
+      "renovation",
+      "salles-de-bain",
+      "construction-extension"
+    ]
+  },
+  {
+    "slug": "macon-nimes",
+    "nom": "Nîmes",
+    "cp": "30000",
+    "metaTitle": "Maçon à Nîmes (30000) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Nîmes et alentours : piscines maçonnées, terrasses, murs de clôture, extensions et rénovation de mazets. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Villas dans la garrigue, mazets en pierre, maisons de faubourg : chaque projet nîmois a son caractère.",
+    "texte": [
+      "Autour de Nîmes, les projets tournent souvent autour de la vie dehors : piscines maçonnées, plages, terrasses, murs de clôture et pool-houses. Les mazets en pierre de la garrigue nîmoise, eux, demandent une restauration respectueuse : murs, enduits à la chaux, toitures.",
+      "Basés à Quissac, nous intervenons à Nîmes et dans ses environs, dans notre rayon de 50 km. Nous venons voir sur place, nous chiffrons et nous réalisons le chantier nous-mêmes."
+    ],
+    "focus": [
+      "piscines",
+      "terrasses-exterieurs",
+      "murs-clotures"
+    ]
+  },
+  {
+    "slug": "macon-ganges",
+    "nom": "Ganges",
+    "cp": "34190",
+    "metaTitle": "Maçon à Ganges (34190) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Ganges et ses environs : rénovation de maisons anciennes, murs en pierre, enduits, terrasses et salles de bain. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Au bord de l'Hérault, Ganges garde un bâti ancien et des terrains en restanques qui demandent un vrai savoir-faire.",
+    "texte": [
+      "L'ancienne cité des bas de soie compte de nombreuses maisons de ville et de vieux mas, avec des murs en pierre à reprendre, des façades à enduire et des intérieurs à moderniser. Autour, les jardins en pente reposent sur des murs de soutènement qu'il faut entretenir ou reconstruire.",
+      "Basés à Quissac, nous intervenons à Ganges et dans la vallée de l'Hérault, pour la rénovation intérieure comme pour les travaux de façade et d'extérieur."
+    ],
+    "focus": [
+      "renovation",
+      "enduits-facades",
+      "murs-clotures"
+    ]
+  },
+  {
+    "slug": "macon-calvisson",
+    "nom": "Calvisson",
+    "cp": "30420",
+    "metaTitle": "Maçon à Calvisson (30420) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Calvisson et en Vaunage : rénovation de maisons de village, terrasses, piscines, murs et enduits. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Au cœur de la Vaunage, sous ses moulins, Calvisson allie maisons de village et villas au milieu des vignes.",
+    "texte": [
+      "Dans le vieux village, les chantiers touchent souvent au bâti ancien : murs en pierre, voûtes, enduits à la chaux, création de salles de bain. Dans les quartiers plus récents et les villages de la Vaunage, ce sont plutôt les terrasses, les murs de clôture et les piscines.",
+      "Basés à Quissac, nous intervenons à Calvisson et dans toute la Vaunage, avec le même soin du gros œuvre aux finitions."
+    ],
+    "focus": [
+      "renovation",
+      "piscines",
+      "terrasses-exterieurs"
+    ]
+  },
+  {
+    "slug": "macon-vezenobres",
+    "nom": "Vézénobres",
+    "cp": "30360",
+    "metaTitle": "Maçon à Vézénobres (30360) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Vézénobres : restauration de maisons en pierre, voûtes, enduits à la chaux, terrasses et murs. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Perché au-dessus du Gardon, le village médiéval de Vézénobres est un concentré de pierre et de ruelles.",
+    "texte": [
+      "Les maisons du vieux village demandent une maçonnerie respectueuse de l'ancien : reprise de voûtes, rejointoiement, enduits à la chaux, ouvertures dans des murs épais. En contrebas, les maisons plus récentes ont surtout besoin de terrasses, de murs et d'aménagements extérieurs.",
+      "Basés à Quissac, nous intervenons à Vézénobres et dans les villages voisins, de la restauration du bâti ancien jusqu'aux finitions."
+    ],
+    "focus": [
+      "renovation",
+      "enduits-facades",
+      "terrasses-exterieurs"
+    ]
+  },
+  {
+    "slug": "macon-claret",
+    "nom": "Claret",
+    "cp": "34270",
+    "metaTitle": "Maçon à Claret (34270) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Claret et ses environs : rénovation, salles de bain, terrasses, murs de clôture et piscines. Artisan basé à Quissac, à quelques minutes, devis gratuit.",
+    "accroche": "Juste de l'autre côté de la limite du Gard, Claret est presque notre voisin.",
+    "texte": [
+      "Entre garrigue et vignes, Claret et les villages alentour mêlent maisons anciennes et constructions plus récentes. Les demandes vont de la rénovation intérieure, avec salles de bain et ouvertures de murs, aux aménagements extérieurs : terrasses, murs de clôture, piscines.",
+      "Basés à Quissac, tout près, nous intervenons à Claret et dans le nord de l'Hérault, avec une visite sur place et un devis détaillé."
+    ],
+    "focus": [
+      "renovation",
+      "salles-de-bain",
+      "piscines"
+    ]
+  },
+  {
+    "slug": "macon-saint-jean-du-gard",
+    "nom": "Saint-Jean-du-Gard",
+    "cp": "30270",
+    "metaTitle": "Maçon à Saint-Jean-du-Gard (30270) | CRM Maçonnerie Générale",
+    "metaDesc": "Maçon à Saint-Jean-du-Gard : murs en pierre, faïsses et murs de soutènement, rénovation de maisons cévenoles, enduits. Artisan basé à Quissac, devis gratuit.",
+    "accroche": "Au bord du Gardon, Saint-Jean-du-Gard ouvre sur les Cévennes et leurs maisons de schiste.",
+    "texte": [
+      "Les maisons cévenoles et les mas des vallées autour de Saint-Jean-du-Gard sont bâtis en pierre, souvent sur des terrains en terrasses. Les chantiers y sont exigeants : reprise de murs, faïsses et murs de soutènement, enduits, mais aussi modernisation des intérieurs.",
+      "Basés à Quissac, nous intervenons à Saint-Jean-du-Gard et dans les vallées cévenoles voisines, dans notre rayon de 50 km."
+    ],
+    "focus": [
+      "renovation",
+      "murs-clotures",
+      "enduits-facades"
+    ]
   }
 ]

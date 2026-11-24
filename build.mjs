@@ -6,7 +6,8 @@ const ROOT = new URL('.', import.meta.url).pathname;
 const OUT = join(ROOT, 'dist');
 const load = f => JSON.parse(readFileSync(join(ROOT, 'data', f), 'utf8'));
 const S = load('site.json'), METIERS = load('metiers.json'), COMMUNES = load('communes.json');
-const REAL = load('realisations.json'), JOURNAL = load('journal.json'), ARTICLES = load('articles.json');
+const REAL = load('realisations.json'), JOURNAL = load('journal.json'), ARTICLES = load('articles.json'), AVIS = load('avis.json');
+const AVIS_URL = /^https?:\/\//.test(S.googleAvisUrl || '') ? S.googleAvisUrl : '';
 const M = Object.fromEntries(METIERS.map(m => [m.slug, m]));
 // Indexation Google : bloquée tant que la variable INDEXATION=on n'est pas définie dans Cloudflare
 // (à activer le jour où crm-maconnerie.fr est branché).
@@ -49,6 +50,8 @@ const I = {
   peinture: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="6" width="28" height="10" rx="2"/><path d="M36 11h4v9H24v6"/><path d="M21 26h6v16h-6z"/></svg>',
   chauffage: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44c8 0 13-5 13-12 0-9-8-12-9-22-5 4-7 9-6 14-3-2-4-5-4-8-4 4-7 9-7 15 0 8 5 13 13 13z"/><path d="M24 44c-3 0-5-2-5-5 0-4 5-7 5-11 2 3 5 6 5 10 0 4-2 6-5 6z"/></svg>'
 };
+I.wa = '<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.86 3 3.03 8.82 3.03 16c0 2.3.6 4.54 1.74 6.5L3 29l6.68-1.75A12.95 12.95 0 0 0 16.04 29C23.2 29 29 23.18 29 16S23.2 3 16.04 3zm0 23.6c-2 0-3.950-.54-5.65-1.55l-.4-.24-3.97 1.04 1.06-3.86-.26-.4A10.56 10.56 0 0 1 5.4 16c0-5.86 4.770-10.62 10.64-10.62 5.86 0 10.6 4.76 10.6 10.62 0 5.85-4.76 10.6-10.6 10.6zm5.82-7.95c-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.72.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.18-.32-.02-.49.14-.65.15-.14.32-.37.48-.56.16-.19.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.53-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.14 3.08 1.3 3.3c.16.2 2.25 3.43 5.44 4.81.76.33 1.35.53 1.82.67.76.24 1.46.21 2 .13.62-.09 1.88-.77 2.15-1.51.26-.74.26-1.38.18-1.51-.08-.13-.29-.21-.61-.37z"/></svg>';
+const WA = `https://wa.me/${S.whatsapp}?text=${encodeURIComponent('Bonjour, je vous contacte depuis votre site. Mon projet : ')}`;
 // ---------- Photos : les vraies photos Facebook remplacent les visuels provisoires dès la 1re synchro ----------
 const SHOWN = REAL.filter(r => r.affiche !== false);
 const REAL_POSTS = JOURNAL.posts.filter(p => !p.exemple && p.images?.length);
@@ -119,8 +122,10 @@ ${ld}
 ${body}
 </main>
 ${footer()}
+<a class="wa-float" href="${WA}" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">${I.wa}<span>WhatsApp</span></a>
 <div class="callbar">
   <a class="btn btn-line" href="tel:${S.telephoneLien}">${I.phone} Appeler</a>
+  <a class="btn btn-wa" href="${WA}" target="_blank" rel="noopener" aria-label="WhatsApp">${I.wa}</a>
   <a class="btn btn-primary" href="/contact/">Devis gratuit</a>
 </div>
 <script src="/assets/js/main.js?v=${V.js}" defer></script>
@@ -138,13 +143,13 @@ function footer() {
         <p><a href="${S.facebook}" rel="noopener" target="_blank" style="display:inline-flex;gap:10px;align-items:center"><span style="width:18px;display:inline-flex">${I.fb}</span>Nos chantiers sur Facebook</a></p>
       </div>
       <div><h4>Métiers</h4><ul>${METIERS.map(m => `<li><a href="/metiers/${m.slug}/">${esc(m.nom)}</a></li>`).join('')}</ul></div>
-      <div><h4>Secteur</h4><ul>${COMMUNES.map(c => `<li><a href="/zone-intervention/${c.slug}/">Maçon à ${esc(c.nom)}</a></li>`).join('')}</ul></div>
+      <div><h4>Secteur</h4><ul>${COMMUNES.slice(0, 8).map(c => `<li><a href="/zone-intervention/${c.slug}/">Maçon à ${esc(c.nom)}</a></li>`).join('')}<li><a href="/zone-intervention/">Toute notre zone →</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a href="tel:${S.telephoneLien}" style="font:500 1.3rem var(--serif);color:#fff">${esc(S.telephone)}</a></li>
         <li><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></li>
         <li>${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)}), ${esc(S.adresse.departement)}</li>
         <li>${esc(S.horaires)}</li>
-        <li style="margin-top:16px"><a href="/conseils/">Conseils travaux</a></li>
+        <li style="margin-top:16px"><a href="/conseils/">Conseils travaux</a></li>${AVIS_URL ? `<li><a href="${AVIS_URL}" rel="noopener" target="_blank">★ Laisser un avis Google</a></li>` : ''}
       </ul></div>
     </div>
     <div class="foot-bottom">
@@ -230,6 +235,17 @@ const HERO_SLIDES = [['voute', 'voute-pierre-2'], ['piscine', 'piscine-escalier'
   return { f, titre: r.titre || 'Nos chantiers', lieu: r.lieu || 'Gard' };
 });
 
+// ---------- Avant / après géant (accueil) ----------
+const BAX = ['toiture-sinistre', 'piscine-beton', 'salle-eau', 'wc-renovation', 'mur-cloture'].map(id => REAL.find(r => r.id === id)).filter(r => r && r.avant);
+
+// ---------- Avis clients Google (uniquement de vrais avis recopiés dans data/avis.json) ----------
+const stars = n => `<span class="stars" aria-label="${n} sur 5">${'★'.repeat(Math.round(n))}${'☆'.repeat(5 - Math.round(n))}</span>`;
+const avisBloc = () => !AVIS.avis.length ? '' : `<section class="section avis"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">Avis Google</span><h2>Ils nous ont <em>fait confiance.</em></h2></div>${AVIS.note ? `<div class="avis-note"><b>${String(AVIS.note).replace('.', ',')}</b>${stars(AVIS.note)}<span>${AVIS.nombre} avis sur Google</span></div>` : ''}</div>
+  <div class="quotes">${AVIS.avis.slice(0, 6).map(a => `<figure class="quote reveal">${stars(a.note || 5)}<blockquote>« ${esc(a.texte)} »</blockquote><figcaption>${esc(a.auteur)}${a.date ? ` · ${esc(a.date)}` : ''}</figcaption></figure>`).join('')}</div>
+  ${AVIS_URL ? `<div class="btns" style="margin-top:36px"><a class="btn btn-primary" href="${AVIS_URL}" rel="noopener" target="_blank">Laisser un avis</a></div>` : ''}
+</div></section>`;
+
 // ---------- Accueil ----------
 const STORIES = ['voute-pierre', 'mas-pierre', 'bassin-saint-nazaire'].map(id => REAL.find(r => r.id === id)).filter(Boolean);
 const story = (r, i) => `<article class="story${i % 2 ? ' rev' : ''} reveal">
@@ -298,12 +314,6 @@ add('/', {
   </div>
 </section>
 
-<section class="section paper">
-  <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Avant / après</span><h2>Le travail parle de lui-même.</h2></div><a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a></div>
-    ${worksGrid(['toiture-sinistre', 'wc-renovation', 'salle-eau'].map(id => REAL.find(r => r.id === id)).filter(Boolean))}
-  </div>
-</section>
 
 <section class="section">
   <div class="wrap">
@@ -311,7 +321,28 @@ add('/', {
     <div class="stories">${STORIES.map(story).join('')}</div>
   </div>
 </section>
+
+<section class="section dark on-dark bax" aria-label="Avant / après">
+  <div class="wrap bax-grid">
+    <div class="bax-stage reveal">
+      <div class="ba bax-ba" data-sweep>
+        <img class="bimg" src="${BAX[0].avant}" alt="Avant : ${esc(BAX[0].titre)}" loading="lazy" width="1200" height="1600">
+        <div class="after-img"><img src="${BAX[0].image}" alt="Après : ${esc(BAX[0].titre)}" loading="lazy" width="1200" height="1600"></div>
+        <span class="lbl l">Avant</span><span class="lbl r">Après</span><div class="handle"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Comparer avant et après">
+      </div>
+    </div>
+    <div class="bax-txt reveal">
+      <span class="eyebrow">Avant / après</span>
+      <h2>Faites glisser, <em>jugez par vous-même.</em></h2>
+      <p class="lead">De vrais chantiers, photographiés avant et après notre passage. Choisissez-en un et faites glisser le curseur.</p>
+      <ol class="bax-list">${BAX.map((r, i) => `<li><button type="button"${i === 0 ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"'} data-avant="${r.avant}" data-apres="${r.image}" data-titre="${esc(r.titre)}"><span class="n">${String(i + 1).padStart(2, '0')}</span><b>${esc(r.titre)}</b><span class="m">${esc(M[r.metier] ? M[r.metier].court || M[r.metier].nom : '')}</span></button></li>`).join('')}</ol>
+      <a class="link" href="/realisations/">Toutes nos réalisations ${I.arrow}</a>
+    </div>
+  </div>
+</section>
 ${cercle()}
+${avisBloc()}
 
 <section class="section dark on-dark">
   <div class="wrap">
@@ -520,7 +551,7 @@ add('/contact/', {
   desc: 'Demandez un devis gratuit à CRM Maçonnerie Générale, maçon à Quissac : formulaire guidé, téléphone ou e-mail. Réponse sous 48 h.',
   schema: [crumbsLd([['Accueil', '/'], ['Contact', '/contact/']])],
   body: pageHero({ kicker: 'Contact', h1: 'Parlons de <em>votre projet.</em>', lead: 'Décrivez vos travaux en deux minutes : nous vous rappelons sous 48 h pour convenir d’une visite.', crumbItems: [['Accueil', '/'], ['Contact', '/contact/']], btns: false }) + `
-<section class="section"><div class="wrap split" style="align-items:start;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)">
+<section class="section"><div class="wrap split contact-split">
   <form class="form" id="devis" data-mail="${esc(S.email)}" novalidate>
     <h2 style="font-size:2rem">Demande de devis</h2>
     <fieldset class="chips"><legend class="legend">Quels travaux ? <small>(plusieurs choix possibles)</small></legend>
@@ -546,6 +577,7 @@ add('/contact/', {
     <div class="contact-card">
       <h3>Nous joindre directement</h3>
       <div class="line">${I.phone}<div><b>Téléphone</b><a class="big" href="tel:${S.telephoneLien}">${esc(S.telephone)}</a></div></div>
+      <div class="line"><span class="wa-ic">${I.wa}</span><div><b>WhatsApp</b><a href="${WA}" target="_blank" rel="noopener">Envoyer un message et des photos</a></div></div>
       <div class="line">${I.mail}<div><b>E-mail</b><a href="mailto:${esc(S.email)}">${esc(S.email)}</a></div></div>
       <div class="line">${I.pin}<div><b>Basé à</b>${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)}), ${esc(S.adresse.departement)}</div></div>
       <div class="line">${I.clock}<div><b>Horaires</b>${esc(S.horaires)}</div></div>
@@ -556,18 +588,29 @@ add('/contact/', {
 </div></section>`
 });
 
+if (AVIS_URL) add('/avis/', {
+  title: 'Laisser un avis | CRM Maçonnerie Générale', desc: 'Laissez un avis Google sur CRM Maçonnerie Générale.', noindex: true,
+  body: `<section class="section avis-qr"><div class="wrap" style="text-align:center">
+  <img src="/assets/img/logo.svg" alt="CRM — Cyril Rives Maçonnerie générale" width="200" height="117">
+  <h1 style="margin:30px 0 10px">Merci pour <em>votre confiance.</em></h1>
+  <p class="lead" style="margin:0 auto 30px">Votre avis compte : il aide d'autres familles à nous trouver. Scannez le code ou cliquez ci-dessous.</p>
+  ${existsSync(join(ROOT, 'src/assets/img/qr-avis.svg')) ? '<img class="qr" src="/assets/img/qr-avis.svg" alt="QR code pour laisser un avis Google" width="260" height="260">' : ''}
+  <p style="margin-top:28px"><a class="btn btn-primary" href="${AVIS_URL}" rel="noopener" target="_blank">Laisser un avis Google</a></p>
+</div></section>`
+});
+
 // ---------- Légal ----------
 const L = S.legal;
 add('/mentions-legales/', {
   title: 'Mentions légales | CRM Maçonnerie Générale', desc: 'Mentions légales du site crm-maconnerie.fr.',
   body: pageHero({ kicker: 'Informations légales', h1: 'Mentions légales', btns: false }) + `
 <section class="section"><div class="wrap prose legal">
-  <h2>Éditeur du site</h2><p>${esc(S.nom)} — ${esc(L.formeJuridique)}${L.capital ? ', ' + esc(L.capital) : ''}<br>Dirigeant et directeur de la publication : ${esc(S.dirigeant)}<br>Adresse : ${esc(S.adresse.rue)}, ${esc(S.adresse.codePostal)} ${esc(S.adresse.ville)}<br>SIRET : ${esc(L.siret)} — ${esc(L.rcsOuRm)}<br>TVA : ${esc(L.tva)}<br>Téléphone : ${esc(S.telephone)} — E-mail : ${esc(S.email)}</p>
+  <h2>Éditeur du site</h2><p>${esc(S.nom)} — ${esc(L.formeJuridique)}${L.capital ? ', ' + esc(L.capital) : ''}<br>Dirigeant et directeur de la publication : ${esc(S.dirigeant)}<br>Adresse : ${esc(S.adresse.rue)}, ${esc(S.adresse.codePostal)} ${esc(S.adresse.ville)}<br>${esc(L.rcsOuRm)} — SIREN ${esc(L.siren)}${L.siret && !L.siret.startsWith('[') ? ' — SIRET ' + esc(L.siret) : ''}<br>TVA : ${esc(L.tva)}<br>Téléphone : ${esc(S.telephone)} — E-mail : ${esc(S.email)}</p>
   <h2>Assurance professionnelle</h2><p>${esc(L.assuranceDecennale)}</p>
   <h2>Hébergement</h2><p>${esc(S.hebergeur)}</p>
   <h2>Conception et réalisation</h2><p>${esc(S.webmaster.nom)} — <a href="${S.webmaster.url}">${S.webmaster.url.replace('https://', '')}</a></p>
   <h2>Propriété intellectuelle</h2><p>Les textes, photographies et le logo de ce site sont la propriété de ${esc(S.nom)}. Toute reproduction sans autorisation est interdite.</p>
-  <h2>Médiation de la consommation</h2><p>Conformément au Code de la consommation, le client peut recourir gratuitement à un médiateur de la consommation : [nom et coordonnées du médiateur auquel l'entreprise adhère].</p>
+  <h2>Médiation de la consommation</h2><p>Conformément au Code de la consommation, le client peut recourir gratuitement à un médiateur de la consommation : ${esc(L.mediateur)}.</p>
 </div></section>`
 });
 add('/confidentialite/', {

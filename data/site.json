@@ -9,7 +9,7 @@
   "telephoneLien": "+33624150923",
   "email": "cyrilrivesm@gmail.com",
   "adresse": {
-    "rue": "Chemin de campagne",
+    "rue": "341 Chemin de Campagne",
     "codePostal": "30260",
     "ville": "Quissac",
     "departement": "Gard",
@@ -22,12 +22,14 @@
   "facebook": "https://www.facebook.com/share/1DsBebzr75/",
   "googleAvisUrl": "[lien Google « laisser un avis » — créé avec la fiche Google Business]",
   "legal": {
-    "formeJuridique": "[forme juridique : EI / EURL / SARL…]",
-    "siret": "[SIRET]",
-    "rcsOuRm": "Répertoire des métiers — Chambre de métiers et de l'artisanat du Gard, n° [à compléter]",
+    "formeJuridique": "Entrepreneur individuel (EI)",
+    "siret": "[SIRET à confirmer]",
+    "rcsOuRm": "Entreprise artisanale immatriculée au Registre national des entreprises (RNE)",
     "tva": "[n° TVA intracommunautaire ou « TVA non applicable, art. 293 B du CGI »]",
     "assuranceDecennale": "[Assureur décennale + n° de contrat + zone couverte]",
-    "capital": "[capital social si société]"
+    "capital": "",
+    "siren": "904 716 594",
+    "mediateur": "[nom et coordonnées du médiateur auquel l'entreprise adhère]"
   },
   "chiffres": [
     {
@@ -49,5 +51,6 @@
   },
   "hebergeur": "Cloudflare, Inc. — 101 Townsend St, San Francisco, CA 94107, USA — cloudflare.com",
   "heroImage": "/assets/photos/terrasse-escalier-piscine.jpg",
-  "artisan": true
+  "artisan": true,
+  "whatsapp": "33624150923"
 }
