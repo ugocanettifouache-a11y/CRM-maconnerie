@@ -2,7 +2,7 @@ name: Import photos
 on:
   workflow_dispatch:
   push:
-    paths: ['data/import-photos.json', 'data/import-sources.json']
+    paths: ['data/import-photos.json', 'data/import-sources.json', 'data/import-villes.json']
 permissions:
   contents: write
 jobs:
@@ -17,4 +17,4 @@ jobs:
           git config user.name "crm-bot"
           git config user.email "bot@crm-maconnerie.fr"
           git add src/assets/realisations sources
-          if ! git diff --cached --quiet; then git commit -m "Import des photos de chantier (Facebook)" && git push; fi
+          if ! git diff --cached --quiet; then git commit -m "Import de photos (chantiers ou communes)" && git push; fi

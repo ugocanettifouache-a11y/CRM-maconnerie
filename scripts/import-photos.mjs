@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 const root = new URL('..', import.meta.url).pathname;
-const lists = [['data/import-photos.json', 'src/assets/realisations/'], ['data/import-sources.json', 'sources/facebook/']];
+const lists = [['data/import-photos.json', 'src/assets/realisations/'], ['data/import-sources.json', 'sources/facebook/'], ['data/import-villes.json', 'sources/villes/']];
 for (const [file, base] of lists) {
   if (!existsSync(root + file)) continue;
   const list = JSON.parse(readFileSync(root + file, 'utf8'));
@@ -12,7 +12,7 @@ for (const [file, base] of lists) {
     const out = root + base + name;
     if (existsSync(out)) { ok++; continue; }
     mkdirSync(dirname(out), { recursive: true });
-    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const r = await fetch(url, { headers: { 'User-Agent': url.includes('wikimedia.org') ? 'crm-maconnerie-site/1.0 (https://crm-maconnerie.pages.dev; import de photos de communes)' : 'Mozilla/5.0' } });
     if (!r.ok) { console.error('échec', name, r.status); continue; }
     writeFileSync(out, Buffer.from(await r.arrayBuffer())); ok++;
   }
