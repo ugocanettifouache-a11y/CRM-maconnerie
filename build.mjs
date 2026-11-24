@@ -88,25 +88,37 @@ const zoneMap = () => `<link rel="stylesheet" href="/assets/vendor/leaflet/leafl
 <figcaption>Le cercle montre nos ${S.rayonKm} km autour de Quissac. Cliquez sur une commune pour voir sa page.</figcaption></figure>
 <script src="/assets/vendor/leaflet/leaflet.js" defer></script>`;
 
+// ---------- Données des mégamenus ----------
+const MENU_PH = { 'renovation': 'voute-pierre-2', 'salles-de-bain': 'sdb-verte', 'toitures-genoises': 'toiture-apres', 'terrasses-exterieurs': 'opus-escaliers-maison', 'piscines': 'piscine-travertin-2', 'construction-extension': 'bassin', 'murs-clotures': 'murs-rue', 'enduits-facades': 'mas-pierre-2' };
+const REAL_METIERS = METIERS.map(m => [m.slug, SHOWN.filter(r => r.metier === m.slug).length]).filter(([, n]) => n);
+const MENU_REALS = ['piscine-beton', 'voute-pierre', 'toiture-sinistre'].map(id => SHOWN.find(r => r.id === id)).filter(r => r && r.image && r.image.startsWith('/assets/photos/'));
+const POSTS = (JOURNAL.posts || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
 function layout({ path, title, desc, body, schema = [], image = '/assets/img/og.jpg', noindex = false, overlay = false }) {
   body = withSrcset(body);
   const url = S.url + path;
-  const nav = [
-    ['/metiers/', 'Savoir-faire', METIERS.map(m => [`/metiers/${m.slug}/`, m.nom])],
-    ['/realisations/', 'Réalisations'],
-    ['/journal-de-chantier/', 'Journal'],
-    ['/zone-intervention/', 'Secteur', 'MEGA'],
-    ['/a-propos/', 'Qui sommes-nous'],
-  ];
   const cur = h => (path === h || (h !== '/' && path.startsWith(h))) ? ' aria-current="page"' : '';
-  const mega = `<div class="has-sub has-mega"><a href="/zone-intervention/"${cur('/zone-intervention/')}>Secteur</a><div class="sub mega">
+  const tg = l => `<button class="sub-tg" type="button" aria-expanded="false" aria-label="Ouvrir le menu ${esc(l)}"></button>`;
+  const megaWrap = (h, l, cls, inner) => `<div class="has-sub has-mega"><a href="${h}"${cur(h)}>${l}</a>${tg(l)}<div class="sub mega ${cls}">${inner}</div></div>`;
+  const mlink = (h, t) => `<a class="mega-link" href="${h}">${t} ${I.arrow}</a>`;
+  const mega = `<div class="has-sub has-mega"><a href="/zone-intervention/"${cur('/zone-intervention/')}>Secteur</a>${tg('Secteur')}<div class="sub mega m-zone">
     <div class="mega-intro"><span class="eyebrow">Notre secteur</span><p class="mega-big">${S.rayonKm} km <em>autour de Quissac.</em></p>${zoneCheck('zc-menu', 'Vous êtes dans le secteur ?')}</div>
     <div class="mega-cols">${GROUPES.map(({ g, list }) => `<div><h5>${g}</h5>${list.map(c => `<a href="/zone-intervention/${c.slug}/">${esc(c.nom)}<span>${c.slug === 'macon-quissac' ? 'notre base' : `${c.km} km`}</span></a>`).join('')}</div>`).join('')}</div>
     <a class="mega-all" href="/zone-intervention/">Voir la carte du secteur ${I.arrow}</a>
   </div></div>`;
-  const navHtml = nav.map(([h, l, sub]) => sub === 'MEGA' ? mega : sub
-    ? `<div class="has-sub"><a href="${h}"${cur(h)}>${l}</a><div class="sub">${sub.map(([sh, sl]) => `<a href="${sh}">${esc(sl)}</a>`).join('')}</div></div>`
-    : `<a href="${h}"${cur(h)}>${l}</a>`).join('');
+  const navHtml = [
+    megaWrap('/metiers/', 'Savoir-faire', 'm-metiers', `<div class="mega-intro"><span class="eyebrow">Nos savoir-faire</span><p class="mega-big">Du gros œuvre <em>aux finitions.</em></p><p class="mega-txt">${METIERS.length} métiers, un seul interlocuteur, et notre cercle d'artisans pour le reste.</p>${mlink('/metiers/', 'Tous nos savoir-faire')}</div>
+      <div class="mega-grid">${METIERS.map(m => `<a class="mcard${m.slug === 'piscines' ? ' star' : ''}" href="/metiers/${m.slug}/"><span class="mcard-ph"><img src="/assets/photos/${MENU_PH[m.slug]}-800.jpg" alt="" loading="lazy" width="400" height="300">${m.slug === 'piscines' ? '<i>Notre passion</i>' : ''}</span><b>${esc(m.nom)}</b></a>`).join('')}</div>`),
+    megaWrap('/realisations/', 'Réalisations', 'm-reals', `<div class="mega-intro"><span class="eyebrow">Réalisations</span><p class="mega-big">${SHOWN.length} chantiers <em>en images.</em></p><div class="mega-tags">${REAL_METIERS.map(([s, n]) => `<a href="/realisations/#f-${s}">${esc(M[s].court || M[s].nom)}<span>${n}</span></a>`).join('')}</div>${mlink('/realisations/', 'Toutes nos réalisations')}</div>
+      <div class="mega-grid three">${MENU_REALS.map(r => `<a class="mcard" href="/realisations/#f-${r.metier}"><span class="mcard-ph"><img src="${r.image.replace('.jpg', '-800.jpg')}" alt="" loading="lazy" width="400" height="300">${r.avant ? '<i>Avant / après</i>' : ''}</span><b>${esc(r.titre)}</b><small>${esc(M[r.metier] ? M[r.metier].nom : '')}</small></a>`).join('')}</div>`),
+    megaWrap('/journal-de-chantier/', 'Journal', 'm-journal', `<div class="mega-intro"><span class="eyebrow">Journal de chantier</span><p class="mega-big">Nos chantiers, <em>au fil des jours.</em></p><p class="mega-txt">Nos publications Facebook arrivent ici automatiquement.</p>${mlink('/journal-de-chantier/', 'Voir le journal')}${S.facebook ? `<a class="mega-fb" href="${S.facebook}" rel="noopener" target="_blank">${I.fb} Suivre sur Facebook</a>` : ''}</div>
+      <div class="mega-two"><div><h5>Dernières publications</h5>${POSTS.slice(0, 3).map(p => `<a class="mpost" href="/journal-de-chantier/">${p.images && p.images[0] ? `<img src="${p.images[0].startsWith('/assets/photos/') ? p.images[0].replace('.jpg', '-800.jpg') : p.images[0]}" alt="" loading="lazy" width="120" height="90">` : ''}<span><small>${frDate(p.date)}</small>${esc(p.texte.length > 90 ? p.texte.slice(0, 88).replace(/\s+\S*$/, '') + '…' : p.texte)}</span></a>`).join('') || '<p class="mega-txt">Les prochaines publications arrivent bientôt.</p>'}</div>
+      <div><h5>Conseils travaux</h5>${ARTICLES.slice().sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5).map(a => `<a class="mart" href="/conseils/${a.slug}/">${esc(a.titre)}</a>`).join('')}${mlink('/conseils/', 'Tous nos conseils')}</div></div>`),
+    mega,
+    megaWrap('/a-propos/', 'Qui sommes-nous', 'm-about', `<div class="mega-intro"><span class="eyebrow">Qui sommes-nous</span><p class="mega-big">Une entreprise d'artisan, <em>à Quissac.</em></p><p class="mega-txt">Plus de 10 ans de métier. Celui qui vous répond est celui qui réalise vos travaux.</p>${mlink('/a-propos/', 'Notre histoire')}</div>
+      <div class="mega-two"><div><h5>L'entreprise</h5><a class="mart" href="/a-propos/">Notre histoire</a><a class="mart" href="/#methode">Notre méthode, étape par étape</a><a class="mart" href="/metiers/#cercle">Notre cercle d'artisans partenaires</a><a class="mart" href="/metiers/piscines/">Notre passion : la piscine</a><a class="mart" href="/zone-intervention/">Notre secteur de ${S.rayonKm} km</a>${AVIS_URL ? `<a class="mart" href="${AVIS_URL}" rel="noopener" target="_blank">Nos avis Google</a>` : ''}</div>
+      <div class="mega-contact"><h5>Nous joindre</h5><a class="mc-tel" href="tel:${S.telephoneLien}">${I.phone} ${esc(S.telephone)}</a><a class="mc-line" href="${WA}" target="_blank" rel="noopener">${I.wa} WhatsApp, avec vos photos</a><a class="mc-line" href="mailto:${S.email}">${I.mail} ${esc(S.email)}</a><p class="mc-line">${I.pin} ${esc(S.adresse.ville)} (${esc(S.adresse.codePostal)})</p><a class="btn btn-primary" href="/contact/">Demander un devis gratuit</a></div></div>`),
+  ].join('');
   const ld = [localBusiness(), ...schema].map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('');
   return `<!doctype html>
 <html lang="fr">
@@ -244,7 +256,7 @@ function add(path, opts) { pages.push({ path, ...opts }); }
 
 // ---------- Cercle d'artisans partenaires ----------
 const TRADES = [['plomberie', 'Plomberie & sanitaire', 'Réseaux, évacuations, sanitaires'], ['elec', 'Électricité', 'Mise aux normes, tableau, éclairage'], ['menuiserie', 'Menuiserie', 'Fenêtres, portes, escaliers'], ['platre', 'Plâtrerie & isolation', 'Cloisons, doublages, plafonds'], ['peinture', 'Peinture', 'Murs, plafonds, boiseries'], ['chauffage', 'Chauffage & climatisation', 'Pompe à chaleur, radiateurs, clim']];
-const cercle = (cls = 'paper') => `<section class="section ${cls} cercle"><div class="wrap split" style="align-items:start">
+const cercle = (cls = 'paper') => `<section class="section ${cls} cercle" id="cercle"><div class="wrap split" style="align-items:start">
   <div class="reveal"><span class="eyebrow">Notre cercle d'artisans</span><h2>Tous les corps de métier, <em>un seul interlocuteur.</em></h2>
     <p class="lead" style="margin-top:26px">Une rénovation ne s'arrête pas à la maçonnerie. Pour la plomberie, l'électricité, la menuiserie ou la plâtrerie, nous faisons appel à des artisans qualifiés que nous connaissons bien, avec qui nous travaillons chantier après chantier.</p>
     <p>Vous n'avez qu'un contact : nous. Nous organisons le planning, coordonnons les interventions et suivons le chantier jusqu'à la réception, sans que vous ayez à courir après chaque corps de métier.</p>
@@ -380,7 +392,7 @@ ${avisBloc()}
 
 <section class="section dark on-dark">
   <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Méthode</span><h2>Notre méthode.</h2></div></div>
+    <div class="head" id="methode"><div><span class="eyebrow">Méthode</span><h2>Notre méthode.</h2></div></div>
     <div class="steps">
       <div class="step reveal"><h3>On se parle</h3><p>Vous nous appelez ou remplissez le formulaire. Nous vous rappelons sous 48 h.</p></div>
       <div class="step reveal"><h3>Nous venons voir</h3><p>Sur place, nous regardons le terrain, le bâti et vos contraintes. C'est gratuit.</p></div>

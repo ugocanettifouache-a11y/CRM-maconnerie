@@ -8,8 +8,18 @@
     if (head) head.classList.toggle('menu', open); solid();
   });
 
+  // Menu mobile : rubriques en accordéon
+  document.querySelectorAll('.sub-tg').forEach(bt => bt.addEventListener('click', () => {
+    const li = bt.parentElement, open = !li.classList.contains('open');
+    document.querySelectorAll('.has-sub.open').forEach(x => { if (x !== li) { x.classList.remove('open'); x.querySelector('.sub-tg').setAttribute('aria-expanded', 'false'); } });
+    li.classList.toggle('open', open); bt.setAttribute('aria-expanded', String(open));
+  }));
+  // Fermer le mégamenu après un clic sur un lien d'ancre (même page)
+  document.querySelectorAll('.mega a[href*="#"]').forEach(a => a.addEventListener('click', () => { if (t && nav && nav.classList.contains('open')) t.click(); document.activeElement && document.activeElement.blur(); }));
+
   // En-tête transparent sur le héros de l'accueil : devient blanc au défilement
-  function solid() { if (head && head.classList.contains('over')) head.classList.toggle('solid', scrollY > 40 || head.classList.contains('menu')); }
+  function solid() { if (head && head.classList.contains('over')) head.classList.toggle('solid', scrollY > 40 || head.classList.contains('menu') || head.classList.contains('hov')); }
+  document.querySelectorAll('.has-mega').forEach(h => { h.addEventListener('mouseenter', () => { if (matchMedia('(min-width:1081px)').matches && head) { head.classList.add('hov'); solid(); } }); h.addEventListener('mouseleave', () => { if (head) { head.classList.remove('hov'); solid(); } }); });
   addEventListener('scroll', solid, { passive: true }); solid();
 
   // Héros : photos de chantier en fondu enchaîné
@@ -52,6 +62,8 @@
   } else els.forEach(show);
 
   // Filtres (réalisations, journal)
+  const hashFilter = () => { const m = location.hash.match(/^#f-([a-z-]+)/); if (!m) return; const bt = document.querySelector(`[data-filters] button[data-f="${m[1]}"]`); if (bt) { bt.click(); bt.closest('[data-filters]').scrollIntoView({ block: 'start' }); } };
+  setTimeout(hashFilter, 0); addEventListener('hashchange', hashFilter);
   document.querySelectorAll('[data-filters]').forEach(group => {
     const target = document.getElementById(group.dataset.filters);
     group.addEventListener('click', e => {
